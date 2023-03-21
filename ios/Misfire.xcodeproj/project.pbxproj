@@ -30,6 +30,7 @@
 		00E356EE1AD99517003FC87E /* MisfireTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = MisfireTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		00E356F11AD99517003FC87E /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		00E356F21AD99517003FC87E /* MisfireTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MisfireTests.m; sourceTree = "<group>"; };
+		037C0A2B29CA2B0F00243E59 /* RNSVG.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = RNSVG.xcodeproj; path = "../../TalentOrLuck/node_modules/react-native-svg/apple/RNSVG.xcodeproj"; sourceTree = "<group>"; };
 		13B07F961A680F5B00A75B9A /* Misfire.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Misfire.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		13B07FAF1A68108700A75B9A /* AppDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AppDelegate.h; path = Misfire/AppDelegate.h; sourceTree = "<group>"; };
 		13B07FB01A68108700A75B9A /* AppDelegate.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; name = AppDelegate.mm; path = Misfire/AppDelegate.mm; sourceTree = "<group>"; };
@@ -83,9 +84,17 @@
 			name = "Supporting Files";
 			sourceTree = "<group>";
 		};
+		037C0A2C29CA2B0F00243E59 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
 		13B07FAE1A68108700A75B9A /* Misfire */ = {
 			isa = PBXGroup;
 			children = (
+				037C0A2B29CA2B0F00243E59 /* RNSVG.xcodeproj */,
 				13B07FAF1A68108700A75B9A /* AppDelegate.h */,
 				13B07FB01A68108700A75B9A /* AppDelegate.mm */,
 				13B07FB51A68108700A75B9A /* Images.xcassets */,
@@ -222,6 +231,12 @@
 			mainGroup = 83CBB9F61A601CBA00E9B192;
 			productRefGroup = 83CBBA001A601CBA00E9B192 /* Products */;
 			projectDirPath = "";
+			projectReferences = (
+				{
+					ProductGroup = 037C0A2C29CA2B0F00243E59 /* Products */;
+					ProjectRef = 037C0A2B29CA2B0F00243E59 /* RNSVG.xcodeproj */;
+				},
+			);
 			projectRoot = "";
 			targets = (
 				13B07F861A680F5B00A75B9A /* Misfire */,
