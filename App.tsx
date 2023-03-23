@@ -57,12 +57,11 @@ export default function App(): JSX.Element {
     components: {
       Text: {
         baseStyle: {
-          fontFamily: 'Urbanist',
+          fontFamily: 'Fredoka One',
           fontStyle: 'normal',
-          fontWeight: 600,
-          fontSize: 15,
-          textAlign: 'center',
-          lineHeight: 18,
+          fontWeight: 400,
+          fontSize: 30,
+          lineHeight: 36,
           color: 'white',
         },
       },

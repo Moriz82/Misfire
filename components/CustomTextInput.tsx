@@ -33,7 +33,7 @@ export function CustomTextInput(props: Props) {
         style={{
           flex: 1,
           height: 50,
-          fontFamily: 'Urbanist',
+          fontFamily: 'Fredoka One',
           color: 'black',
         }}
         placeholder={props.placeholderText}

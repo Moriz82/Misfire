@@ -2,6 +2,14 @@
   "migIndex": 1,
   "data": [
     {
+      "path": "assets/fonts/Fredoka-Regular.ttf",
+      "sha1": "520ab11425914a594eaf883a7d5bd40fc985f823"
+    },
+    {
+      "path": "assets/fonts/Fredoka-VariableFont_wdth,wght.ttf",
+      "sha1": "edf6e6d443a1a98164af4c118c55d828cef5a57b"
+    },
+    {
       "path": "assets/fonts/Urbanist-Black.ttf",
       "sha1": "d33f0dae39375bd0a709204bd801951886078e3c"
     },
@@ -72,6 +80,10 @@
     {
       "path": "assets/fonts/Urbanist-ThinItalic.ttf",
       "sha1": "750bf74a97e6d46709d8ac806d1036e0a9721eb4"
+    },
+    {
+      "path": "assets/fonts/fredoka-one.one-regular.ttf",
+      "sha1": "e971488ad7ae939707952d27903d128bddab861a"
     }
   ]
 }

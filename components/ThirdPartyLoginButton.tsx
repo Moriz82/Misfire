@@ -1,11 +1,8 @@
 import React from 'react';
-import {Text} from 'native-base';
 import {
   GestureResponderEvent,
-  Pressable,
   StyleSheet,
   TouchableOpacity,
-  View,
 } from 'react-native';
 import {Image} from 'react-native';
 
@@ -30,7 +27,3 @@ export function ThirdPartyLoginButton(props: Props) {
     </TouchableOpacity>
   );
 }
-
-const styles = StyleSheet.create({
-  buttonStyle: {},
-});

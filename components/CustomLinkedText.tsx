@@ -1,5 +1,6 @@
 import React from 'react';
-import {View, Text, StyleSheet, GestureResponderEvent} from 'react-native';
+import {View, StyleSheet, GestureResponderEvent} from 'react-native';
+import {Text} from 'native-base';
 
 type Props = {
   displayText: string;

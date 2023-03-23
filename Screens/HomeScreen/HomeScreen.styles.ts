@@ -3,12 +3,13 @@ import {StyleSheet} from 'react-native';
 const homeScreenStyles = StyleSheet.create({
   safeAreaViewStyle: {
     flex: 1,
-    backgroundColor: '#222222',
+    backgroundColor: '#605A58',
   },
   headerText: {
     fontSize: 30,
     paddingTop: 50,
     textAlign: 'left',
+    fontFamily: 'Fredoka One',
   },
   emailTextInput: {
     paddingTop: 30,

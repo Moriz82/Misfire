@@ -8,12 +8,16 @@
 
 /* Begin PBXBuildFile section */
 		00E356F31AD99517003FC87E /* MisfireTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 00E356F21AD99517003FC87E /* MisfireTests.m */; };
+		0396B15A29CA43970091083D /* fonts in Resources */ = {isa = PBXBuildFile; fileRef = 0396B15329CA43970091083D /* fonts */; };
 		0C80B921A6F3F58F76C31292 /* libPods-Misfire.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 5DCACB8F33CDC322A6C60F78 /* libPods-Misfire.a */; };
 		13B07FBC1A68108700A75B9A /* AppDelegate.mm in Sources */ = {isa = PBXBuildFile; fileRef = 13B07FB01A68108700A75B9A /* AppDelegate.mm */; };
 		13B07FBF1A68108700A75B9A /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 13B07FB51A68108700A75B9A /* Images.xcassets */; };
 		13B07FC11A68108700A75B9A /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 13B07FB71A68108700A75B9A /* main.m */; };
 		7699B88040F8A987B510C191 /* libPods-Misfire-MisfireTests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 19F6CBCC0A4E27FBF8BF4A61 /* libPods-Misfire-MisfireTests.a */; };
 		81AB9BB82411601600AC10FF /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 81AB9BB72411601600AC10FF /* LaunchScreen.storyboard */; };
+		57A10BAE44EB4B10BE77FBAD /* Fredoka-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 3F5FCEF9BBBD412AA42116CD /* Fredoka-Regular.ttf */; };
+		B25981D3680643538EB70AE2 /* Fredoka-VariableFont_wdth,wght.ttf in Resources */ = {isa = PBXBuildFile; fileRef = E55ABC4BDF4B4283BADFF31E /* Fredoka-VariableFont_wdth,wght.ttf */; };
+		3387DF8E40F848E1B6757707 /* fredoka-one.one-regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 0B7012EA0EC8470F87963690 /* fredoka-one.one-regular.ttf */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -24,6 +28,20 @@
 			remoteGlobalIDString = 13B07F861A680F5B00A75B9A;
 			remoteInfo = Misfire;
 		};
+		0396B15629CA43970091083D /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 037C0A2B29CA2B0F00243E59 /* RNSVG.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 0CF68AC11AF0540F00FF9E5C;
+			remoteInfo = RNSVG;
+		};
+		0396B15829CA43970091083D /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 037C0A2B29CA2B0F00243E59 /* RNSVG.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 94DDAC5C1F3D024300EED511;
+			remoteInfo = "RNSVG-tvOS";
+		};
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
@@ -31,6 +49,7 @@
 		00E356F11AD99517003FC87E /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		00E356F21AD99517003FC87E /* MisfireTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MisfireTests.m; sourceTree = "<group>"; };
 		037C0A2B29CA2B0F00243E59 /* RNSVG.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = RNSVG.xcodeproj; path = "../../TalentOrLuck/node_modules/react-native-svg/apple/RNSVG.xcodeproj"; sourceTree = "<group>"; };
+		0396B15329CA43970091083D /* fonts */ = {isa = PBXFileReference; lastKnownFileType = folder; name = fonts; path = ../assets/fonts; sourceTree = "<group>"; };
 		13B07F961A680F5B00A75B9A /* Misfire.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Misfire.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		13B07FAF1A68108700A75B9A /* AppDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AppDelegate.h; path = Misfire/AppDelegate.h; sourceTree = "<group>"; };
 		13B07FB01A68108700A75B9A /* AppDelegate.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; name = AppDelegate.mm; path = Misfire/AppDelegate.mm; sourceTree = "<group>"; };
@@ -45,6 +64,9 @@
 		81AB9BB72411601600AC10FF /* LaunchScreen.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; name = LaunchScreen.storyboard; path = Misfire/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		89C6BE57DB24E9ADA2F236DE /* Pods-Misfire-MisfireTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Misfire-MisfireTests.release.xcconfig"; path = "Target Support Files/Pods-Misfire-MisfireTests/Pods-Misfire-MisfireTests.release.xcconfig"; sourceTree = "<group>"; };
 		ED297162215061F000B7C4FE /* JavaScriptCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = JavaScriptCore.framework; path = System/Library/Frameworks/JavaScriptCore.framework; sourceTree = SDKROOT; };
+		3F5FCEF9BBBD412AA42116CD /* Fredoka-Regular.ttf */ = {isa = PBXFileReference; name = "Fredoka-Regular.ttf"; path = "../assets/fonts/Fredoka-Regular.ttf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
+		E55ABC4BDF4B4283BADFF31E /* Fredoka-VariableFont_wdth,wght.ttf */ = {isa = PBXFileReference; name = "Fredoka-VariableFont_wdth,wght.ttf"; path = "../assets/fonts/Fredoka-VariableFont_wdth,wght.ttf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
+		0B7012EA0EC8470F87963690 /* fredoka-one.one-regular.ttf */ = {isa = PBXFileReference; name = "fredoka-one.one-regular.ttf"; path = "../assets/fonts/fredoka-one.one-regular.ttf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -87,6 +109,8 @@
 		037C0A2C29CA2B0F00243E59 /* Products */ = {
 			isa = PBXGroup;
 			children = (
+				0396B15729CA43970091083D /* libRNSVG.a */,
+				0396B15929CA43970091083D /* libRNSVG-tvOS.a */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -94,6 +118,7 @@
 		13B07FAE1A68108700A75B9A /* Misfire */ = {
 			isa = PBXGroup;
 			children = (
+				0396B15329CA43970091083D /* fonts */,
 				037C0A2B29CA2B0F00243E59 /* RNSVG.xcodeproj */,
 				13B07FAF1A68108700A75B9A /* AppDelegate.h */,
 				13B07FB01A68108700A75B9A /* AppDelegate.mm */,
@@ -131,6 +156,7 @@
 				83CBBA001A601CBA00E9B192 /* Products */,
 				2D16E6871FA4F8E400B85C8A /* Frameworks */,
 				BBD78D7AC51CEA395F1C20DB /* Pods */,
+				2375C58908064A9FA6D0BF48 /* Resources */,
 			);
 			indentWidth = 2;
 			sourceTree = "<group>";
@@ -156,6 +182,17 @@
 			);
 			path = Pods;
 			sourceTree = "<group>";
+		};
+		2375C58908064A9FA6D0BF48 /* Resources */ = {
+			isa = "PBXGroup";
+			children = (
+				3F5FCEF9BBBD412AA42116CD /* Fredoka-Regular.ttf */,
+				E55ABC4BDF4B4283BADFF31E /* Fredoka-VariableFont_wdth,wght.ttf */,
+				0B7012EA0EC8470F87963690 /* fredoka-one.one-regular.ttf */,
+			);
+			name = Resources;
+			sourceTree = "<group>";
+			path = "";
 		};
 /* End PBXGroup section */
 
@@ -245,6 +282,23 @@
 		};
 /* End PBXProject section */
 
+/* Begin PBXReferenceProxy section */
+		0396B15729CA43970091083D /* libRNSVG.a */ = {
+			isa = PBXReferenceProxy;
+			fileType = archive.ar;
+			path = libRNSVG.a;
+			remoteRef = 0396B15629CA43970091083D /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		0396B15929CA43970091083D /* libRNSVG-tvOS.a */ = {
+			isa = PBXReferenceProxy;
+			fileType = archive.ar;
+			path = "libRNSVG-tvOS.a";
+			remoteRef = 0396B15829CA43970091083D /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+/* End PBXReferenceProxy section */
+
 /* Begin PBXResourcesBuildPhase section */
 		00E356EC1AD99517003FC87E /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
@@ -257,8 +311,12 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				0396B15A29CA43970091083D /* fonts in Resources */,
 				81AB9BB82411601600AC10FF /* LaunchScreen.storyboard in Resources */,
 				13B07FBF1A68108700A75B9A /* Images.xcassets in Resources */,
+				57A10BAE44EB4B10BE77FBAD /* Fredoka-Regular.ttf in Resources */,
+				B25981D3680643538EB70AE2 /* Fredoka-VariableFont_wdth,wght.ttf in Resources */,
+				3387DF8E40F848E1B6757707 /* fredoka-one.one-regular.ttf in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
