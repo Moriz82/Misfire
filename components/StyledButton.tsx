@@ -32,7 +32,7 @@ const styles = StyleSheet.create({
     borderRadius: 15,
     shadowColor: '#000000',
     shadowOffset: {width: 5, height: 5},
-    shadowRadius: 10
+    shadowRadius: 10,
   },
   buttonText: {
     color: 'rgb(255, 255, 255)',
