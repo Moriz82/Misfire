@@ -14,6 +14,7 @@ const JoinGame = (props: {navigation: any}) => {
         <View style={{width: '10%', height: '10%'}}>
           <ImageButton
             image={require('../../assets/images/MisfireLogo.png')}
+            image={require('../../assets/images/backButton.png')}
             onPress={() => props.navigation.navigate('HomeScreen')}
           />
         </View>
