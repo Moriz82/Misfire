@@ -4,7 +4,7 @@ import {Image, SafeAreaView} from 'react-native';
 import {StyledButton} from '../../components/StyledButton';
 import {CustomTextInput} from '../../components/CustomTextInput';
 import homeScreenStyles from './HomeScreen.styles';
-import {ImageButton} from './ImageButton';
+import {ImageButton} from '../../components/ImageButton';
 
 const HomeScreen = (props: {navigation: any}) => {
   const [usernameText, setUsernameText] = useState('');
