@@ -39,7 +39,6 @@ const HomeScreen = (props: {navigation: any}) => {
 
         <View style={homeScreenStyles.emailTextInput}>
           <StyledButton
-            onPress={() => null}
             onPress={() => props.navigation.navigate('JoinGame')}
             buttonText={'Join Game'}
             buttonColor={false}

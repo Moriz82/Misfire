@@ -84,15 +84,11 @@ export default function App(): JSX.Element {
             component={HomeScreen}
             options={{headerShown: false, title: ''}}
           />
-          {/*<Stack.Screen
-            name="SignUp"
-            component={SignUp}
           <Stack.Screen
             name="JoinGame"
             component={JoinGame}
             options={{headerShown: false, title: ''}}
           />
-          <Stack.Screen
           {/*<Stack.Screen
             name="TeamSelection"
             component={TeamSelection}
