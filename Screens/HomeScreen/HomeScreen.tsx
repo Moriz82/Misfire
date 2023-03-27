@@ -1,9 +1,10 @@
-import {Box, StatusBar, Text, View} from 'native-base';
+import {Box, StatusBar, View} from 'native-base';
 import React, {useState} from 'react';
 import {Image, SafeAreaView} from 'react-native';
 import {StyledButton} from '../../components/StyledButton';
 import {CustomTextInput} from '../../components/CustomTextInput';
 import homeScreenStyles from './HomeScreen.styles';
+import {ImageButton} from './ImageButton';
 
 const HomeScreen = (props: {navigation: any}) => {
   const [usernameText, setUsernameText] = useState('');
@@ -42,6 +43,13 @@ const HomeScreen = (props: {navigation: any}) => {
             onPress={() => null}
             buttonText={'Join Game'}
             buttonColor={false}
+          />
+        </View>
+
+        <View style={homeScreenStyles.emailTextInput}>
+          <ImageButton
+            image={require('../../assets/images/settingsImage.png')}
+            onPress={() => props.navigation.navigate('SettingsScreen')}
           />
         </View>
       </Box>
