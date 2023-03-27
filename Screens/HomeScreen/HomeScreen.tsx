@@ -12,10 +12,12 @@ const HomeScreen = (props: {navigation: any}) => {
     <SafeAreaView style={homeScreenStyles.safeAreaViewStyle}>
       <StatusBar barStyle={'light-content'} />
       <Box style={{padding: 10}}>
-        <Image
-          style={{height: 200, width: 200}}
-          source={require('../../assets/images/MisfireLogoWithText.png')}
-        />
+        <View style={{alignItems: 'center'}}>
+          <Image
+            style={{height: 200, width: 200}}
+            source={require('../../assets/images/MisfireLogoWithText.png')}
+          />
+        </View>
 
         <View style={homeScreenStyles.emailTextInput}>
           <CustomTextInput
