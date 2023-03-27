@@ -50,6 +50,9 @@ const HomeScreen = (props: {navigation: any}) => {
           <ImageButton
             image={require('../../assets/images/settingsImage.png')}
             onPress={() => props.navigation.navigate('SettingsScreen')}
+            onPress={() => props.navigation.navigate('SettingsScreen')} 
+            height={100} 
+            width={100}          
           />
         </View>
       </Box>
