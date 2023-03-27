@@ -12,8 +12,10 @@ type Props = {
 export function ImageButton(props: Props) {
   return (
     <Button style={{backgroundColor: '#605A58'}} onPress={props.onPress}>
-      <Image style={{height: 100, width: 100}} source={props.image} />
-      <Image style={{height: props.height, width: props.width}} source={props.image} />
+      <Image
+        style={{height: props.height, width: props.width}}
+        source={props.image}
+      />
     </Button>
   );
 }
