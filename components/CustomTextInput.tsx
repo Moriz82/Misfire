@@ -32,6 +32,7 @@ export function CustomTextInput(props: Props) {
       <TextInput
         style={{
           flex: 1,
+          marginLeft: 10,
           height: 50,
           fontFamily: 'Fredoka One',
           color: 'black',
