@@ -4,6 +4,7 @@ import {extendTheme, NativeBaseProvider} from 'native-base';
 import {NavigationContainer} from '@react-navigation/native';
 import {createNativeStackNavigator} from '@react-navigation/native-stack';
 import HomeScreen from './Screens/HomeScreen/HomeScreen';
+import JoinGame from './Screens/JoinGame/JoinGame';
 
 export default function App(): JSX.Element {
   let dataFetched = false;
@@ -86,9 +87,13 @@ export default function App(): JSX.Element {
           {/*<Stack.Screen
             name="SignUp"
             component={SignUp}
+          <Stack.Screen
+            name="JoinGame"
+            component={JoinGame}
             options={{headerShown: false, title: ''}}
           />
           <Stack.Screen
+          {/*<Stack.Screen
             name="TeamSelection"
             component={TeamSelection}
             options={{headerShown: false, title: ''}}
