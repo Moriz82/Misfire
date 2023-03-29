@@ -1,6 +1,6 @@
 import {Box, StatusBar, View} from 'native-base';
 import React, {useState} from 'react';
-import {Image, SafeAreaView} from 'react-native';
+import {SafeAreaView} from 'react-native';
 import {StyledButton} from '../../components/StyledButton';
 import {CustomTextInput} from '../../components/CustomTextInput';
 import homeScreenStyles from './HomeScreen.styles';
@@ -8,15 +8,24 @@ import {ImageButton} from '../../components/ImageButton';
 
 const HomeScreen = (props: {navigation: any}) => {
   const [usernameText, setUsernameText] = useState('');
+  let clickCount = 0;
 
   return (
     <SafeAreaView style={homeScreenStyles.safeAreaViewStyle}>
       <StatusBar barStyle={'light-content'} />
       <Box style={{padding: 10}}>
         <View style={{alignItems: 'center'}}>
-          <Image
-            style={{height: 200, width: 200}}
-            source={require('../../assets/images/MisfireLogoWithText.png')}
+          <ImageButton
+            onPress={() => {
+              clickCount += 1;
+              if (clickCount >= 100) {
+                clickCount = 0;
+                props.navigation.navigate('SecretScreen');
+              }
+            }}
+            image={require('../../assets/images/MisfireLogoWithText.png')}
+            height={200}
+            width={200}
           />
         </View>
 

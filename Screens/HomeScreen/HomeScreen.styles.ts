@@ -24,6 +24,11 @@ const homeScreenStyles = StyleSheet.create({
   registerNowText: {
     paddingTop: 30,
   },
+  buttonText: {
+    color: 'rgb(255, 255, 255)',
+    fontSize: 25,
+    fontWeight: '700',
+  },
 });
 
 export default homeScreenStyles;

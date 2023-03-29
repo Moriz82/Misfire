@@ -5,8 +5,8 @@ import {Button} from 'native-base';
 type Props = {
   onPress: (event: GestureResponderEvent) => void;
   image: any;
-  height: number;
-  width: number;
+  height: any;
+  width: any;
 };
 
 export function ImageButton(props: Props) {

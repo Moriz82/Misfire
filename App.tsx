@@ -7,6 +7,7 @@ import HomeScreen from './Screens/HomeScreen/HomeScreen';
 import JoinGame from './Screens/JoinGame/JoinGame';
 import CreateGame from "./Screens/CreateGame/CreateGame";
 import SettingsScreen from "./Screens/SettingsScreen/SettingsScreen";
+import SecretScreen from "./Screens/SecretScreen/SecretScreen";
 
 export default function App(): JSX.Element {
   let dataFetched = false;
@@ -99,6 +100,11 @@ export default function App(): JSX.Element {
           <Stack.Screen
             name="SettingsScreen"
             component={SettingsScreen}
+            options={{headerShown: false, title: ''}}
+          />
+          <Stack.Screen
+            name="SecretScreen"
+            component={SecretScreen}
             options={{headerShown: false, title: ''}}
           />
         </Stack.Navigator>
