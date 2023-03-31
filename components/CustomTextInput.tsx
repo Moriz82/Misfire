@@ -70,7 +70,7 @@ const styles = StyleSheet.create({
   },
   placeholderText: {
     color: 'rgb(255, 255, 255)',
-    fontSize: 15,
+    fontSize: 17,
     fontWeight: '700',
   },
 });

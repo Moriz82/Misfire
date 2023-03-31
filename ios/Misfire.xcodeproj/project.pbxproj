@@ -50,7 +50,7 @@
 		00E356F21AD99517003FC87E /* MisfireTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MisfireTests.m; sourceTree = "<group>"; };
 		037C0A2B29CA2B0F00243E59 /* RNSVG.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = RNSVG.xcodeproj; path = "../../TalentOrLuck/node_modules/react-native-svg/apple/RNSVG.xcodeproj"; sourceTree = "<group>"; };
 		0396B15329CA43970091083D /* fonts */ = {isa = PBXFileReference; lastKnownFileType = folder; name = fonts; path = ../assets/fonts; sourceTree = "<group>"; };
-		0B7012EA0EC8470F87963690 /* fredoka-one.one-regular.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = undefined; includeInIndex = 0; lastKnownFileType = unknown; name = "fredoka-one.one-regular.ttf"; path = "../assets/fonts/fredoka-one.one-regular.ttf"; sourceTree = "<group>"; };
+		0B7012EA0EC8470F87963690 /* fredoka-one.one-regular.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "fredoka-one.one-regular.ttf"; path = "../assets/fonts/fredoka-one.one-regular.ttf"; sourceTree = "<group>"; };
 		13B07F961A680F5B00A75B9A /* Misfire.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Misfire.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		13B07FAF1A68108700A75B9A /* AppDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AppDelegate.h; path = Misfire/AppDelegate.h; sourceTree = "<group>"; };
 		13B07FB01A68108700A75B9A /* AppDelegate.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; name = AppDelegate.mm; path = Misfire/AppDelegate.mm; sourceTree = "<group>"; };
@@ -59,13 +59,13 @@
 		13B07FB71A68108700A75B9A /* main.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = main.m; path = Misfire/main.m; sourceTree = "<group>"; };
 		19F6CBCC0A4E27FBF8BF4A61 /* libPods-Misfire-MisfireTests.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-Misfire-MisfireTests.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		3B4392A12AC88292D35C810B /* Pods-Misfire.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Misfire.debug.xcconfig"; path = "Target Support Files/Pods-Misfire/Pods-Misfire.debug.xcconfig"; sourceTree = "<group>"; };
-		3F5FCEF9BBBD412AA42116CD /* Fredoka-Regular.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = undefined; includeInIndex = 0; lastKnownFileType = unknown; name = "Fredoka-Regular.ttf"; path = "../assets/fonts/Fredoka-Regular.ttf"; sourceTree = "<group>"; };
+		3F5FCEF9BBBD412AA42116CD /* Fredoka-Regular.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "Fredoka-Regular.ttf"; path = "../assets/fonts/Fredoka-Regular.ttf"; sourceTree = "<group>"; };
 		5709B34CF0A7D63546082F79 /* Pods-Misfire.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Misfire.release.xcconfig"; path = "Target Support Files/Pods-Misfire/Pods-Misfire.release.xcconfig"; sourceTree = "<group>"; };
 		5B7EB9410499542E8C5724F5 /* Pods-Misfire-MisfireTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Misfire-MisfireTests.debug.xcconfig"; path = "Target Support Files/Pods-Misfire-MisfireTests/Pods-Misfire-MisfireTests.debug.xcconfig"; sourceTree = "<group>"; };
 		5DCACB8F33CDC322A6C60F78 /* libPods-Misfire.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-Misfire.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		81AB9BB72411601600AC10FF /* LaunchScreen.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; name = LaunchScreen.storyboard; path = Misfire/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		89C6BE57DB24E9ADA2F236DE /* Pods-Misfire-MisfireTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Misfire-MisfireTests.release.xcconfig"; path = "Target Support Files/Pods-Misfire-MisfireTests/Pods-Misfire-MisfireTests.release.xcconfig"; sourceTree = "<group>"; };
-		E55ABC4BDF4B4283BADFF31E /* Fredoka-VariableFont_wdth,wght.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = undefined; includeInIndex = 0; lastKnownFileType = unknown; name = "Fredoka-VariableFont_wdth,wght.ttf"; path = "../assets/fonts/Fredoka-VariableFont_wdth,wght.ttf"; sourceTree = "<group>"; };
+		E55ABC4BDF4B4283BADFF31E /* Fredoka-VariableFont_wdth,wght.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "Fredoka-VariableFont_wdth,wght.ttf"; path = "../assets/fonts/Fredoka-VariableFont_wdth,wght.ttf"; sourceTree = "<group>"; };
 		ED297162215061F000B7C4FE /* JavaScriptCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = JavaScriptCore.framework; path = System/Library/Frameworks/JavaScriptCore.framework; sourceTree = SDKROOT; };
 /* End PBXFileReference section */
 
@@ -138,7 +138,6 @@
 				0B7012EA0EC8470F87963690 /* fredoka-one.one-regular.ttf */,
 			);
 			name = Resources;
-			path = "";
 			sourceTree = "<group>";
 		};
 		2D16E6871FA4F8E400B85C8A /* Frameworks */ = {
@@ -559,6 +558,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
 				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = D8HBPAG294;
 				ENABLE_BITCODE = NO;
 				INFOPLIST_FILE = Misfire/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -586,6 +586,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
 				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = D8HBPAG294;
 				INFOPLIST_FILE = Misfire/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
