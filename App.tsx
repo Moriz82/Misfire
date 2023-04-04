@@ -9,6 +9,7 @@ import CreateGame from "./Screens/CreateGame/CreateGame";
 import SettingsScreen from "./Screens/SettingsScreen/SettingsScreen";
 import SecretScreen from "./Screens/SecretScreen/SecretScreen";
 import YouAreItScreen from "./Screens/YouAreItScreen/YouAreItScreen";
+import ChatScreen from "./Screens/ChatScreen/ChatScreen";
 
 export default function App(): JSX.Element {
   let dataFetched = false;
@@ -111,6 +112,11 @@ export default function App(): JSX.Element {
           <Stack.Screen
             name="YouAreItScreen"
             component={YouAreItScreen}
+            options={{headerShown: false, title: ''}}
+          />
+          <Stack.Screen
+            name="ChatScreen"
+            component={ChatScreen}
             options={{headerShown: false, title: ''}}
           />
         </Stack.Navigator>
