@@ -1,7 +1,7 @@
-import {Box, StatusBar, View} from 'native-base';
+import {Box, StatusBar, View, Text, Button} from 'native-base';
 import React, {useState} from 'react';
 import {SafeAreaView} from 'react-native';
-import {StyledButton} from '../../components/StyledButton';
+import {StyledButton, TextStroke} from '../../components/StyledButton';
 import {CustomTextInput} from '../../components/CustomTextInput';
 import {ImageButton} from '../../components/ImageButton';
 import homeScreenStyles from '../HomeScreen/HomeScreen.styles';
@@ -10,26 +10,15 @@ const HomeScreen = (props: {navigation: any}) => {
   const [usernameText, setUsernameText] = useState('');
   let clickCount = 0;
 
-  return (
+  return (  
     <SafeAreaView style={homeScreenStyles.safeAreaViewStyle}>
-      <StatusBar barStyle={'light-content'} />
-      <Box style={{padding: 10}}>
-        <View style={{alignItems: 'center'}}>
-          <ImageButton
-            onPress={() => {
-              clickCount += 1;
-              if (clickCount >= 100) {
-                clickCount = 0;
-                props.navigation.navigate('SecretScreen');
-              }
-            }}
-            image={require('../../assets/images/MisfireLogoWithText.png')}
-            height={200}
-            width={200}
-            isDark={false}
-          />
-        </View>
+      <View style={{alignItems: 'center'}}>
+        <TextStroke stroke={3} color={'#000000'}>
+         <Text style={{padding: 40, paddingTop: 60, color: '#FF6C1A'}}>You are the target! </Text>
+        </TextStroke>
+      </View>
 
+      <View style={{padding: 30, paddingTop: 0}}>
         <View style={homeScreenStyles.emailTextInput}>
           <CustomTextInput
             placeholderText={'Name...'}
@@ -39,33 +28,19 @@ const HomeScreen = (props: {navigation: any}) => {
             isPassword={false}
           />
         </View>
+      </View>
 
-        <View style={homeScreenStyles.emailTextInput}>
-          <StyledButton
-            onPress={() => props.navigation.navigate('CreateGame')}
-            buttonText={'Create Game'}
-            buttonColor={true}
-          />
-        </View>
+      <View style={{alignItems: 'center'}}>
+        <TextStroke stroke={3} color={'#000000'}>
+         <Text style={{padding: 30, paddingTop: 45, color: 'white'}}>Type the name of ONE contact you would like to omit. </Text>
+        </TextStroke>
+      </View>
 
-        <View style={homeScreenStyles.emailTextInput}>
-          <StyledButton
-            onPress={() => props.navigation.navigate('JoinGame')}
-            buttonText={'Join Game'}
-            buttonColor={false}
-          />
-        </View>
+      <View style={{alignItems: 'center', padding: 35}}>
+        <Button style={{width: '50%', height: '30%'}}>
 
-        <View style={homeScreenStyles.emailTextInput}>
-          <ImageButton
-            image={require('../../assets/images/settingsImage.png')}
-            onPress={() => props.navigation.navigate('SettingsScreen')}
-            height={100}
-            width={100}
-            isDark={false}
-          />
-        </View>
-      </Box>
+        </Button>
+      </View>
     </SafeAreaView>
   );
 };
