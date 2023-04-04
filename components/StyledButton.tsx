@@ -42,14 +42,13 @@ const styles = StyleSheet.create({
 });
 
 type Props2 = {
-  children: Element;
+  children: any;
   stroke: number;
   color: string;
 };
 
 export class TextStroke extends React.Component<Props2> {
   createClones = (w: number, h: number, color?: string) => {
-    // @ts-ignore
     const {children} = this.props;
     return Children.map(children, child => {
       if (isValidElement(child)) {
@@ -75,7 +74,6 @@ export class TextStroke extends React.Component<Props2> {
   };
 
   render() {
-    // @ts-ignore
     const {color, stroke, children} = this.props;
     const strokeW = stroke;
     const top = this.createClones(0, -strokeW * 1.2, color);
