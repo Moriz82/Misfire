@@ -7,11 +7,12 @@ type Props = {
   image: any;
   height: any;
   width: any;
+  isDark: boolean;
 };
 
 export function ImageButton(props: Props) {
   return (
-    <Button style={{backgroundColor: '#605A58'}} onPress={props.onPress}>
+    <Button style={{backgroundColor: props.isDark ? '#434343' : '#605A58'}} onPress={props.onPress}>
       <Image
         style={{height: props.height, width: props.width}}
         source={props.image}

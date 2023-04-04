@@ -41,7 +41,13 @@ const styles = StyleSheet.create({
   },
 });
 
-export class TextStroke extends React.Component<Props> {
+type Props2 = {
+  children: Element;
+  stroke: number;
+  color: string;
+};
+
+export class TextStroke extends React.Component<Props2> {
   createClones = (w: number, h: number, color?: string) => {
     // @ts-ignore
     const {children} = this.props;
