@@ -5,9 +5,10 @@ import {NavigationContainer} from '@react-navigation/native';
 import {createNativeStackNavigator} from '@react-navigation/native-stack';
 import HomeScreen from './Screens/HomeScreen/HomeScreen';
 import JoinGame from './Screens/JoinGame/JoinGame';
-import CreateGame from './Screens/CreateGame/CreateGame';
-import SettingsScreen from './Screens/SettingsScreen/SettingsScreen';
-import SecretScreen from './Screens/SecretScreen/SecretScreen';
+import CreateGame from "./Screens/CreateGame/CreateGame";
+import SettingsScreen from "./Screens/SettingsScreen/SettingsScreen";
+import SecretScreen from "./Screens/SecretScreen/SecretScreen";
+import YouAreItScreen from "./Screens/YouAreItScreen/YouAreItScreen";
 
 export default function App(): JSX.Element {
   let dataFetched = false;
@@ -105,6 +106,11 @@ export default function App(): JSX.Element {
           <Stack.Screen
             name="SecretScreen"
             component={SecretScreen}
+            options={{headerShown: false, title: ''}}
+          />
+          <Stack.Screen
+            name="YouAreItScreen"
+            component={YouAreItScreen}
             options={{headerShown: false, title: ''}}
           />
         </Stack.Navigator>
