@@ -7,7 +7,7 @@ import {ImageButton} from '../../components/ImageButton';
 import homeScreenStyles from '../HomeScreen/HomeScreen.styles';
 
 const HomeScreen = (props: {navigation: any}) => {
-  const [usernameText, setUsernameText] = useState('');
+  const [fieldText, setText] = useState('');
   let clickCount = 0;
 
   return (  
@@ -44,7 +44,21 @@ const HomeScreen = (props: {navigation: any}) => {
       </View>
 
       <View style={{flex:1, backgroundColor: '#605A58'}}>
+        <View style={{flex:1, backgroundColor: 'white'}}>
 
+        </View>
+
+        <View style={{paddingBottom: 25, padding: 20}}>
+          <View style={homeScreenStyles.emailTextInput}>
+            <CustomTextInput
+              placeholderText={'Send A Message...'}
+              value={fieldText}
+              onChangeText={(newText: any) => setText(newText)}
+              iconName={'email'}
+              isPassword={false}
+            />
+          </View>
+        </View>
       </View>
     </>
   );
