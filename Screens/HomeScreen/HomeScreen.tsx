@@ -26,6 +26,7 @@ const HomeScreen = (props: {navigation: any}) => {
             image={require('../../assets/images/MisfireLogoWithText.png')}
             height={200}
             width={200}
+            isDark={false}
           />
         </View>
 
@@ -61,6 +62,7 @@ const HomeScreen = (props: {navigation: any}) => {
             onPress={() => props.navigation.navigate('SettingsScreen')}
             height={100}
             width={100}
+            isDark={false}
           />
         </View>
       </Box>
