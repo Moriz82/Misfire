@@ -3,18 +3,14 @@ import {Button, Text} from 'native-base';
 import {StyleSheet} from 'react-native';
 import {TextStroke} from './StyledButton';
 
-type Props = {
-  buttonText: string;
-};
-
-export function ReadyButton(props: Props) {
+export function ReadyButton() {
   const [isReady, setIsReady] = useState(false);
   return (
     <Button
-      style={[styles.root, {backgroundColor: isReady ? '#2AC230' : '#FF0F00'}]}
+      style={[styles.root, {backgroundColor: isReady ? '#FF0F00' : '#2AC230'}]}
       onPress={() => setIsReady(!isReady)}>
-      <TextStroke stroke={3} color={'#000000'}>
-        <Text style={styles.buttonText}>{isReady ? 'Ready' : 'UnReady'}</Text>
+      <TextStroke stroke={1} color={'#000000'}>
+        <Text style={styles.buttonText}>{isReady ? 'UNREADY' : 'READY'}</Text>
       </TextStroke>
     </Button>
   );

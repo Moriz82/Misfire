@@ -5,16 +5,19 @@ import {StyledButton, TextStroke} from '../../components/StyledButton';
 import {CustomTextInput} from '../../components/CustomTextInput';
 import {ImageButton} from '../../components/ImageButton';
 import homeScreenStyles from '../HomeScreen/HomeScreen.styles';
+import {ReadyButton} from '../../components/ReadyButton';
 
 const HomeScreen = (props: {navigation: any}) => {
   const [usernameText, setUsernameText] = useState('');
   let clickCount = 0;
 
-  return (  
+  return (
     <SafeAreaView style={homeScreenStyles.safeAreaViewStyle}>
       <View style={{alignItems: 'center'}}>
         <TextStroke stroke={3} color={'#000000'}>
-         <Text style={{padding: 40, paddingTop: 60, color: '#FF6C1A'}}>You are the target! </Text>
+          <Text style={{padding: 40, paddingTop: 60, color: '#FF6C1A'}}>
+            You are the target!{' '}
+          </Text>
         </TextStroke>
       </View>
 
@@ -32,14 +35,14 @@ const HomeScreen = (props: {navigation: any}) => {
 
       <View style={{alignItems: 'center'}}>
         <TextStroke stroke={3} color={'#000000'}>
-         <Text style={{padding: 30, paddingTop: 45, color: 'white'}}>Type the name of ONE contact you would like to omit. </Text>
+          <Text style={{padding: 30, paddingTop: 45, color: 'white'}}>
+            Type the name of ONE contact you would like to omit.{' '}
+          </Text>
         </TextStroke>
       </View>
 
       <View style={{alignItems: 'center', padding: 35}}>
-        <Button style={{width: '50%', height: '30%'}}>
-
-        </Button>
+        <ReadyButton />
       </View>
     </SafeAreaView>
   );
