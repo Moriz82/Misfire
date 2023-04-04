@@ -47,6 +47,7 @@ const JoinGame = (props: {navigation: any}) => {
           onPress={() => props.navigation.navigate('HomeScreen')}
           height={150}
           width={150}
+          isDark={false}
         />
 
         <View style={{width: '85%', paddingTop: 50}}>
