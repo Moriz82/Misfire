@@ -1,4 +1,3 @@
-
 import React, {useState} from 'react';
 import {SafeAreaView, StyleSheet} from 'react-native';
 import {View, Text, Image} from 'native-base';
@@ -41,26 +40,31 @@ const HomeScreen = (props: {navigation: any}) => {
         </View>
       </View>
 
-      <View style={{height: '30%', backgroundColor: '#605A58', paddingTop: 10, alignItems: 'center'}}>
+      <View
+        style={{
+          height: '30%',
+          backgroundColor: '#605A58',
+          paddingTop: 10,
+          alignItems: 'center',
+        }}>
         <Image
           style={{height: 160, width: 160}}
           source={require('../../assets/images/backButton.png')}
-          alt={"err"}
+          alt={'err'}
         />
       </View>
-        
+
       <View style={styles.gridContainer}>
-       <View style={styles.gridCell}/>
-       <View style={styles.gridCell}/>
-       <View style={styles.gridCell}/>
-       <View style={styles.gridCell}/>
-       <View style={styles.gridCell}/>
-       <View style={styles.gridCell}/>
-       <View style={styles.gridCell}/>
-       <View style={styles.gridCell}/>
-       <View style={styles.gridCell}/>
+        <View style={styles.gridCell} />
+        <View style={styles.gridCell} />
+        <View style={styles.gridCell} />
+        <View style={styles.gridCell} />
+        <View style={styles.gridCell} />
+        <View style={styles.gridCell} />
+        <View style={styles.gridCell} />
+        <View style={styles.gridCell} />
+        <View style={styles.gridCell} />
       </View>
-      
 
       <View
         style={{
@@ -68,7 +72,7 @@ const HomeScreen = (props: {navigation: any}) => {
           flex: 1,
           alignItems: 'center',
           justifyContent: 'flex-end',
-          padding: 8
+          padding: 8,
         }}>
         <View style={homeScreenStyles.emailTextInput}>
           <StyledButton
