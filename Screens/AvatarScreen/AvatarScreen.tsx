@@ -1,19 +1,7 @@
-<<<<<<< HEAD
-import {
-  Box,
-  StatusBar,
-  View,
-  Text,
-  Button,
-  ScrollView,
-  Image,
-} from 'native-base';
+
 import React, {useState} from 'react';
 import {SafeAreaView, StyleSheet} from 'react-native';
-=======
 import {View, Text, Image} from 'native-base';
-import React from 'react';
->>>>>>> ba275eba52dc38cacda9aaba971b879e7848c591
 import {StyledButton, TextStroke} from '../../components/StyledButton';
 import {ImageButton} from '../../components/ImageButton';
 import homeScreenStyles from '../HomeScreen/HomeScreen.styles';
