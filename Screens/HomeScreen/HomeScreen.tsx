@@ -42,7 +42,7 @@ const HomeScreen = (props: {navigation: any}) => {
 
         <View style={homeScreenStyles.emailTextInput}>
           <StyledButton
-            onPress={() => props.navigation.navigate('CreateGame')}
+            onPress={() => props.navigation.navigate('AvatarScreen')}
             buttonText={'Create Game'}
             buttonColor={true}
           />
@@ -50,7 +50,7 @@ const HomeScreen = (props: {navigation: any}) => {
 
         <View style={homeScreenStyles.emailTextInput}>
           <StyledButton
-            onPress={() => props.navigation.navigate('JoinGame')}
+            onPress={() => props.navigation.navigate('AvatarScreen')}
             buttonText={'Join Game'}
             buttonColor={false}
           />

@@ -1,4 +1,4 @@
-import {Box, StatusBar, View, Text, Button} from 'native-base';
+import {Box, StatusBar, View, Text, Button, ScrollView} from 'native-base';
 import React, {useState} from 'react';
 import {SafeAreaView} from 'react-native';
 import {StyledButton, TextStroke} from '../../components/StyledButton';
@@ -44,11 +44,17 @@ const HomeScreen = (props: {navigation: any}) => {
       </View>
 
       <View style={{flex:1, backgroundColor: '#605A58'}}>
-        <View style={{flex:1, backgroundColor: 'white'}}>
+        <ScrollView style={{flex:1, backgroundColor: '#605A58', paddingTop: 50}}>
 
-        </View>
+          <View style={{backgroundColor: 'red', width: '50%', height: '50%'}}>
+            <View >
 
-        <View style={{paddingBottom: 25, padding: 20}}>
+            </View>
+          </View>
+
+        </ScrollView>
+
+        <View style={{paddingBottom: 25, padding: 20, backgroundColor: 'blue'}}>
           <View style={homeScreenStyles.emailTextInput}>
             <CustomTextInput
               placeholderText={'Send A Message...'}

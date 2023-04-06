@@ -36,13 +36,19 @@ const CreateGame = (props: {navigation: any}) => {
             paddingBottom: 15,
           }}>
           <TextStroke stroke={3} color={'#000000'}>
-            <Text style={homeScreenStyles.buttonText}>Create Game </Text>
+            <Text style={homeScreenStyles.buttonText}>Lobby </Text>
           </TextStroke>
         </View>
       </View>
 
       <SafeAreaView style={homeScreenStyles.safeAreaViewStyle}>
-        <View style={{alignItems: 'center', display: 'flex', flexDirection: 'row', justifyContent:"center"}}>
+        <View
+          style={{
+            alignItems: 'center',
+            display: 'flex',
+            flexDirection: 'row',
+            justifyContent: 'center',
+          }}>
           <View style={{paddingTop: 25, paddingBottom: 10}}>
             <TextStroke stroke={3} color={'#000000'}>
               <Text style={homeScreenStyles.buttonText}>Game ID: </Text>
