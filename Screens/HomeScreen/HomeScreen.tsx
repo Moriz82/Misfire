@@ -6,6 +6,8 @@ import {CustomTextInput} from '../../components/CustomTextInput';
 import homeScreenStyles from './HomeScreen.styles';
 import {ImageButton} from '../../components/ImageButton';
 
+export var buttonSelected = false;
+
 const HomeScreen = (props: {navigation: any}) => {
   const [usernameText, setUsernameText] = useState('');
   let clickCount = 0;
@@ -42,7 +44,10 @@ const HomeScreen = (props: {navigation: any}) => {
 
         <View style={homeScreenStyles.emailTextInput}>
           <StyledButton
-            onPress={() => props.navigation.navigate('AvatarScreen')}
+            onPress={() => {
+              buttonSelected = false;
+              props.navigation.navigate('AvatarScreen');
+            }}
             buttonText={'Create Game'}
             buttonColor={true}
           />
@@ -50,7 +55,10 @@ const HomeScreen = (props: {navigation: any}) => {
 
         <View style={homeScreenStyles.emailTextInput}>
           <StyledButton
-            onPress={() => props.navigation.navigate('AvatarScreen')}
+            onPress={() => {
+              buttonSelected = true;
+              props.navigation.navigate('AvatarScreen');
+            }}
             buttonText={'Join Game'}
             buttonColor={false}
           />

@@ -37,11 +37,6 @@ const GameSettingScreen = (props: {navigation: any}) => {
             flexDirection: 'row',
             paddingLeft: 20,
           }}>
-          <Svg height="60" width="200">
-            <Text stroke="black" fontSize="20" fontWeight="bold" x="100" y="20" textAnchor="middle">
-              STROKED TEXT
-            </Text>
-          </Svg>
           <Box alignItems="center" w="75%" h="85%">
             <Slider
               w="3/4"
