@@ -8,7 +8,7 @@ import {
   Image,
 } from 'native-base';
 import React, {useState} from 'react';
-import {SafeAreaView} from 'react-native';
+import {SafeAreaView, StyleSheet} from 'react-native';
 import {StyledButton, TextStroke} from '../../components/StyledButton';
 import {CustomTextInput} from '../../components/CustomTextInput';
 import {ImageButton} from '../../components/ImageButton';
@@ -52,40 +52,34 @@ const HomeScreen = (props: {navigation: any}) => {
         </View>
       </View>
 
-      <View style={{height: '30%', backgroundColor: '#605A58', paddingTop: 10}}>
+      <View style={{height: '30%', backgroundColor: '#605A58', paddingTop: 10, alignItems: 'center'}}>
         <Image
           style={{height: 160, width: 160}}
           source={require('../../assets/images/backButton.png')}
+          alt={"err"}
         />
       </View>
-
-      <View
-        style={{backgroundColor: 'white', height: '13%', flexDirection: 'row'}}>
-        <View style={{backgroundColor: 'blue', flex: 1}} />
-        <View style={{backgroundColor: 'green', flex: 1}} />
-        <View style={{backgroundColor: 'blue', flex: 1}} />
+        
+      <View style={styles.gridContainer}>
+       <View style={styles.gridCell}/>
+       <View style={styles.gridCell}/>
+       <View style={styles.gridCell}/>
+       <View style={styles.gridCell}/>
+       <View style={styles.gridCell}/>
+       <View style={styles.gridCell}/>
+       <View style={styles.gridCell}/>
+       <View style={styles.gridCell}/>
+       <View style={styles.gridCell}/>
       </View>
-
-      <View
-        style={{backgroundColor: 'white', height: '13%', flexDirection: 'row'}}>
-        <View style={{backgroundColor: 'green', flex: 1}} />
-        <View style={{backgroundColor: 'blue', flex: 1}} />
-        <View style={{backgroundColor: 'green', flex: 1}} />
-      </View>
-
-      <View
-        style={{backgroundColor: 'white', height: '13%', flexDirection: 'row'}}>
-        <View style={{backgroundColor: 'blue', flex: 1}} />
-        <View style={{backgroundColor: 'green', flex: 1}} />
-        <View style={{backgroundColor: 'blue', flex: 1}} />
-      </View>
+      
 
       <View
         style={{
           backgroundColor: '#605A58',
           flex: 1,
           alignItems: 'center',
-          justifyContent: 'flex-start',
+          justifyContent: 'flex-end',
+          padding: 8
         }}>
         <View style={homeScreenStyles.emailTextInput}>
           <StyledButton
@@ -98,6 +92,20 @@ const HomeScreen = (props: {navigation: any}) => {
     </>
   );
 };
+
+const styles = StyleSheet.create({
+  gridContainer: {
+    flexDirection: 'row',
+    flexWrap: 'wrap',
+    backgroundColor: '#c7c7c7',
+  },
+  gridCell: {
+    flexBasis: '33.333%',
+    height: 100,
+    borderWidth: 5,
+    borderColor: '#3d3d3d',
+  },
+});
 
 /*<StyledButton
   onPress={() => props.navigation.navigate('SignUp')}
