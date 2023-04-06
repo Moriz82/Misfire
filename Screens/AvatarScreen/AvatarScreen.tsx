@@ -77,7 +77,7 @@ const HomeScreen = (props: {navigation: any}) => {
                 buttonSelected ? 'JoinGame' : 'CreateGame',
               );
             }}
-            buttonText={'Create Game'}
+            buttonText={'Continue'}
             buttonColor={true}
           />
         </View>

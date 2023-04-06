@@ -15,10 +15,20 @@ const HomeScreen = (props: {navigation: any}) => {
     <SafeAreaView style={homeScreenStyles.safeAreaViewStyle}>
       <View style={{alignItems: 'center'}}>
         <TextStroke stroke={3} color={'#000000'}>
-          <Text style={{padding: 40, paddingTop: 60, color: '#FF6C1A'}}>
+          <Text style={{padding: 10, paddingTop: 30, color: '#FF6C1A'}}>
             You are the target!{' '}
           </Text>
         </TextStroke>
+      </View>
+
+      <View style={{alignItems: 'center'}}>
+        <ImageButton
+          image={require('../../assets/images/Target.png')}
+          onPress={() => props.navigation.navigate('HomeScreen')}
+          height={130}
+          width={130}
+          isDark={false}
+        />
       </View>
 
       <View style={{padding: 30, paddingTop: 0}}>
@@ -41,7 +51,7 @@ const HomeScreen = (props: {navigation: any}) => {
         </TextStroke>
       </View>
 
-      <View style={{alignItems: 'center', padding: 35}}>
+      <View style={{alignItems: 'center', padding: 15}}>
         <ReadyButton />
       </View>
     </SafeAreaView>

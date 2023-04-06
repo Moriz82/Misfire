@@ -78,13 +78,6 @@ const CreateGame = (props: {navigation: any}) => {
               buttonColor={true}
             />
           </View>
-          <View style={homeScreenStyles.emailTextInput}>
-            <StyledButton
-              onPress={() => props.navigation.navigate('ChatScreen')}
-              buttonText={'Chat'}
-              buttonColor={false}
-            />
-          </View>
         </View>
       </SafeAreaView>
     </>
