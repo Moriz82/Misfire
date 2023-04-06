@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 import {
   Box,
   StatusBar,
@@ -9,15 +10,16 @@ import {
 } from 'native-base';
 import React, {useState} from 'react';
 import {SafeAreaView, StyleSheet} from 'react-native';
+=======
+import {View, Text, Image} from 'native-base';
+import React from 'react';
+>>>>>>> ba275eba52dc38cacda9aaba971b879e7848c591
 import {StyledButton, TextStroke} from '../../components/StyledButton';
-import {CustomTextInput} from '../../components/CustomTextInput';
 import {ImageButton} from '../../components/ImageButton';
 import homeScreenStyles from '../HomeScreen/HomeScreen.styles';
+import {buttonSelected} from '../HomeScreen/HomeScreen';
 
 const HomeScreen = (props: {navigation: any}) => {
-  const [fieldText, setText] = useState('');
-  let clickCount = 0;
-
   return (
     <>
       <View
@@ -37,7 +39,6 @@ const HomeScreen = (props: {navigation: any}) => {
           width={50}
           isDark={true}
         />
-
 
         <View
           style={{
@@ -83,7 +84,11 @@ const HomeScreen = (props: {navigation: any}) => {
         }}>
         <View style={homeScreenStyles.emailTextInput}>
           <StyledButton
-            onPress={() => props.navigation.navigate('AvatarScreen')}
+            onPress={() => {
+              props.navigation.navigate(
+                buttonSelected ? 'JoinGame' : 'CreateGame',
+              );
+            }}
             buttonText={'Create Game'}
             buttonColor={true}
           />
