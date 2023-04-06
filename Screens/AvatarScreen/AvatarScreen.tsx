@@ -1,4 +1,12 @@
-import {Box, StatusBar, View, Text, Button, ScrollView, Image} from 'native-base';
+import {
+  Box,
+  StatusBar,
+  View,
+  Text,
+  Button,
+  ScrollView,
+  Image,
+} from 'native-base';
 import React, {useState} from 'react';
 import {SafeAreaView} from 'react-native';
 import {StyledButton, TextStroke} from '../../components/StyledButton';
@@ -10,7 +18,7 @@ const HomeScreen = (props: {navigation: any}) => {
   const [fieldText, setText] = useState('');
   let clickCount = 0;
 
-  return (  
+  return (
     <>
       <View
         style={{
@@ -30,6 +38,7 @@ const HomeScreen = (props: {navigation: any}) => {
           isDark={true}
         />
 
+
         <View
           style={{
             alignItems: 'center',
@@ -44,34 +53,40 @@ const HomeScreen = (props: {navigation: any}) => {
       </View>
 
       <View style={{height: '30%', backgroundColor: '#605A58', paddingTop: 10}}>
-        <ImageButton
-          image={require('../../assets/images/settingsImage.png')}
-          onPress={() => props.navigation.navigate('GameSettingsScreen')}
-          height={160}
-          width={160}
-          isDark={false}
+        <Image
+          style={{height: 160, width: 160}}
+          source={require('../../assets/images/backButton.png')}
         />
       </View>
 
-      <View style={{backgroundColor: 'white', height: '13%', flexDirection: 'row'}}>
-        <View style={{backgroundColor: 'blue', flex:1}}></View>
-        <View style={{backgroundColor: 'green', flex:1}}></View>
-        <View style={{backgroundColor: 'blue', flex:1}}></View>
+      <View
+        style={{backgroundColor: 'white', height: '13%', flexDirection: 'row'}}>
+        <View style={{backgroundColor: 'blue', flex: 1}} />
+        <View style={{backgroundColor: 'green', flex: 1}} />
+        <View style={{backgroundColor: 'blue', flex: 1}} />
       </View>
 
-      <View style={{backgroundColor: 'white', height: '13%', flexDirection: 'row'}}>
-        <View style={{backgroundColor: 'green', flex:1}}></View>
-        <View style={{backgroundColor: 'blue', flex:1}}></View>
-        <View style={{backgroundColor: 'green', flex:1}}></View>
+      <View
+        style={{backgroundColor: 'white', height: '13%', flexDirection: 'row'}}>
+        <View style={{backgroundColor: 'green', flex: 1}} />
+        <View style={{backgroundColor: 'blue', flex: 1}} />
+        <View style={{backgroundColor: 'green', flex: 1}} />
       </View>
 
-      <View style={{backgroundColor: 'white', height: '13%', flexDirection: 'row'}}>
-        <View style={{backgroundColor: 'blue', flex:1}}></View>
-        <View style={{backgroundColor: 'green', flex:1}}></View>
-        <View style={{backgroundColor: 'blue', flex:1}}></View>
+      <View
+        style={{backgroundColor: 'white', height: '13%', flexDirection: 'row'}}>
+        <View style={{backgroundColor: 'blue', flex: 1}} />
+        <View style={{backgroundColor: 'green', flex: 1}} />
+        <View style={{backgroundColor: 'blue', flex: 1}} />
       </View>
 
-      <View style={{backgroundColor: '#605A58', flex:1, alignItems: 'center', justifyContent: 'flex-start'}}>
+      <View
+        style={{
+          backgroundColor: '#605A58',
+          flex: 1,
+          alignItems: 'center',
+          justifyContent: 'flex-start',
+        }}>
         <View style={homeScreenStyles.emailTextInput}>
           <StyledButton
             onPress={() => props.navigation.navigate('AvatarScreen')}
