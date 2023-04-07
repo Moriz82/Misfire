@@ -9,7 +9,7 @@
       "client_info": {
         "mobilesdk_app_id": "1:556249985086:android:aa97b72bf27a18259fe16f",
         "android_client_info": {
-          "package_name": "org.reactjs.native.example.Misfire"
+          "package_name": "com.misfire"
         }
       },
       "oauth_client": [

@@ -12,12 +12,15 @@ import YouAreItScreen from './Screens/YouAreItScreen/YouAreItScreen';
 import ChatScreen from './Screens/ChatScreen/ChatScreen';
 import GameSettingScreen from './Screens/GameSettingsScreen/GameSettingsScreen';
 import AvatarScreen from './Screens/AvatarScreen/AvatarScreen';
+import auth from '@react-native-firebase/auth';
 
-export default function App(): JSX.Element {
+export default function App(): JSX.Element | null {
   let dataFetched = false;
   const appState = useRef(AppState.currentState);
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const [appStateVisible, setAppStateVisible] = useState(appState.current);
+  const [initializing, setInitializing] = useState(true);
+  const [user, setUser] = useState();
 
   useEffect(() => {
     const subscription = AppState.addEventListener(
@@ -51,6 +54,19 @@ export default function App(): JSX.Element {
       subscription.remove();
     };
   }, []);
+
+  // Handle user state changes
+  function onAuthStateChanged(user: any) {
+    setUser(user);
+    if (initializing) setInitializing(false);
+  }
+
+  useEffect(() => {
+    const subscriber = auth().onAuthStateChanged(onAuthStateChanged);
+    return subscriber; // unsubscribe on unmount
+  }, []);
+
+  if (initializing) return null;
 
   const Stack = createNativeStackNavigator();
 

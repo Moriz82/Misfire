@@ -5,6 +5,7 @@ import {StyledButton} from '../../components/StyledButton';
 import {CustomTextInput} from '../../components/CustomTextInput';
 import homeScreenStyles from './HomeScreen.styles';
 import {ImageButton} from '../../components/ImageButton';
+import auth from '@react-native-firebase/auth';
 
 export var buttonSelected = false;
 
@@ -77,6 +78,10 @@ const HomeScreen = (props: {navigation: any}) => {
     </SafeAreaView>
   );
 };
+
+function createUser(username:string) {
+  auth()
+}
 
 /*<StyledButton
   onPress={() => props.navigation.navigate('SignUp')}
