@@ -1,7 +1,7 @@
-import {Box, StatusBar, View, Text, Button} from 'native-base';
+import {View, Text} from 'native-base';
 import React, {useState} from 'react';
 import {SafeAreaView} from 'react-native';
-import {StyledButton, TextStroke} from '../../components/StyledButton';
+import {TextStroke} from '../../components/StyledButton';
 import {CustomTextInput} from '../../components/CustomTextInput';
 import {ImageButton} from '../../components/ImageButton';
 import homeScreenStyles from '../HomeScreen/HomeScreen.styles';
@@ -9,7 +9,6 @@ import {ReadyButton} from '../../components/ReadyButton';
 
 const HomeScreen = (props: {navigation: any}) => {
   const [usernameText, setUsernameText] = useState('');
-  let clickCount = 0;
 
   return (
     <SafeAreaView style={homeScreenStyles.safeAreaViewStyle}>

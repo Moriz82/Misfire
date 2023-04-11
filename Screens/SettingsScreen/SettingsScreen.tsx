@@ -1,15 +1,20 @@
-import {SafeAreaView, View} from 'react-native';
+import {View} from 'react-native';
 import {Text} from 'native-base';
 import React from 'react';
 import {ImageButton} from '../../components/ImageButton';
-import {StyledButton, TextStroke} from '../../components/StyledButton';
+import {TextStroke} from '../../components/StyledButton';
 import settingsStyles from './SettingsScreen.styles';
 
 const SettingScreen = (props: {navigation: any}) => {
   return (
     <>
-      <View style={{paddingTop: 20, backgroundColor: '#434343', alignItems: 'flex-start', 
-      flexDirection: 'row'}}>
+      <View
+        style={{
+          paddingTop: 20,
+          backgroundColor: '#434343',
+          alignItems: 'flex-start',
+          flexDirection: 'row',
+        }}>
         <ImageButton
           image={require('../../assets/images/backButton.png')}
           onPress={() => props.navigation.navigate('HomeScreen')}
@@ -29,11 +34,9 @@ const SettingScreen = (props: {navigation: any}) => {
             <Text style={settingsStyles.buttonText}>Settings</Text>
           </TextStroke>
         </View>
-     </View>
+      </View>
 
-     <View style={{backgroundColor: '#605A58', flex:1}}>
-
-     </View>
+      <View style={{backgroundColor: '#605A58', flex: 1}} />
     </>
   );
 };

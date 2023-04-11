@@ -1,12 +1,12 @@
-import { Box, StatusBar, View } from "native-base";
-import React, { useEffect, useState } from "react";
-import { SafeAreaView } from "react-native";
-import { StyledButton } from "../../components/StyledButton";
-import { CustomTextInput } from "../../components/CustomTextInput";
-import homeScreenStyles from "./HomeScreen.styles";
-import { ImageButton } from "../../components/ImageButton";
-import firestore from "@react-native-firebase/firestore";
-import firebase from "@react-native-firebase/app";
+import {Box, StatusBar, View} from 'native-base';
+import React, {useState} from 'react';
+import {SafeAreaView} from 'react-native';
+import {StyledButton} from '../../components/StyledButton';
+import {CustomTextInput} from '../../components/CustomTextInput';
+import homeScreenStyles from './HomeScreen.styles';
+import {ImageButton} from '../../components/ImageButton';
+import firestore from '@react-native-firebase/firestore';
+import {setUsername} from '../../Utils/LocalDataManager';
 
 export var buttonSelected = false;
 
@@ -14,37 +14,30 @@ const HomeScreen = (props: {navigation: any}) => {
   const [usernameText, setUsernameText] = useState('');
   let clickCount = 0;
 
-
   async function handleButtonPress() {
-    /*try{
-      lobbyCode = await createLobby();
-      console.log(lobbyCode)
-      console.log(await firestore().collection('lobbies').doc(lobbyCode));
-    }
-    catch (error) {
-      console.log(error)
-    }*/
-
-    const userDoc = await firestore().collection('lobbies').doc('DeaSRa18ztQl032x80ZX').get()
+    const userDoc = await firestore()
+      .collection('lobbies')
+      .doc('DeaSRa18ztQl032x80ZX')
+      .get();
     console.log(userDoc);
-
   }
 
   async function checkConnection() {
-    await fetch('https://www.google.com', { method: 'HEAD' })
-      .then((response) => {
+    await fetch('https://www.google.com', {method: 'HEAD'})
+      .then(response => {
         if (response.ok) {
           console.log('Connection successful!');
         } else {
           console.log('Connection failed.');
         }
       })
-      .catch((error) => {
+      .catch(error => {
         console.log(`Error: ${error.message}`);
       });
   }
 
   checkConnection().then(r => console.log(r));
+  handleButtonPress().then(r => console.log(r));
 
   return (
     <SafeAreaView style={homeScreenStyles.safeAreaViewStyle}>
@@ -80,6 +73,9 @@ const HomeScreen = (props: {navigation: any}) => {
           <StyledButton
             onPress={() => {
               buttonSelected = false;
+              setUsername(usernameText).then(() =>
+                console.log(`username set to ${usernameText}`),
+              );
               props.navigation.navigate('AvatarScreen');
             }}
             buttonText={'Create Game'}
@@ -91,6 +87,9 @@ const HomeScreen = (props: {navigation: any}) => {
           <StyledButton
             onPress={() => {
               buttonSelected = true;
+              setUsername(usernameText).then(() =>
+                console.log(`username set to ${usernameText}`),
+              );
               props.navigation.navigate('AvatarScreen');
             }}
             buttonText={'Join Game'}
@@ -101,7 +100,7 @@ const HomeScreen = (props: {navigation: any}) => {
         <View style={homeScreenStyles.emailTextInput}>
           <ImageButton
             image={require('../../assets/images/settingsImage.png')}
-            onPress={() => handleButtonPress()}// props.navigation.navigate('SettingsScreen')}
+            onPress={() => props.navigation.navigate('SettingsScreen')}
             height={100}
             width={100}
             isDark={false}
@@ -110,15 +109,6 @@ const HomeScreen = (props: {navigation: any}) => {
       </Box>
     </SafeAreaView>
   );
-
-
 };
-
-let lobbyCode = "";
-
-/*<StyledButton
-  onPress={() => props.navigation.navigate('SignUp')}
-  buttonText={'Sign Up'}
-/>*/
 
 export default HomeScreen;

@@ -1,35 +1,43 @@
 import firestore from '@react-native-firebase/firestore';
 import 'react-native-get-random-values';
-import { v4 as uuid } from 'uuid';
+// @ts-ignore
+import {v4 as uuid} from 'uuid';
 
 export const createLobby = async () => {
   const lobbyCode = uuid();
-  console.log("test")
   try {
+    await firestore().collection('lobbies').add(lobbyCode);
     await firestore().collection('lobbies').doc(lobbyCode).set({
       members: [], // Add an empty array to store lobby members
     });
-    console.log("test")
+    console.log(`Lobby Created with code ${lobbyCode}`);
   } catch (error) {
-    console.log("Error:", error);
+    console.log('Error:', error);
   }
   return lobbyCode;
 };
 
-export const joinLobby = async (lobbyCode:string , username:string) => {
+export const joinLobby = async (
+  lobbyCode: string,
+  username: string,
+  avatarID: number,
+) => {
   // Get the lobby document reference
   const lobbyRef = firestore().collection('lobbies').doc(lobbyCode);
 
   // Add the user to the members array
-  await lobbyRef.update({
-    members: firestore.FieldValue.arrayUnion(username),
-  });
-
-  // Call a Firebase Cloud Function to update the lobby members on all clients
-  //const updateLobbyMembers = functions().httpsCallable('updateLobbyMembers');
-  //updateLobbyMembers({ lobbyCode });
+  if (!(await lobbyRef.get())) {
+    await lobbyRef.update({
+      members: firestore.FieldValue.arrayUnion({
+        username: username,
+        avatarID: avatarID,
+      }),
+    });
+  } else {
+    return 'Username already exists in lobby';
+  }
 };
 
-export const deleteLobby = async (lobbyCode:string) => {
+export const deleteLobby = async (lobbyCode: string) => {
   await firestore().collection('lobbies').doc(lobbyCode).delete();
-}
+};

@@ -14,26 +14,6 @@ import GameSettingScreen from './Screens/GameSettingsScreen/GameSettingsScreen';
 import AvatarScreen from './Screens/AvatarScreen/AvatarScreen';
 
 export default function App(): JSX.Element | null {
-
- /* async function initializeFirebase() {
-    const firebaseConfig = {
-      apiKey: "AIzaSyD_gRbhXZvd1BE8grsbbeEJ54pLDx2iVOQ",
-      authDomain: "misfire-963e5.firebaseapp.com",
-      projectId: "misfire-963e5",
-      storageBucket: "misfire-963e5.appspot.com",
-      messagingSenderId: "556249985086",
-      appId: "1:556249985086:web:2b2135985cd18d589fe16f",
-      measurementId: "G-53D32JS4QK",
-      databaseURL:"firebase-adminsdk-l4b75@misfire-963e5.iam.gserviceaccount.com"
-    };
-
-    await firebase.initializeApp(firebaseConfig);
-    await firestore().settings({ experimentalForceLongPolling: true });
-
-  }
-
-  initializeFirebase().then(r => console.log("done"));*/
-
   let dataFetched = false;
   const appState = useRef(AppState.currentState);
   // eslint-disable-next-line @typescript-eslint/no-unused-vars

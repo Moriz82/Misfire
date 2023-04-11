@@ -1,12 +1,15 @@
 import React, {useState} from 'react';
-import {SafeAreaView, StyleSheet} from 'react-native';
+import {StyleSheet} from 'react-native';
 import {View, Text, Image} from 'native-base';
 import {StyledButton, TextStroke} from '../../components/StyledButton';
 import {ImageButton} from '../../components/ImageButton';
 import homeScreenStyles from '../HomeScreen/HomeScreen.styles';
 import {buttonSelected} from '../HomeScreen/HomeScreen';
+import {setAvatarID} from '../../Utils/LocalDataManager';
 
 const HomeScreen = (props: {navigation: any}) => {
+  const [avatarID, setAvatarID] = useState(0);
+
   return (
     <>
       <View
@@ -55,15 +58,87 @@ const HomeScreen = (props: {navigation: any}) => {
       </View>
 
       <View style={styles.gridContainer}>
-        <View style={styles.gridCell} />
-        <View style={styles.gridCell} />
-        <View style={styles.gridCell} />
-        <View style={styles.gridCell} />
-        <View style={styles.gridCell} />
-        <View style={styles.gridCell} />
-        <View style={styles.gridCell} />
-        <View style={styles.gridCell} />
-        <View style={styles.gridCell} />
+        <View style={styles.gridCell}>
+          <ImageButton
+            onPress={() => setAvatarID(0)}
+            image={require('../../assets/images/MisfireLogo.png')}
+            height={50}
+            width={50}
+            isDark={false}
+          />
+        </View>
+        <View style={styles.gridCell}>
+          <ImageButton
+            onPress={() => setAvatarID(1)}
+            image={require('../../assets/images/MisfireLogo.png')}
+            height={50}
+            width={50}
+            isDark={false}
+          />
+        </View>
+        <View style={styles.gridCell}>
+          <ImageButton
+            onPress={() => setAvatarID(2)}
+            image={require('../../assets/images/MisfireLogo.png')}
+            height={50}
+            width={50}
+            isDark={false}
+          />
+        </View>
+        <View style={styles.gridCell}>
+          <ImageButton
+            onPress={() => setAvatarID(3)}
+            image={require('../../assets/images/MisfireLogo.png')}
+            height={50}
+            width={50}
+            isDark={false}
+          />
+        </View>
+        <View style={styles.gridCell}>
+          <ImageButton
+            onPress={() => setAvatarID(4)}
+            image={require('../../assets/images/MisfireLogo.png')}
+            height={50}
+            width={50}
+            isDark={false}
+          />
+        </View>
+        <View style={styles.gridCell}>
+          <ImageButton
+            onPress={() => setAvatarID(5)}
+            image={require('../../assets/images/MisfireLogo.png')}
+            height={50}
+            width={50}
+            isDark={false}
+          />
+        </View>
+        <View style={styles.gridCell}>
+          <ImageButton
+            onPress={() => setAvatarID(6)}
+            image={require('../../assets/images/MisfireLogo.png')}
+            height={50}
+            width={50}
+            isDark={false}
+          />
+        </View>
+        <View style={styles.gridCell}>
+          <ImageButton
+            onPress={() => setAvatarID(7)}
+            image={require('../../assets/images/MisfireLogo.png')}
+            height={50}
+            width={50}
+            isDark={false}
+          />
+        </View>
+        <View style={styles.gridCell}>
+          <ImageButton
+            onPress={() => setAvatarID(8)}
+            image={require('../../assets/images/MisfireLogo.png')}
+            height={50}
+            width={50}
+            isDark={false}
+          />
+        </View>
       </View>
 
       <View

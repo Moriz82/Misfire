@@ -4,8 +4,7 @@ import React from 'react';
 import {ImageButton} from '../../components/ImageButton';
 import homeScreenStyles from '../HomeScreen/HomeScreen.styles';
 import {CustomCheckBox} from '../../components/CustomCheckBox';
-import { TextStroke } from '../../components/StyledButton';
-import Svg from "react-native-svg";
+import {TextStroke} from '../../components/StyledButton';
 
 const GameSettingScreen = (props: {navigation: any}) => {
   return (

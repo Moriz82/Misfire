@@ -1,16 +1,14 @@
-import {Box, StatusBar, View, Text, Button, ScrollView} from 'native-base';
+import {View, Text, ScrollView} from 'native-base';
 import React, {useState} from 'react';
-import {SafeAreaView} from 'react-native';
-import {StyledButton, TextStroke} from '../../components/StyledButton';
+import {TextStroke} from '../../components/StyledButton';
 import {CustomTextInput} from '../../components/CustomTextInput';
 import {ImageButton} from '../../components/ImageButton';
 import homeScreenStyles from '../HomeScreen/HomeScreen.styles';
 
 const HomeScreen = (props: {navigation: any}) => {
   const [fieldText, setText] = useState('');
-  let clickCount = 0;
 
-  return (  
+  return (
     <>
       <View
         style={{
@@ -43,15 +41,12 @@ const HomeScreen = (props: {navigation: any}) => {
         </View>
       </View>
 
-      <View style={{flex:1, backgroundColor: '#605A58'}}>
-        <ScrollView style={{flex:1, backgroundColor: '#605A58', paddingTop: 50}}>
-
+      <View style={{flex: 1, backgroundColor: '#605A58'}}>
+        <ScrollView
+          style={{flex: 1, backgroundColor: '#605A58', paddingTop: 50}}>
           <View style={{backgroundColor: 'red', width: '50%', height: '50%'}}>
-            <View >
-
-            </View>
+            <View />
           </View>
-
         </ScrollView>
 
         <View style={{paddingBottom: 25, padding: 20, backgroundColor: 'blue'}}>
