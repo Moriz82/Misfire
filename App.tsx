@@ -12,15 +12,32 @@ import YouAreItScreen from './Screens/YouAreItScreen/YouAreItScreen';
 import ChatScreen from './Screens/ChatScreen/ChatScreen';
 import GameSettingScreen from './Screens/GameSettingsScreen/GameSettingsScreen';
 import AvatarScreen from './Screens/AvatarScreen/AvatarScreen';
-import auth from '@react-native-firebase/auth';
 
 export default function App(): JSX.Element | null {
+
+ /* async function initializeFirebase() {
+    const firebaseConfig = {
+      apiKey: "AIzaSyD_gRbhXZvd1BE8grsbbeEJ54pLDx2iVOQ",
+      authDomain: "misfire-963e5.firebaseapp.com",
+      projectId: "misfire-963e5",
+      storageBucket: "misfire-963e5.appspot.com",
+      messagingSenderId: "556249985086",
+      appId: "1:556249985086:web:2b2135985cd18d589fe16f",
+      measurementId: "G-53D32JS4QK",
+      databaseURL:"firebase-adminsdk-l4b75@misfire-963e5.iam.gserviceaccount.com"
+    };
+
+    await firebase.initializeApp(firebaseConfig);
+    await firestore().settings({ experimentalForceLongPolling: true });
+
+  }
+
+  initializeFirebase().then(r => console.log("done"));*/
+
   let dataFetched = false;
   const appState = useRef(AppState.currentState);
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const [appStateVisible, setAppStateVisible] = useState(appState.current);
-  const [initializing, setInitializing] = useState(true);
-  const [user, setUser] = useState();
 
   useEffect(() => {
     const subscription = AppState.addEventListener(
@@ -55,27 +72,7 @@ export default function App(): JSX.Element | null {
     };
   }, []);
 
-  // Handle user state changes
-  function onAuthStateChanged(user: any) {
-    setUser(user);
-    if (initializing) setInitializing(false);
-  }
-
-  useEffect(() => {
-    const subscriber = auth().onAuthStateChanged(onAuthStateChanged);
-    return subscriber; // unsubscribe on unmount
-  }, []);
-
-  if (initializing) return null;
-
   const Stack = createNativeStackNavigator();
-
-  // const colorTheme = {
-  //   brand: {
-  //     backgroundGray: '#222222',
-  //     cricketGreen: '#005B04',
-  //   },
-  // };
 
   const theme = extendTheme({
     components: {

@@ -7,7 +7,7 @@
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:556249985086:android:aa97b72bf27a18259fe16f",
+        "mobilesdk_app_id": "1:556249985086:android:3b2d8185b8e25ee39fe16f",
         "android_client_info": {
           "package_name": "com.misfire"
         }
@@ -29,6 +29,13 @@
             {
               "client_id": "556249985086-ndujmst394ua6ahlkc00s3fgi6behpq6.apps.googleusercontent.com",
               "client_type": 3
+            },
+            {
+              "client_id": "556249985086-998nsdlm0bldahdaff2l1jgu1ubd14k7.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "org.reactjs.native.example.Misfire"
+              }
             }
           ]
         }
