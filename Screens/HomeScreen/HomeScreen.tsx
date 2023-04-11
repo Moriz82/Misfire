@@ -31,7 +31,7 @@ const HomeScreen = (props: {navigation: any}) => {
   }
 
   async function checkConnection() {
-    await fetch('http://www.google.com', { method: 'HEAD' })
+    await fetch('https://www.google.com', { method: 'HEAD' })
       .then((response) => {
         if (response.ok) {
           console.log('Connection successful!');
