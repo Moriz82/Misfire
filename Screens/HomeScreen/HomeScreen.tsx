@@ -7,7 +7,7 @@ import homeScreenStyles from './HomeScreen.styles';
 import {ImageButton} from '../../components/ImageButton';
 import {setUsername} from '../../Utils/LocalDataManager';
 
-export var buttonSelected = false;
+export var isNotGameCreater = false;
 
 const HomeScreen = (props: {navigation: any}) => {
   const [usernameText, setUsernameText] = useState('');
@@ -49,7 +49,7 @@ const HomeScreen = (props: {navigation: any}) => {
               if (!checkUsername()) {
                 return;
               }
-              buttonSelected = false;
+              isNotGameCreater = false;
               setUsername(usernameText).then(() =>
                 console.log(`username set to ${usernameText}`),
               );
@@ -66,7 +66,7 @@ const HomeScreen = (props: {navigation: any}) => {
               if (!checkUsername()) {
                 return;
               }
-              buttonSelected = true;
+              isNotGameCreater = true;
               setUsername(usernameText).then(() =>
                 console.log(`username set to ${usernameText}`),
               );

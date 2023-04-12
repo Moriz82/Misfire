@@ -3,6 +3,9 @@ import React, {useState} from 'react';
 import {StyledButton, TextStroke} from '../../components/StyledButton';
 import {ImageButton} from '../../components/ImageButton';
 import {CustomTextInput} from '../../components/CustomTextInput';
+import {joinLobby} from '../../Utils/RemoteDataManager';
+
+export var joinGameCode = '';
 
 const JoinGame = (props: {navigation: any}) => {
   const [gameCode, setGameCode] = useState('');
@@ -62,7 +65,13 @@ const JoinGame = (props: {navigation: any}) => {
 
         <View style={{width: '85%', paddingTop: 30}}>
           <StyledButton
-            onPress={() => props.navigation.navigate('CreateGame')}
+            onPress={() => {
+              joinLobby(gameCode).then(() =>
+                console.log(`joined game with code: ${gameCode}`),
+              );
+              joinGameCode = gameCode;
+              props.navigation.navigate('CreateGame');
+            }}
             buttonText={'Join'}
             buttonColor={true}
           />

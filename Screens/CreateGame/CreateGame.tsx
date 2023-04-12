@@ -4,34 +4,27 @@ import React, {useEffect, useState} from 'react';
 import homeScreenStyles from '../HomeScreen/HomeScreen.styles';
 import {StyledButton, TextStroke} from '../../components/StyledButton';
 import {ImageButton} from '../../components/ImageButton';
-import {
-  createLobby,
-  deleteLobby,
-  joinLobby,
-} from '../../Utils/RemoteDataManager';
-import {userdata} from '../../Utils/LocalDataManager';
+import {createLobby, deleteLobby} from '../../Utils/RemoteDataManager';
+import {isNotGameCreater} from '../HomeScreen/HomeScreen';
+import {joinGameCode} from '../JoinGame/JoinGame';
 
 const CreateGame = (props: {navigation: any}) => {
   const [lobbyID, setLobbyID] = useState('');
 
   useEffect(() => {
-    const makeLobby = async () => {
-      const lobbyID = await createLobby();
-      setLobbyID(lobbyID);
-      console.log(`created lobby with id ${lobbyID}`);
-    };
+    if (!isNotGameCreater) {
+      const makeLobby = async () => {
+        const lobbyID = await createLobby();
+        setLobbyID(lobbyID);
+        console.log(`joined game with code: ${lobbyID}`);
+      };
 
-    makeLobby();
+      makeLobby();
+    } else {
+      setLobbyID(joinGameCode);
+    }
   }, []);
 
-  useEffect(() => {
-    if (lobbyID) {
-      joinLobby(lobbyID);
-      console.log(
-        `joined lobby with id: ${lobbyID} and username: ${userdata.username}`,
-      );
-    }
-  }, [lobbyID]);
   return (
     <>
       <View
@@ -47,9 +40,13 @@ const CreateGame = (props: {navigation: any}) => {
         <ImageButton
           image={require('../../assets/images/backButton.png')}
           onPress={() => {
-            deleteLobby(`${lobbyID}`).then(
-              () => `lobby deleted with code ${lobbyID}`,
-            );
+            if (!isNotGameCreater) {
+              deleteLobby(`${lobbyID}`).then(
+                () => `lobby deleted with code ${lobbyID}`,
+              );
+            } else {
+              // remove from lobby
+            }
             props.navigation.navigate('HomeScreen');
           }}
           height={50}
