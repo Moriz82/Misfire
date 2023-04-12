@@ -7,7 +7,7 @@ import homeScreenStyles from './HomeScreen.styles';
 import {ImageButton} from '../../components/ImageButton';
 import {setUsername} from '../../Utils/LocalDataManager';
 
-export var isNotGameCreater = false;
+export var isNotGameCreator = false;
 
 const HomeScreen = (props: {navigation: any}) => {
   const [usernameText, setUsernameText] = useState('');
@@ -49,7 +49,7 @@ const HomeScreen = (props: {navigation: any}) => {
               if (!checkUsername()) {
                 return;
               }
-              isNotGameCreater = false;
+              isNotGameCreator = false;
               setUsername(usernameText).then(() =>
                 console.log(`username set to ${usernameText}`),
               );
@@ -66,7 +66,7 @@ const HomeScreen = (props: {navigation: any}) => {
               if (!checkUsername()) {
                 return;
               }
-              isNotGameCreater = true;
+              isNotGameCreator = true;
               setUsername(usernameText).then(() =>
                 console.log(`username set to ${usernameText}`),
               );
@@ -86,8 +86,6 @@ const HomeScreen = (props: {navigation: any}) => {
             isDark={false}
           />
         </View>
-
-
 
         <View style={homeScreenStyles.emailTextInput}>
           <StyledButton

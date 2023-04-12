@@ -4,7 +4,7 @@ import {View, Text, Image} from 'native-base';
 import {StyledButton, TextStroke} from '../../components/StyledButton';
 import {ImageButton} from '../../components/ImageButton';
 import homeScreenStyles from '../HomeScreen/HomeScreen.styles';
-import {isNotGameCreater} from '../HomeScreen/HomeScreen';
+import {isNotGameCreator} from '../HomeScreen/HomeScreen';
 import {setAvatarID} from '../../Utils/LocalDataManager';
 
 const HomeScreen = (props: {navigation: any}) => {
@@ -184,7 +184,7 @@ const HomeScreen = (props: {navigation: any}) => {
                 console.log(`avatar id set to: ${avatarID}`),
               );
               props.navigation.navigate(
-                isNotGameCreater ? 'JoinGame' : 'CreateGame',
+                isNotGameCreator ? 'JoinGame' : 'CreateGame',
               );
             }}
             buttonText={'Continue'}

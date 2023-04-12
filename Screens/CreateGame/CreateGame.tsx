@@ -5,14 +5,14 @@ import homeScreenStyles from '../HomeScreen/HomeScreen.styles';
 import {StyledButton, TextStroke} from '../../components/StyledButton';
 import {ImageButton} from '../../components/ImageButton';
 import {createLobby, deleteLobby} from '../../Utils/RemoteDataManager';
-import {isNotGameCreater} from '../HomeScreen/HomeScreen';
+import {isNotGameCreator} from '../HomeScreen/HomeScreen';
 import {joinGameCode} from '../JoinGame/JoinGame';
 
 const CreateGame = (props: {navigation: any}) => {
   const [lobbyID, setLobbyID] = useState('');
 
   useEffect(() => {
-    if (!isNotGameCreater) {
+    if (!isNotGameCreator) {
       const makeLobby = async () => {
         const lobbyID = await createLobby();
         setLobbyID(lobbyID);
@@ -40,7 +40,7 @@ const CreateGame = (props: {navigation: any}) => {
         <ImageButton
           image={require('../../assets/images/backButton.png')}
           onPress={() => {
-            if (!isNotGameCreater) {
+            if (!isNotGameCreator) {
               deleteLobby(`${lobbyID}`).then(
                 () => `lobby deleted with code ${lobbyID}`,
               );
