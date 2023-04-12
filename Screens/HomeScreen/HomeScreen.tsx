@@ -86,6 +86,18 @@ const HomeScreen = (props: {navigation: any}) => {
             isDark={false}
           />
         </View>
+
+
+
+        <View style={homeScreenStyles.emailTextInput}>
+          <StyledButton
+            onPress={() => {
+              props.navigation.navigate('HeIsItScreen');
+            }}
+            buttonText={'test button delete me'}
+            buttonColor={false}
+          />
+        </View>
       </Box>
     </SafeAreaView>
   );

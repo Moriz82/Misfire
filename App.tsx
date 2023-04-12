@@ -12,6 +12,7 @@ import YouAreItScreen from './Screens/YouAreItScreen/YouAreItScreen';
 import ChatScreen from './Screens/ChatScreen/ChatScreen';
 import GameSettingScreen from './Screens/GameSettingsScreen/GameSettingsScreen';
 import AvatarScreen from './Screens/AvatarScreen/AvatarScreen';
+import HeIsItScreen from './Screens/HeIsItScreen/HeIsItScreen';
 import {fetchData} from './Utils/LocalDataManager';
 
 export default function App(): JSX.Element | null {
@@ -125,6 +126,12 @@ export default function App(): JSX.Element | null {
           <Stack.Screen
             name="AvatarScreen"
             component={AvatarScreen}
+            options={{headerShown: false, title: ''}}
+          />
+
+          <Stack.Screen
+            name="HeIsItScreen"
+            component={HeIsItScreen}
             options={{headerShown: false, title: ''}}
           />
         </Stack.Navigator>

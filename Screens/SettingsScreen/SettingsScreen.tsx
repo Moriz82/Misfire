@@ -3,7 +3,7 @@ import {Text, Slider} from 'native-base';
 import React from 'react';
 import {ImageButton} from '../../components/ImageButton';
 import {TextStroke, StyledButton} from '../../components/StyledButton';
-import settingsStyles from './SettingsScreen.styles';
+import heIsItStyles from './SettingsScreen.styles';
 import {CustomCheckBox} from '../../components/CustomCheckBox';
 
 const SettingScreen = (props: {navigation: any}) => {
@@ -32,7 +32,7 @@ const SettingScreen = (props: {navigation: any}) => {
             paddingTop: 20,
           }}>
           <TextStroke stroke={3} color={'#000000'}>
-            <Text style={settingsStyles.buttonText}>Settings</Text>
+            <Text style={heIsItStyles.buttonText}>Settings</Text>
           </TextStroke>
         </View>
       </View>
