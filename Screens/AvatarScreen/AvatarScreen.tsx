@@ -69,7 +69,7 @@ const HomeScreen = (props: {navigation: any}) => {
           source={avatarImages[avatarID]}
           alt={'err'}
         />
-        <ImageButton
+        {/*<ImageButton
           onPress={() => {
             clickCount++;
             if (clickCount >= 100) {
@@ -81,7 +81,7 @@ const HomeScreen = (props: {navigation: any}) => {
           height={160}
           width={160}
           isDark={false}
-        />
+        />*/}
       </View>
 
       <View style={styles.gridContainer}>
