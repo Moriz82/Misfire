@@ -4,7 +4,7 @@ import {View, Text, Image} from 'native-base';
 import {StyledButton, TextStroke} from '../../components/StyledButton';
 import {ImageButton} from '../../components/ImageButton';
 import homeScreenStyles from '../HomeScreen/HomeScreen.styles';
-import {buttonSelected} from '../HomeScreen/HomeScreen';
+import {isNotGameCreater} from '../HomeScreen/HomeScreen';
 import {setAvatarID} from '../../Utils/LocalDataManager';
 
 const HomeScreen = (props: {navigation: any}) => {
@@ -63,13 +63,13 @@ const HomeScreen = (props: {navigation: any}) => {
           paddingTop: 10,
           alignItems: 'center',
         }}>
-        <Image
+        {/*<Image
           key={avatarID}
           style={{height: 160, width: 160}}
           source={avatarImages[avatarID]}
           alt={'err'}
-        />
-        {/*<ImageButton
+        />*/}
+        <ImageButton
           onPress={() => {
             clickCount++;
             if (clickCount >= 100) {
@@ -81,7 +81,8 @@ const HomeScreen = (props: {navigation: any}) => {
           height={160}
           width={160}
           isDark={false}
-        />*/}
+          key={avatarID}
+        />
       </View>
 
       <View style={styles.gridContainer}>
@@ -183,7 +184,7 @@ const HomeScreen = (props: {navigation: any}) => {
                 console.log(`avatar id set to: ${avatarID}`),
               );
               props.navigation.navigate(
-                buttonSelected ? 'JoinGame' : 'CreateGame',
+                isNotGameCreater ? 'JoinGame' : 'CreateGame',
               );
             }}
             buttonText={'Continue'}

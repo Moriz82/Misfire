@@ -1,4 +1,4 @@
-import {GestureResponderEvent, Image} from 'react-native';
+import {Image} from 'react-native';
 import React from 'react';
 import {Button} from 'native-base';
 
@@ -8,6 +8,7 @@ type Props = {
   height: any;
   width: any;
   isDark: boolean;
+  key?: any;
 };
 
 export function ImageButton(props: Props) {
@@ -18,6 +19,7 @@ export function ImageButton(props: Props) {
       <Image
         style={{height: props.height, width: props.width}}
         source={props.image}
+        key={props.key}
       />
     </Button>
   );
