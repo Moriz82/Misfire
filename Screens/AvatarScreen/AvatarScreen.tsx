@@ -9,7 +9,7 @@ import {setAvatarID} from '../../Utils/LocalDataManager';
 
 const HomeScreen = (props: {navigation: any}) => {
   const [avatarID, setLAvatarID] = useState(0);
-
+  let clickCount = 0;
   const avatarImages = [
     require('../../assets/images/avatar0.png'),
     require('../../assets/images/avatar1.png'),
@@ -20,6 +20,7 @@ const HomeScreen = (props: {navigation: any}) => {
     require('../../assets/images/avatar6.png'),
     require('../../assets/images/avatar7.png'),
     require('../../assets/images/avatar8.png'),
+    require('../../assets/images/secret.png'),
   ];
 
   return (
@@ -67,6 +68,19 @@ const HomeScreen = (props: {navigation: any}) => {
           style={{height: 160, width: 160}}
           source={avatarImages[avatarID]}
           alt={'err'}
+        />
+        <ImageButton
+          onPress={() => {
+            clickCount++;
+            if (clickCount >= 100) {
+              setLAvatarID(9);
+              clickCount = 0;
+            }
+          }}
+          image={avatarImages[avatarID]}
+          height={160}
+          width={160}
+          isDark={false}
         />
       </View>
 

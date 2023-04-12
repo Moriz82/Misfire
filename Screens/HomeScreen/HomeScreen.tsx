@@ -91,7 +91,7 @@ const HomeScreen = (props: {navigation: any}) => {
   );
 
   function checkUsername(): boolean {
-    if (usernameText.length == 0) {
+    if (usernameText.length === 0) {
       return false;
     }
     return true;
