@@ -8,7 +8,19 @@ import {buttonSelected} from '../HomeScreen/HomeScreen';
 import {setAvatarID} from '../../Utils/LocalDataManager';
 
 const HomeScreen = (props: {navigation: any}) => {
-  const [avatarID, setAvatarID] = useState(0);
+  const [avatarID, setLAvatarID] = useState(0);
+
+  const avatarImages = [
+    require('../../assets/images/avatar0.png'),
+    require('../../assets/images/avatar1.png'),
+    require('../../assets/images/avatar2.png'),
+    require('../../assets/images/avatar3.png'),
+    require('../../assets/images/avatar4.png'),
+    require('../../assets/images/avatar5.png'),
+    require('../../assets/images/avatar6.png'),
+    require('../../assets/images/avatar7.png'),
+    require('../../assets/images/avatar8.png'),
+  ];
 
   return (
     <>
@@ -51,8 +63,9 @@ const HomeScreen = (props: {navigation: any}) => {
           alignItems: 'center',
         }}>
         <Image
+          key={avatarID}
           style={{height: 160, width: 160}}
-          source={require('../../assets/images/backButton.png')}
+          source={avatarImages[avatarID]}
           alt={'err'}
         />
       </View>
@@ -60,8 +73,8 @@ const HomeScreen = (props: {navigation: any}) => {
       <View style={styles.gridContainer}>
         <View style={styles.gridCell}>
           <ImageButton
-            onPress={() => setAvatarID(0)}
-            image={require('../../assets/images/MisfireLogo.png')}
+            onPress={() => setLAvatarID(0)}
+            image={require('../../assets/images/avatar0.png')}
             height={50}
             width={50}
             isDark={false}
@@ -69,8 +82,8 @@ const HomeScreen = (props: {navigation: any}) => {
         </View>
         <View style={styles.gridCell}>
           <ImageButton
-            onPress={() => setAvatarID(1)}
-            image={require('../../assets/images/MisfireLogo.png')}
+            onPress={() => setLAvatarID(1)}
+            image={require('../../assets/images/avatar1.png')}
             height={50}
             width={50}
             isDark={false}
@@ -78,8 +91,8 @@ const HomeScreen = (props: {navigation: any}) => {
         </View>
         <View style={styles.gridCell}>
           <ImageButton
-            onPress={() => setAvatarID(2)}
-            image={require('../../assets/images/MisfireLogo.png')}
+            onPress={() => setLAvatarID(2)}
+            image={require('../../assets/images/avatar2.png')}
             height={50}
             width={50}
             isDark={false}
@@ -87,8 +100,8 @@ const HomeScreen = (props: {navigation: any}) => {
         </View>
         <View style={styles.gridCell}>
           <ImageButton
-            onPress={() => setAvatarID(3)}
-            image={require('../../assets/images/MisfireLogo.png')}
+            onPress={() => setLAvatarID(3)}
+            image={require('../../assets/images/avatar3.png')}
             height={50}
             width={50}
             isDark={false}
@@ -96,8 +109,8 @@ const HomeScreen = (props: {navigation: any}) => {
         </View>
         <View style={styles.gridCell}>
           <ImageButton
-            onPress={() => setAvatarID(4)}
-            image={require('../../assets/images/MisfireLogo.png')}
+            onPress={() => setLAvatarID(4)}
+            image={require('../../assets/images/avatar4.png')}
             height={50}
             width={50}
             isDark={false}
@@ -105,8 +118,8 @@ const HomeScreen = (props: {navigation: any}) => {
         </View>
         <View style={styles.gridCell}>
           <ImageButton
-            onPress={() => setAvatarID(5)}
-            image={require('../../assets/images/MisfireLogo.png')}
+            onPress={() => setLAvatarID(5)}
+            image={require('../../assets/images/avatar5.png')}
             height={50}
             width={50}
             isDark={false}
@@ -114,8 +127,8 @@ const HomeScreen = (props: {navigation: any}) => {
         </View>
         <View style={styles.gridCell}>
           <ImageButton
-            onPress={() => setAvatarID(6)}
-            image={require('../../assets/images/MisfireLogo.png')}
+            onPress={() => setLAvatarID(6)}
+            image={require('../../assets/images/avatar6.png')}
             height={50}
             width={50}
             isDark={false}
@@ -123,8 +136,8 @@ const HomeScreen = (props: {navigation: any}) => {
         </View>
         <View style={styles.gridCell}>
           <ImageButton
-            onPress={() => setAvatarID(7)}
-            image={require('../../assets/images/MisfireLogo.png')}
+            onPress={() => setLAvatarID(7)}
+            image={require('../../assets/images/avatar7.png')}
             height={50}
             width={50}
             isDark={false}
@@ -132,8 +145,8 @@ const HomeScreen = (props: {navigation: any}) => {
         </View>
         <View style={styles.gridCell}>
           <ImageButton
-            onPress={() => setAvatarID(8)}
-            image={require('../../assets/images/MisfireLogo.png')}
+            onPress={() => setLAvatarID(8)}
+            image={require('../../assets/images/avatar8.png')}
             height={50}
             width={50}
             isDark={false}
@@ -152,6 +165,9 @@ const HomeScreen = (props: {navigation: any}) => {
         <View style={homeScreenStyles.emailTextInput}>
           <StyledButton
             onPress={() => {
+              setAvatarID(avatarID).then(() =>
+                console.log(`avatar id set to: ${avatarID}`),
+              );
               props.navigation.navigate(
                 buttonSelected ? 'JoinGame' : 'CreateGame',
               );

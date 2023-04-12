@@ -12,12 +12,15 @@ import YouAreItScreen from './Screens/YouAreItScreen/YouAreItScreen';
 import ChatScreen from './Screens/ChatScreen/ChatScreen';
 import GameSettingScreen from './Screens/GameSettingsScreen/GameSettingsScreen';
 import AvatarScreen from './Screens/AvatarScreen/AvatarScreen';
+import {fetchData} from './Utils/LocalDataManager';
 
 export default function App(): JSX.Element | null {
   let dataFetched = false;
   const appState = useRef(AppState.currentState);
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const [appStateVisible, setAppStateVisible] = useState(appState.current);
+
+  fetchData().then(() => console.log());
 
   useEffect(() => {
     const subscription = AppState.addEventListener(

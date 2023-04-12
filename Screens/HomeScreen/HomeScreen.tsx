@@ -5,7 +5,6 @@ import {StyledButton} from '../../components/StyledButton';
 import {CustomTextInput} from '../../components/CustomTextInput';
 import homeScreenStyles from './HomeScreen.styles';
 import {ImageButton} from '../../components/ImageButton';
-import firestore from '@react-native-firebase/firestore';
 import {setUsername} from '../../Utils/LocalDataManager';
 
 export var buttonSelected = false;
@@ -13,31 +12,6 @@ export var buttonSelected = false;
 const HomeScreen = (props: {navigation: any}) => {
   const [usernameText, setUsernameText] = useState('');
   let clickCount = 0;
-
-  async function handleButtonPress() {
-    const userDoc = await firestore()
-      .collection('lobbies')
-      .doc('DeaSRa18ztQl032x80ZX')
-      .get();
-    console.log(userDoc);
-  }
-
-  async function checkConnection() {
-    await fetch('https://www.google.com', {method: 'HEAD'})
-      .then(response => {
-        if (response.ok) {
-          console.log('Connection successful!');
-        } else {
-          console.log('Connection failed.');
-        }
-      })
-      .catch(error => {
-        console.log(`Error: ${error.message}`);
-      });
-  }
-
-  checkConnection().then(r => console.log(r));
-  handleButtonPress().then(r => console.log(r));
 
   return (
     <SafeAreaView style={homeScreenStyles.safeAreaViewStyle}>
@@ -72,6 +46,9 @@ const HomeScreen = (props: {navigation: any}) => {
         <View style={homeScreenStyles.emailTextInput}>
           <StyledButton
             onPress={() => {
+              if (!checkUsername()) {
+                return;
+              }
               buttonSelected = false;
               setUsername(usernameText).then(() =>
                 console.log(`username set to ${usernameText}`),
@@ -86,6 +63,9 @@ const HomeScreen = (props: {navigation: any}) => {
         <View style={homeScreenStyles.emailTextInput}>
           <StyledButton
             onPress={() => {
+              if (!checkUsername()) {
+                return;
+              }
               buttonSelected = true;
               setUsername(usernameText).then(() =>
                 console.log(`username set to ${usernameText}`),
@@ -109,6 +89,13 @@ const HomeScreen = (props: {navigation: any}) => {
       </Box>
     </SafeAreaView>
   );
+
+  function checkUsername(): boolean {
+    if (usernameText.length == 0) {
+      return false;
+    }
+    return true;
+  }
 };
 
 export default HomeScreen;

@@ -1,13 +1,37 @@
 import {SafeAreaView} from 'react-native';
 import {Text, View} from 'native-base';
-import React from 'react';
+import React, {useEffect, useState} from 'react';
 import homeScreenStyles from '../HomeScreen/HomeScreen.styles';
 import {StyledButton, TextStroke} from '../../components/StyledButton';
 import {ImageButton} from '../../components/ImageButton';
+import {
+  createLobby,
+  deleteLobby,
+  joinLobby,
+} from '../../Utils/RemoteDataManager';
+import {userdata} from '../../Utils/LocalDataManager';
 
 const CreateGame = (props: {navigation: any}) => {
-  const gameID: number = 25902398;
+  const [lobbyID, setLobbyID] = useState('');
 
+  useEffect(() => {
+    const makeLobby = async () => {
+      const lobbyID = await createLobby();
+      setLobbyID(lobbyID);
+      console.log(`created lobby with id ${lobbyID}`);
+    };
+
+    makeLobby();
+  }, []);
+
+  useEffect(() => {
+    if (lobbyID) {
+      joinLobby(lobbyID);
+      console.log(
+        `joined lobby with id: ${lobbyID} and username: ${userdata.username}`,
+      );
+    }
+  }, [lobbyID]);
   return (
     <>
       <View
@@ -22,7 +46,12 @@ const CreateGame = (props: {navigation: any}) => {
         }}>
         <ImageButton
           image={require('../../assets/images/backButton.png')}
-          onPress={() => props.navigation.navigate('HomeScreen')}
+          onPress={() => {
+            deleteLobby(`${lobbyID}`).then(
+              () => `lobby deleted with code ${lobbyID}`,
+            );
+            props.navigation.navigate('HomeScreen');
+          }}
           height={50}
           width={50}
           isDark={true}
@@ -54,7 +83,7 @@ const CreateGame = (props: {navigation: any}) => {
               <Text style={homeScreenStyles.buttonText}>Game ID: </Text>
             </TextStroke>
             <TextStroke stroke={3} color={'#000000'}>
-              <Text style={homeScreenStyles.buttonText}>{gameID}</Text>
+              <Text style={homeScreenStyles.buttonText}>{lobbyID}</Text>
             </TextStroke>
           </View>
           <View style={[homeScreenStyles.emailTextInput, {paddingLeft: 30}]}>

@@ -1,12 +1,13 @@
 import firestore from '@react-native-firebase/firestore';
 import 'react-native-get-random-values';
 // @ts-ignore
-import {v4 as uuid} from 'uuid';
+import {nanoid} from 'nanoid';
+import {userdata} from './LocalDataManager';
 
 export const createLobby = async () => {
-  const lobbyCode = uuid();
+  const lobbyCode = nanoid(8);
   try {
-    await firestore().collection('lobbies').add(lobbyCode);
+    //await firestore().collection('lobbies').add(lobbyCode);
     await firestore().collection('lobbies').doc(lobbyCode).set({
       members: [], // Add an empty array to store lobby members
     });
@@ -17,24 +18,30 @@ export const createLobby = async () => {
   return lobbyCode;
 };
 
-export const joinLobby = async (
-  lobbyCode: string,
-  username: string,
-  avatarID: number,
-) => {
+export const joinLobby = async (lobbyCode: string) => {
   // Get the lobby document reference
   const lobbyRef = firestore().collection('lobbies').doc(lobbyCode);
 
   // Add the user to the members array
-  if (!(await lobbyRef.get())) {
-    await lobbyRef.update({
-      members: firestore.FieldValue.arrayUnion({
-        username: username,
-        avatarID: avatarID,
-      }),
-    });
+  const lobbyDoc = await lobbyRef.get();
+  if (lobbyDoc.exists) {
+    const lobbyData = lobbyDoc.data();
+    if (
+      !lobbyData?.members.some(
+        (member: {username: any}) => member.username === userdata.username,
+      )
+    ) {
+      await lobbyRef.update({
+        members: firestore.FieldValue.arrayUnion({
+          username: userdata.username,
+          avatarID: userdata.avatarID,
+        }),
+      });
+    } else {
+      return 'Username already exists in lobby';
+    }
   } else {
-    return 'Username already exists in lobby';
+    return 'Lobby does not exist';
   }
 };
 

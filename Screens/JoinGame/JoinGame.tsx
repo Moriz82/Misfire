@@ -5,7 +5,7 @@ import {ImageButton} from '../../components/ImageButton';
 import {CustomTextInput} from '../../components/CustomTextInput';
 
 const JoinGame = (props: {navigation: any}) => {
-  const [usernameText, setUsernameText] = useState('');
+  const [gameCode, setGameCode] = useState('');
 
   return (
     <>
@@ -53,8 +53,8 @@ const JoinGame = (props: {navigation: any}) => {
         <View style={{width: '85%', paddingTop: 50}}>
           <CustomTextInput
             placeholderText={'Enter Game Code...'}
-            value={usernameText}
-            onChangeText={(newText: any) => setUsernameText(newText)}
+            value={gameCode}
+            onChangeText={(newText: any) => setGameCode(newText)}
             iconName={'email'}
             isPassword={false}
           />

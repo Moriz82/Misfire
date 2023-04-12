@@ -1,6 +1,6 @@
 import AsyncStorage from '@react-native-async-storage/async-storage';
 
-var userdata = {
+export var userdata = {
   username: '',
   avatarID: 0,
 };
@@ -33,5 +33,15 @@ const getJSONData = async (key: string) => {
     return jsonValue != null ? JSON.parse(jsonValue) : null;
   } catch (e) {
     console.log(e);
+  }
+};
+
+export const fetchData = async () => {
+  let data = await getJSONData('userdata');
+  if (data != null) {
+    userdata = data;
+    console.log(`loaded userdata: ${data.username}, ${data.avatarID}`);
+  } else {
+    console.log('no userdata found');
   }
 };
