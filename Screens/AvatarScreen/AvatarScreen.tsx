@@ -20,7 +20,7 @@ const HomeScreen = (props: {navigation: any}) => {
     require('../../assets/images/avatar6.png'),
     require('../../assets/images/avatar7.png'),
     require('../../assets/images/avatar8.png'),
-    require('../../assets/images/secret.png'),
+    require('../../assets/images/Secret.png'),
   ];
 
   return (
