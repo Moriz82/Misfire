@@ -1,5 +1,5 @@
 import {SafeAreaView} from 'react-native';
-import {ScrollView, Text, View} from 'native-base';
+import {ScrollView, Text, View, Image} from 'native-base';
 import React, {useEffect, useState} from 'react';
 import homeScreenStyles from '../HomeScreen/HomeScreen.styles';
 import {StyledButton, TextStroke} from '../../components/StyledButton';
@@ -15,6 +15,8 @@ import {isNotGameCreator} from '../HomeScreen/HomeScreen';
 import {joinGameCode} from '../JoinGame/JoinGame';
 import {ReadyButton} from '../../components/ReadyButton';
 import {userdata} from '../../Utils/LocalDataManager';
+import {avatarImages} from '../AvatarScreen/AvatarScreen';
+import {bgColor} from '../../App';
 
 const CreateGame = (props: {navigation: any}) => {
   const [lobbyID, setLobbyID] = useState('');
@@ -42,24 +44,26 @@ const CreateGame = (props: {navigation: any}) => {
           `joined lobby with id: ${lobbyID} and username: ${userdata.username}`,
         );
       }
-      const updateUserList = async () => {
-        const newUserList = await getLobbyMembers(lobbyID);
-        // @ts-ignore
-        setUserList(newUserList);
-        console.log(`joined game with code: ${lobbyID}`);
-      };
-
-      updateUserList();
-
-      // Call updateUserList every... idek .. it does it alot
-      const intervalId = setInterval(updateUserList, 1000);
-
-      // Clear the interval when the component unmounts or when the lobbyID changes
-      return () => {
-        clearInterval(intervalId);
-      };
     }
   }, [lobbyID]);
+
+  useEffect(() => {
+    const updateUserList = async () => {
+      const newUserList = await getLobbyMembers(lobbyID);
+      // @ts-ignore
+      setUserList(newUserList);
+    };
+
+    updateUserList();
+
+    // Call updateUserList every... idek .. it does it alot
+    const intervalId = setInterval(updateUserList, 1000);
+
+    // Clear the interval when the component unmounts or when the lobbyID changes
+    return () => {
+      clearInterval(intervalId);
+    };
+  });
 
   return (
     <>
@@ -124,12 +128,27 @@ const CreateGame = (props: {navigation: any}) => {
           </View>
         </View>
 
-        <View style={{backgroundColor: 'white', flex: 1}}>
+        <View style={{backgroundColor: bgColor, flex: 1}}>
           <ScrollView>
             {userList.map(({username, avatarID}, index) => (
-              <Text key={index} style={{padding: 10}}>
-                {username + ' ' + avatarID}
-              </Text>
+              <View
+                style={{
+                  flexDirection: 'row',
+                  borderColor: 'black',
+                  borderWidth: 4,
+                  borderRadius: 4,
+                  backgroundColor: 'white',
+                }}>
+                <Image
+                  source={avatarImages[avatarID]}
+                  height={16}
+                  width={16}
+                  alt={'err'}
+                />
+                <Text key={index} style={{padding: 10, color: 'black'}}>
+                  {username}
+                </Text>
+              </View>
             ))}
           </ScrollView>
         </View>

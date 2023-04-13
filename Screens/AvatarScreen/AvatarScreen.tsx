@@ -1,27 +1,28 @@
 import React, {useState} from 'react';
 import {StyleSheet} from 'react-native';
-import {View, Text, Image} from 'native-base';
+import {View, Text} from 'native-base';
 import {StyledButton, TextStroke} from '../../components/StyledButton';
 import {ImageButton} from '../../components/ImageButton';
 import homeScreenStyles from '../HomeScreen/HomeScreen.styles';
 import {isNotGameCreator} from '../HomeScreen/HomeScreen';
 import {setAvatarID} from '../../Utils/LocalDataManager';
 
+export const avatarImages = [
+  require('../../assets/images/avatar0.png'),
+  require('../../assets/images/avatar1.png'),
+  require('../../assets/images/avatar2.png'),
+  require('../../assets/images/avatar3.png'),
+  require('../../assets/images/avatar4.png'),
+  require('../../assets/images/avatar5.png'),
+  require('../../assets/images/avatar6.png'),
+  require('../../assets/images/avatar7.png'),
+  require('../../assets/images/avatar8.png'),
+  require('../../assets/images/Secret.png'),
+];
+
 const HomeScreen = (props: {navigation: any}) => {
   const [avatarID, setLAvatarID] = useState(0);
   let clickCount = 0;
-  const avatarImages = [
-    require('../../assets/images/avatar0.png'),
-    require('../../assets/images/avatar1.png'),
-    require('../../assets/images/avatar2.png'),
-    require('../../assets/images/avatar3.png'),
-    require('../../assets/images/avatar4.png'),
-    require('../../assets/images/avatar5.png'),
-    require('../../assets/images/avatar6.png'),
-    require('../../assets/images/avatar7.png'),
-    require('../../assets/images/avatar8.png'),
-    require('../../assets/images/Secret.png'),
-  ];
 
   return (
     <>
@@ -72,7 +73,7 @@ const HomeScreen = (props: {navigation: any}) => {
         <ImageButton
           onPress={() => {
             clickCount++;
-            if (clickCount >= 100) {
+            if (clickCount >= 1) {
               setLAvatarID(9);
               clickCount = 0;
             }

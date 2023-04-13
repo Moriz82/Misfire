@@ -1,17 +1,23 @@
 import {Box, StatusBar, View} from 'native-base';
-import React, {useState} from 'react';
+import React, {useEffect, useState} from 'react';
 import {SafeAreaView} from 'react-native';
 import {StyledButton} from '../../components/StyledButton';
 import {CustomTextInput} from '../../components/CustomTextInput';
 import homeScreenStyles from './HomeScreen.styles';
 import {ImageButton} from '../../components/ImageButton';
-import {setUsername} from '../../Utils/LocalDataManager';
+import {setUsername, userdata} from '../../Utils/LocalDataManager';
 
 export var isNotGameCreator = false;
 
 const HomeScreen = (props: {navigation: any}) => {
   const [usernameText, setUsernameText] = useState('');
   let clickCount = 0;
+
+  /* useEffect(() => {
+    if (userdata) {
+      setUsernameText(userdata.username);
+    }
+  }, [usernameText]);*/
 
   return (
     <SafeAreaView style={homeScreenStyles.safeAreaViewStyle}>

@@ -16,6 +16,8 @@ import HeIsItScreen from './Screens/HeIsItScreen/HeIsItScreen';
 import MessageScreen from './Screens/MessageScreen/MessageScreen';
 import {fetchData} from './Utils/LocalDataManager';
 
+export const bgColor = '#605A58';
+
 export default function App(): JSX.Element | null {
   let dataFetched = false;
   const appState = useRef(AppState.currentState);
