@@ -1,15 +1,24 @@
 import {SafeAreaView} from 'react-native';
-import {Text, View} from 'native-base';
+import {ScrollView, Text, View} from 'native-base';
 import React, {useEffect, useState} from 'react';
 import homeScreenStyles from '../HomeScreen/HomeScreen.styles';
 import {StyledButton, TextStroke} from '../../components/StyledButton';
 import {ImageButton} from '../../components/ImageButton';
-import {createLobby, deleteLobby} from '../../Utils/RemoteDataManager';
+import {
+  createLobby,
+  deleteLobby,
+  getLobbyMembers,
+  joinLobby,
+  leaveLobby,
+} from '../../Utils/RemoteDataManager';
 import {isNotGameCreator} from '../HomeScreen/HomeScreen';
 import {joinGameCode} from '../JoinGame/JoinGame';
+import {ReadyButton} from '../../components/ReadyButton';
+import {userdata} from '../../Utils/LocalDataManager';
 
 const CreateGame = (props: {navigation: any}) => {
   const [lobbyID, setLobbyID] = useState('');
+  const [userList, setUserList] = useState([]);
 
   useEffect(() => {
     if (!isNotGameCreator) {
@@ -24,6 +33,33 @@ const CreateGame = (props: {navigation: any}) => {
       setLobbyID(joinGameCode);
     }
   }, []);
+
+  useEffect(() => {
+    if (lobbyID) {
+      if (!isNotGameCreator) {
+        joinLobby(lobbyID);
+        console.log(
+          `joined lobby with id: ${lobbyID} and username: ${userdata.username}`,
+        );
+      }
+      const updateUserList = async () => {
+        const newUserList = await getLobbyMembers(lobbyID);
+        // @ts-ignore
+        setUserList(newUserList);
+        console.log(`joined game with code: ${lobbyID}`);
+      };
+
+      updateUserList();
+
+      // Call updateUserList every... idek .. it does it alot
+      const intervalId = setInterval(updateUserList, 1000);
+
+      // Clear the interval when the component unmounts or when the lobbyID changes
+      return () => {
+        clearInterval(intervalId);
+      };
+    }
+  }, [lobbyID]);
 
   return (
     <>
@@ -45,7 +81,7 @@ const CreateGame = (props: {navigation: any}) => {
                 () => `lobby deleted with code ${lobbyID}`,
               );
             } else {
-              // remove from lobby
+              leaveLobby(lobbyID).then(() => `lobby left with code ${lobbyID}`);
             }
             props.navigation.navigate('HomeScreen');
           }}
@@ -84,30 +120,55 @@ const CreateGame = (props: {navigation: any}) => {
             </TextStroke>
           </View>
           <View style={[homeScreenStyles.emailTextInput, {paddingLeft: 30}]}>
-            <ImageButton
-              image={require('../../assets/images/settingsImage.png')}
-              onPress={() => props.navigation.navigate('GameSettingsScreen')}
-              height={80}
-              width={80}
-              isDark={false}
-            />
+            {renderSettings(props)}
           </View>
         </View>
 
-        <View style={{backgroundColor: 'white', flex: 1}} />
+        <View style={{backgroundColor: 'white', flex: 1}}>
+          <ScrollView>
+            {userList.map(({username, avatarID}, index) => (
+              <Text key={index} style={{padding: 10}}>
+                {username + ' ' + avatarID}
+              </Text>
+            ))}
+          </ScrollView>
+        </View>
 
         <View style={{padding: 10, paddingBottom: 50, paddingVertical: 0}}>
           <View style={homeScreenStyles.emailTextInput}>
-            <StyledButton
-              onPress={() => props.navigation.navigate('YouAreItScreen')}
-              buttonText={'Start Game'}
-              buttonColor={true}
-            />
+            {buttonToRender(props)}
           </View>
         </View>
       </SafeAreaView>
     </>
   );
 };
+
+function renderSettings(props: {navigation: any}) {
+  if (!isNotGameCreator) {
+    return (
+      <ImageButton
+        image={require('../../assets/images/settingsImage.png')}
+        onPress={() => props.navigation.navigate('GameSettingsScreen')}
+        height={80}
+        width={80}
+        isDark={false}
+      />
+    );
+  }
+}
+
+function buttonToRender(props: {navigation: any}) {
+  if (!isNotGameCreator) {
+    return (
+      <StyledButton
+        onPress={() => props.navigation.navigate('YouAreItScreen')}
+        buttonText={'Start Game'}
+        buttonColor={true}
+      />
+    );
+  }
+  return <ReadyButton />;
+}
 
 export default CreateGame;
