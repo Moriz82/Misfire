@@ -13,7 +13,6 @@ import {
 } from '../../Utils/RemoteDataManager';
 import {isNotGameCreator} from '../HomeScreen/HomeScreen';
 import {joinGameCode} from '../JoinGame/JoinGame';
-import {ReadyButton} from '../../components/ReadyButton';
 import {userdata} from '../../Utils/LocalDataManager';
 import {avatarImages} from '../AvatarScreen/AvatarScreen';
 import {bgColor} from '../../App';
@@ -145,9 +144,11 @@ const CreateGame = (props: {navigation: any}) => {
                   width={16}
                   alt={'err'}
                 />
-                <Text key={index} style={{padding: 10, color: 'black'}}>
-                  {username}
-                </Text>
+                <TextStroke stroke={3} color={'#000000'}>
+                  <Text key={index} style={{padding: 10, color: 'black'}}>
+                    {username}
+                  </Text>
+                </TextStroke>
               </View>
             ))}
           </ScrollView>
@@ -168,7 +169,9 @@ function renderSettings(props: {navigation: any}) {
     return (
       <ImageButton
         image={require('../../assets/images/settingsImage.png')}
-        onPress={() => props.navigation.navigate('GameSettingsScreen')}
+        onPress={() => {
+          props.navigation.navigate('GameSettingsScreen');
+        }}
         height={80}
         width={80}
         isDark={false}
@@ -187,7 +190,11 @@ function buttonToRender(props: {navigation: any}) {
       />
     );
   }
-  return <ReadyButton />;
+  return (
+    <TextStroke stroke={3} color={'#000000'}>
+      <Text style={homeScreenStyles.buttonText}>Waiting For Players...</Text>
+    </TextStroke>
+  );
 }
 
 export default CreateGame;
