@@ -8,6 +8,7 @@ import {
   createLobby,
   deleteLobby,
   getLobbyMembers,
+  isGameStarted,
   joinLobby,
   leaveLobby,
 } from '../../Utils/RemoteDataManager';
@@ -47,16 +48,19 @@ const CreateGame = (props: {navigation: any}) => {
   }, [lobbyID]);
 
   useEffect(() => {
-    const updateUserList = async () => {
+    const intervalQuery = async () => {
       const newUserList = await getLobbyMembers(lobbyID);
       // @ts-ignore
       setUserList(newUserList);
+      if (await isGameStarted(lobbyID)) {
+        // navigate to message screen
+      }
     };
 
-    updateUserList();
+    intervalQuery();
 
     // Call updateUserList every... idek .. it does it alot
-    const intervalId = setInterval(updateUserList, 1000);
+    const intervalId = setInterval(intervalQuery, 1000);
 
     // Clear the interval when the component unmounts or when the lobbyID changes
     return () => {

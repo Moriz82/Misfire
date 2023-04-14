@@ -10,6 +10,7 @@ export const createLobby = async () => {
   try {
     //await firestore().collection('lobbies').add(lobbyCode);
     await firestore().collection('lobbies').doc(lobbyCode).set({
+      isGameStarted: false,
       members: [], // Add an empty array to store lobby members
     });
     console.log(`Lobby Created with code ${lobbyCode}`);
@@ -36,6 +37,8 @@ export const joinLobby = async (lobbyCode: string) => {
         members: firestore.FieldValue.arrayUnion({
           username: userdata.username,
           avatarID: userdata.avatarID,
+          isReady: false,
+          message: '',
         }),
       });
     } else {
@@ -82,8 +85,35 @@ export const getLobbyMembers = async (
   const lobbyDoc = await lobbyRef.get();
   if (lobbyDoc.exists) {
     const lobbyData = lobbyDoc.data();
-    return lobbyData?.members as {username: string; avatarID: number}[];
+    return lobbyData?.members as {
+      username: string;
+      avatarID: number;
+      isReady: boolean;
+      message: string;
+    }[];
   } else {
     return [];
+  }
+};
+
+export const remoteStartGame = async (lobbyCode: string) => {
+  const lobbyRef = firestore().collection('lobbies').doc(lobbyCode);
+  try {
+    await lobbyRef.update({isGameStarted: true});
+    console.log(`Game started in lobby ${lobbyCode}`);
+  } catch (error) {
+    console.log('Error:', error);
+  }
+};
+
+export const isGameStarted = async (lobbyCode: string): Promise<boolean> => {
+  const lobbyRef = firestore().collection('lobbies').doc(lobbyCode);
+  const lobbyDoc = await lobbyRef.get();
+
+  if (lobbyDoc.exists) {
+    const lobbyData = lobbyDoc.data();
+    return !!lobbyData?.isGameStarted;
+  } else {
+    throw new Error(`Lobby ${lobbyCode} does not exist`);
   }
 };
