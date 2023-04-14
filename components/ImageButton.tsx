@@ -8,7 +8,6 @@ type Props = {
   height: any;
   width: any;
   isDark: boolean;
-  key?: any;
 };
 
 export function ImageButton(props: Props) {
@@ -19,7 +18,6 @@ export function ImageButton(props: Props) {
       <Image
         style={{height: props.height, width: props.width}}
         source={props.image}
-        key={props.key}
       />
     </Button>
   );

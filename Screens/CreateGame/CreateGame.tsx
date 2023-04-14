@@ -149,7 +149,7 @@ const CreateGame = (props: {navigation: any}) => {
                   alt={'err'}
                 />
                 <TextStroke stroke={3} color={'#000000'}>
-                  <Text key={index} style={{padding: 10, color: 'black'}}>
+                  <Text key={index} style={{padding: 10, color: 'white'}}>
                     {username}
                   </Text>
                 </TextStroke>

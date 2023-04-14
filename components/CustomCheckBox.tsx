@@ -10,6 +10,7 @@ type Props = {
   image2: any;
   isDark: boolean;
   displayText: string;
+  handleValChange: any;
 };
 
 export function CustomCheckBox(props: Props) {
@@ -17,7 +18,11 @@ export function CustomCheckBox(props: Props) {
   return (
     <Button
       style={{backgroundColor: props.isDark ? '#434343' : '#605A58'}}
-      onPress={() => setIsChecked(!isChecked)}>
+      onPress={() => {
+        //setIsChecked(!isChecked);
+        console.log(typeof props.handleValChange);
+        props.handleValChange(false);
+      }}>
       <View
         style={{
           alignItems: 'center',

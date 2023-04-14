@@ -1,12 +1,21 @@
 import {SafeAreaView} from 'react-native';
 import {Box, Slider, Text, View} from 'native-base';
-import React from 'react';
+import React, {useState} from 'react';
 import {ImageButton} from '../../components/ImageButton';
 import homeScreenStyles from '../HomeScreen/HomeScreen.styles';
 import {CustomCheckBox} from '../../components/CustomCheckBox';
 import {TextStroke} from '../../components/StyledButton';
 
 const GameSettingScreen = (props: {navigation: any}) => {
+  const [allowPictures, setAllowPictures] = useState(false);
+  const [allowAudio, setAllowAudio] = useState(false);
+  const [allowVideo, setAllowVideo] = useState(false);
+  const [allowOmissions, setAllowOmissions] = useState(false);
+
+  const handleAllowPicturesChange = (value) => {
+    setAllowPictures(value);
+  };
+
   return (
     <SafeAreaView style={homeScreenStyles.safeAreaViewStyle}>
       <ImageButton
@@ -26,6 +35,7 @@ const GameSettingScreen = (props: {navigation: any}) => {
             displayText={'Allow Pictures'}
             image1={require('../../assets/images/checkImage.png')}
             image2={require('../../assets/images/blankImage.png')}
+            handleValChange={handleAllowPicturesChange}
           />
         </View>
         <Box
@@ -65,6 +75,7 @@ const GameSettingScreen = (props: {navigation: any}) => {
             displayText={'Allow Audio'}
             image1={require('../../assets/images/checkImage.png')}
             image2={require('../../assets/images/blankImage.png')}
+            handleValChange={setAllowAudio}
           />
         </View>
         <View>
@@ -75,6 +86,7 @@ const GameSettingScreen = (props: {navigation: any}) => {
             displayText={'Allow Video'}
             image1={require('../../assets/images/checkImage.png')}
             image2={require('../../assets/images/blankImage.png')}
+            handleValChange={setAllowVideo}
           />
         </View>
         <View>
@@ -85,6 +97,7 @@ const GameSettingScreen = (props: {navigation: any}) => {
             displayText={'Allow Omissions'}
             image1={require('../../assets/images/checkImage.png')}
             image2={require('../../assets/images/blankImage.png')}
+            handleValChange={setAllowOmissions}
           />
         </View>
       </View>
