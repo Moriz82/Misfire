@@ -1,5 +1,5 @@
 import {SafeAreaView} from 'react-native';
-import {ScrollView, Text, View, Image} from 'native-base';
+import {ScrollView, Text, View} from 'native-base';
 import React, {useEffect, useState} from 'react';
 import homeScreenStyles from '../HomeScreen/HomeScreen.styles';
 import {StyledButton, TextStroke} from '../../components/StyledButton';
@@ -18,6 +18,7 @@ import {userdata} from '../../Utils/LocalDataManager';
 import {avatarImages} from '../AvatarScreen/AvatarScreen';
 import {bgColor} from '../../App';
 import {fetchGameSettings} from '../../Utils/GameLogic';
+import CircleImage from '../../components/CircleImage';
 
 export var createGameLobbyID = '';
 
@@ -143,18 +144,16 @@ const CreateGame = (props: {navigation: any}) => {
                 style={{
                   flexDirection: 'row',
                   borderColor: 'black',
-                  borderWidth: 4,
-                  borderRadius: 4,
+                  borderWidth: 3,
+                  borderRadius: 10,
                   backgroundColor: 'white',
+                  marginBottom: 10,
                 }}>
-                <Image
-                  source={avatarImages[avatarID]}
-                  height={16}
-                  width={16}
-                  alt={'err'}
-                />
+                <CircleImage source={avatarImages[avatarID]} size={16} />
                 <TextStroke stroke={3} color={'#000000'}>
-                  <Text key={index} style={{padding: 10, color: 'white'}}>
+                  <Text
+                    key={index}
+                    style={{padding: 10, marginLeft: 10, color: 'white'}}>
                     {username}
                   </Text>
                 </TextStroke>

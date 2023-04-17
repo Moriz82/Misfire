@@ -1,6 +1,5 @@
 import firestore from '@react-native-firebase/firestore';
 import 'react-native-get-random-values';
-// @ts-ignore
 import {nanoid} from 'nanoid';
 import {userdata} from './LocalDataManager';
 
