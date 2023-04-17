@@ -2,16 +2,23 @@ import {View} from 'react-native';
 import {Text, Slider} from 'native-base';
 import React, {useState} from 'react';
 import {ImageButton} from '../../components/ImageButton';
-import {TextStroke, StyledButton} from '../../components/StyledButton';
+import {TextStroke} from '../../components/StyledButton';
 import settingsStyles from './SettingsScreen.styles';
 import {CustomCheckBox} from '../../components/CustomCheckBox';
+import {gameSettings, setGameSettings} from '../../Utils/GameLogic';
+import {createGameLobbyID} from '../CreateGame/CreateGame';
 
 const SettingScreen = (props: {navigation: any}) => {
-  const [allowPictures, setAllowPictures] = useState(false);
-  const [allowAudio, setAllowAudio] = useState(false);
-  const [allowVideo, setAllowVideo] = useState(false);
-  const [allowOmissions, setAllowOmissions] = useState(false);
-  const [allowProfanity, setAllowProfanity] = useState(false);
+  const [allowPictures, setAllowPictures] = useState(
+    gameSettings.allowPictures,
+  );
+  const [allowAudio, setAllowAudio] = useState(gameSettings.allowAudio);
+  const [allowVideo, setAllowVideo] = useState(gameSettings.allowVideo);
+  const [allowProfanity, setAllowProfanity] = useState(
+    gameSettings.allowProfanity,
+  );
+  const [maxCharCount, setMaxCharCount] = useState(gameSettings.maxCharCount);
+  const [roundCount, setRoundCount] = useState(gameSettings.roundCount);
 
   return (
     <>
@@ -24,7 +31,22 @@ const SettingScreen = (props: {navigation: any}) => {
         }}>
         <ImageButton
           image={require('../../assets/images/backButton.png')}
-          onPress={() => props.navigation.navigate('HomeScreen')}
+          onPress={() => {
+            setGameSettings(
+              createGameLobbyID,
+              allowPictures,
+              allowAudio,
+              allowVideo,
+              allowProfanity,
+              maxCharCount,
+              roundCount,
+            ).then(() =>
+              console.log(
+                `Game Settings set to : ${JSON.stringify(gameSettings)}`,
+              ),
+            );
+            props.navigation.navigate('CreateGame');
+          }}
           height={50}
           width={50}
           isDark={true}
@@ -53,6 +75,7 @@ const SettingScreen = (props: {navigation: any}) => {
             image1={require('../../assets/images/checkImage.png')}
             image2={require('../../assets/images/blankImage.png')}
             onChange={isChecked => setAllowProfanity(isChecked)}
+            initState={allowProfanity}
           />
         </View>
       </View>
@@ -86,11 +109,14 @@ const SettingScreen = (props: {navigation: any}) => {
           w="3/4"
           colorScheme="orange"
           maxW="300"
-          defaultValue={70}
-          minValue={0}
-          maxValue={100}
-          accessibilityLabel="hello world"
-          step={10}>
+          defaultValue={250}
+          minValue={1}
+          maxValue={500}
+          accessibilityLabel="ge1"
+          step={1}
+          onChangeEnd={v => {
+            v && setMaxCharCount(Math.floor(v));
+          }}>
           <Slider.Track>
             <Slider.FilledTrack />
           </Slider.Track>
@@ -130,11 +156,14 @@ const SettingScreen = (props: {navigation: any}) => {
           w="3/4"
           colorScheme="orange"
           maxW="300"
-          defaultValue={70}
-          minValue={0}
-          maxValue={100}
+          defaultValue={3}
+          minValue={1}
+          maxValue={20}
           accessibilityLabel="hello world"
-          step={10}>
+          step={1}
+          onChangeEnd={v => {
+            v && setRoundCount(Math.floor(v));
+          }}>
           <Slider.Track>
             <Slider.FilledTrack />
           </Slider.Track>
@@ -161,6 +190,7 @@ const SettingScreen = (props: {navigation: any}) => {
           image1={require('../../assets/images/checkImage.png')}
           image2={require('../../assets/images/blankImage.png')}
           onChange={isChecked => setAllowPictures(isChecked)}
+          initState={allowPictures}
         />
       </View>
       <View
@@ -178,6 +208,7 @@ const SettingScreen = (props: {navigation: any}) => {
           image1={require('../../assets/images/checkImage.png')}
           image2={require('../../assets/images/blankImage.png')}
           onChange={isChecked => setAllowAudio(isChecked)}
+          initState={allowAudio}
         />
       </View>
       <View
@@ -195,6 +226,7 @@ const SettingScreen = (props: {navigation: any}) => {
           image1={require('../../assets/images/checkImage.png')}
           image2={require('../../assets/images/blankImage.png')}
           onChange={isChecked => setAllowVideo(isChecked)}
+          initState={allowVideo}
         />
       </View>
 
@@ -205,15 +237,8 @@ const SettingScreen = (props: {navigation: any}) => {
           paddingTop: 30,
           width: '100%',
           padding: 25,
-        }}>
-        <StyledButton
-          onPress={() => {
-            props.navigation.navigate('HomeScreen');
-          }}
-          buttonText={'Continue'}
-          buttonColor={false}
-        />
-      </View>
+        }}
+      />
     </>
   );
 };

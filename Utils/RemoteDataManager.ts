@@ -11,7 +11,16 @@ export const createLobby = async () => {
     //await firestore().collection('lobbies').add(lobbyCode);
     await firestore().collection('lobbies').doc(lobbyCode).set({
       isGameStarted: false,
-      members: [], // Add an empty array to store lobby members
+      // Game Settings
+      allowPictures: false,
+      allowAudio: false,
+      allowVideo: false,
+      allowProfanity: false,
+      maxCharCount: 250,
+      roundCount: 3,
+      selectedMessage: '',
+      // Add an empty array to store lobby members
+      members: [],
     });
     console.log(`Lobby Created with code ${lobbyCode}`);
   } catch (error) {
@@ -39,6 +48,7 @@ export const joinLobby = async (lobbyCode: string) => {
           avatarID: userdata.avatarID,
           isReady: false,
           message: '',
+          messageVotes: 0,
         }),
       });
     } else {

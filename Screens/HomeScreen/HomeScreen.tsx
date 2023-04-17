@@ -1,11 +1,11 @@
 import {Box, StatusBar, View} from 'native-base';
-import React, {useEffect, useState} from 'react';
+import React, {useState} from 'react';
 import {SafeAreaView} from 'react-native';
 import {StyledButton} from '../../components/StyledButton';
 import {CustomTextInput} from '../../components/CustomTextInput';
 import homeScreenStyles from './HomeScreen.styles';
 import {ImageButton} from '../../components/ImageButton';
-import {setUsername, userdata} from '../../Utils/LocalDataManager';
+import {setUsername} from '../../Utils/LocalDataManager';
 
 export var isNotGameCreator = false;
 
@@ -80,16 +80,6 @@ const HomeScreen = (props: {navigation: any}) => {
             }}
             buttonText={'Join Game'}
             buttonColor={false}
-          />
-        </View>
-
-        <View style={homeScreenStyles.emailTextInput}>
-          <ImageButton
-            image={require('../../assets/images/settingsImage.png')}
-            onPress={() => props.navigation.navigate('SettingsScreen')}
-            height={100}
-            width={100}
-            isDark={false}
           />
         </View>
 

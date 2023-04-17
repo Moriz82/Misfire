@@ -17,6 +17,9 @@ import {joinGameCode} from '../JoinGame/JoinGame';
 import {userdata} from '../../Utils/LocalDataManager';
 import {avatarImages} from '../AvatarScreen/AvatarScreen';
 import {bgColor} from '../../App';
+import {fetchGameSettings} from '../../Utils/GameLogic';
+
+export var createGameLobbyID = '';
 
 const CreateGame = (props: {navigation: any}) => {
   const [lobbyID, setLobbyID] = useState('');
@@ -38,6 +41,7 @@ const CreateGame = (props: {navigation: any}) => {
 
   useEffect(() => {
     if (lobbyID) {
+      createGameLobbyID = lobbyID;
       if (!isNotGameCreator) {
         joinLobby(lobbyID);
         console.log(
@@ -53,7 +57,8 @@ const CreateGame = (props: {navigation: any}) => {
       // @ts-ignore
       setUserList(newUserList);
       if (await isGameStarted(lobbyID)) {
-        // navigate to message screen
+        await fetchGameSettings(lobbyID);
+        props.navigation.navigate('MessageScreen');
       }
     };
 
@@ -174,7 +179,7 @@ function renderSettings(props: {navigation: any}) {
       <ImageButton
         image={require('../../assets/images/settingsImage.png')}
         onPress={() => {
-          props.navigation.navigate('GameSettingsScreen');
+          props.navigation.navigate('SettingsScreen');
         }}
         height={80}
         width={80}
