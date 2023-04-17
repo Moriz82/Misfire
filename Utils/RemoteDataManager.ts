@@ -106,6 +106,25 @@ export const getLobbyMembers = async (
   }
 };
 
+export const getLobbyMembersUser = async (
+  lobbyCode: string,
+): Promise<{username: string}[]> => {
+  const lobbyRef = firestore().collection('lobbies').doc(lobbyCode);
+
+  const lobbyDoc = await lobbyRef.get();
+  if (lobbyDoc.exists) {
+    const lobbyData = lobbyDoc.data();
+    return lobbyData?.members as {
+      username: string;
+      avatarID: number;
+      isReady: boolean;
+      message: string;
+    }[];
+  } else {
+    return [];
+  }
+};
+
 export const remoteStartGame = async (lobbyCode: string) => {
   const lobbyRef = firestore().collection('lobbies').doc(lobbyCode);
   try {
