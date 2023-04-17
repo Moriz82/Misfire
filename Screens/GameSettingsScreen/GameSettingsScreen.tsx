@@ -12,10 +12,6 @@ const GameSettingScreen = (props: {navigation: any}) => {
   const [allowVideo, setAllowVideo] = useState(false);
   const [allowOmissions, setAllowOmissions] = useState(false);
 
-  const handleAllowPicturesChange = (value) => {
-    setAllowPictures(value);
-  };
-
   return (
     <SafeAreaView style={homeScreenStyles.safeAreaViewStyle}>
       <ImageButton
@@ -35,7 +31,7 @@ const GameSettingScreen = (props: {navigation: any}) => {
             displayText={'Allow Pictures'}
             image1={require('../../assets/images/checkImage.png')}
             image2={require('../../assets/images/blankImage.png')}
-            handleValChange={handleAllowPicturesChange}
+            onChange={isChecked => setAllowPictures(isChecked)}
           />
         </View>
         <Box
@@ -75,7 +71,7 @@ const GameSettingScreen = (props: {navigation: any}) => {
             displayText={'Allow Audio'}
             image1={require('../../assets/images/checkImage.png')}
             image2={require('../../assets/images/blankImage.png')}
-            handleValChange={setAllowAudio}
+            onChange={isChecked => setAllowAudio(isChecked)}
           />
         </View>
         <View>
@@ -86,7 +82,7 @@ const GameSettingScreen = (props: {navigation: any}) => {
             displayText={'Allow Video'}
             image1={require('../../assets/images/checkImage.png')}
             image2={require('../../assets/images/blankImage.png')}
-            handleValChange={setAllowVideo}
+            onChange={isChecked => setAllowVideo(isChecked)}
           />
         </View>
         <View>
@@ -97,7 +93,7 @@ const GameSettingScreen = (props: {navigation: any}) => {
             displayText={'Allow Omissions'}
             image1={require('../../assets/images/checkImage.png')}
             image2={require('../../assets/images/blankImage.png')}
-            handleValChange={setAllowOmissions}
+            onChange={isChecked => setAllowOmissions(isChecked)}
           />
         </View>
       </View>
