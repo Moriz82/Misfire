@@ -68,15 +68,16 @@ const JoinGame = (props: {navigation: any}) => {
         <View style={{width: '85%', paddingTop: 30}}>
           <StyledButton
             onPress={() => {
-              getLobbyMembersUser(gameCode).then(value => {
-                if (!value.includes({username: userdata.username})) {
+              searchForUser().then(value => {
+                if (!value) {
+                  console.log(value);
                   joinLobby(gameCode).then(() =>
                     console.log(`joined game with code: ${gameCode}`),
                   );
                   joinGameCode = gameCode;
                   props.navigation.navigate('CreateGame');
                 } else {
-                  setErrorMsg('Username already exists in lobby');
+                  setErrorMsg('Duplicate username');
                 }
               });
             }}
@@ -90,6 +91,12 @@ const JoinGame = (props: {navigation: any}) => {
       </View>
     </>
   );
+
+  async function searchForUser(): Promise<boolean> {
+    const arr = await getLobbyMembersUser(gameCode);
+    console.log(arr);
+    return arr.some(obj => obj.username === userdata.username);
+  }
 };
 
 export default JoinGame;
