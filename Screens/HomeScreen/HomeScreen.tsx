@@ -49,7 +49,6 @@ const HomeScreen = (props: {navigation: any}) => {
           <StyledButton
             onPress={() => {
               if (!checkUsername()) {
-                setErrorMsg('Please enter a username');
                 return;
               }
               isNotGameCreator = false;
@@ -97,7 +96,16 @@ const HomeScreen = (props: {navigation: any}) => {
   );
 
   function checkUsername(): boolean {
-    return !(usernameText.length === 0 || checkForProfanity(usernameText));
+    if (usernameText.length === 0) {
+      setErrorMsg('Please enter a username');
+      return false;
+    }
+    if (checkForProfanity(usernameText)) {
+      setErrorMsg('Inappropriate username');
+      return false;
+    }
+    setErrorMsg('');
+    return true;
   }
 };
 
