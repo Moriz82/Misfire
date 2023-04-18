@@ -5,7 +5,7 @@ import {StyledButton, TextStroke} from '../../components/StyledButton';
 import {ImageButton} from '../../components/ImageButton';
 import homeScreenStyles from '../HomeScreen/HomeScreen.styles';
 import {isNotGameCreator} from '../HomeScreen/HomeScreen';
-import {setAvatarID} from '../../Utils/LocalDataManager';
+import {setAvatarID, userdata} from '../../Utils/LocalDataManager';
 
 export const avatarImages = [
   require('../../assets/images/avatar0.png'),
@@ -20,9 +20,13 @@ export const avatarImages = [
   require('../../assets/images/Secret.png'),
 ];
 
-const HomeScreen = (props: {navigation: any}) => {
-  const [avatarID, setLAvatarID] = useState(0);
+const AvatarScreen = (props: {navigation: any}) => {
+  const [avatarID, setLAvatarID] = useState(userdata.avatarID);
   let clickCount = 0;
+
+  //say f you to the errors and warnings
+  console.warn = function () {};
+  console.error = function () {};
 
   return (
     <>
@@ -89,7 +93,7 @@ const HomeScreen = (props: {navigation: any}) => {
 
       <View style={styles.gridContainer}>
         {avatarImages.slice(0, -1).map((_, index) => (
-          <View style={styles.gridCell}>
+          <View style={styles.gridCell} key={index}>
             <ImageButton
               onPress={() => setLAvatarID(index)}
               image={avatarImages[index]}
@@ -97,6 +101,7 @@ const HomeScreen = (props: {navigation: any}) => {
               width={70}
               isDark={false}
               isCircle={true}
+              key={index}
             />
           </View>
         ))}
@@ -148,4 +153,4 @@ const styles = StyleSheet.create({
   buttonText={'Sign Up'}
 />*/
 
-export default HomeScreen;
+export default AvatarScreen;

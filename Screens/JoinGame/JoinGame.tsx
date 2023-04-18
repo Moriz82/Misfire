@@ -70,7 +70,6 @@ const JoinGame = (props: {navigation: any}) => {
             onPress={() => {
               searchForUser().then(value => {
                 if (!value) {
-                  console.log(value);
                   joinLobby(gameCode).then(() =>
                     console.log(`joined game with code: ${gameCode}`),
                   );
@@ -94,7 +93,6 @@ const JoinGame = (props: {navigation: any}) => {
 
   async function searchForUser(): Promise<boolean> {
     const arr = await getLobbyMembersUser(gameCode);
-    console.log(arr);
     return arr.some(obj => obj.username === userdata.username);
   }
 };

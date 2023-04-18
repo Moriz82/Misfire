@@ -13,7 +13,6 @@ import ChatScreen from './Screens/ChatScreen/ChatScreen';
 import AvatarScreen from './Screens/AvatarScreen/AvatarScreen';
 import HeIsItScreen from './Screens/HeIsItScreen/HeIsItScreen';
 import MessageScreen from './Screens/MessageScreen/MessageScreen';
-import {fetchData} from './Utils/LocalDataManager';
 
 export const bgColor = '#605A58';
 
@@ -22,8 +21,6 @@ export default function App(): JSX.Element | null {
   const appState = useRef(AppState.currentState);
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const [appStateVisible, setAppStateVisible] = useState(appState.current);
-
-  fetchData().then(() => console.log());
 
   useEffect(() => {
     const subscription = AppState.addEventListener(
