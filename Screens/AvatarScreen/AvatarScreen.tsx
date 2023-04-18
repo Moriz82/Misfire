@@ -61,7 +61,7 @@ const HomeScreen = (props: {navigation: any}) => {
         style={{
           height: '30%',
           backgroundColor: '#605A58',
-          paddingTop: 10,
+          paddingTop: 0,
           alignItems: 'center',
         }}>
         {/*<Image
