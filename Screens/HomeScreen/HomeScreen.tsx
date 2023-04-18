@@ -89,7 +89,7 @@ const HomeScreen = (props: {navigation: any}) => {
         <View style={homeScreenStyles.emailTextInput}>
           <StyledButton
             onPress={() => {
-              props.navigation.navigate('MessageScreen');
+              props.navigation.navigate('VoteScreen');
             }}
             buttonText={'test button delete me'}
             buttonColor={false}

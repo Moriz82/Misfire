@@ -13,6 +13,7 @@ import ChatScreen from './Screens/ChatScreen/ChatScreen';
 import AvatarScreen from './Screens/AvatarScreen/AvatarScreen';
 import HeIsItScreen from './Screens/HeIsItScreen/HeIsItScreen';
 import MessageScreen from './Screens/MessageScreen/MessageScreen';
+import VoteScreen from './Screens/VoteScreen/VoteScreen';
 
 export const bgColor = '#605A58';
 
@@ -130,6 +131,11 @@ export default function App(): JSX.Element | null {
           <Stack.Screen
             name="MessageScreen"
             component={MessageScreen}
+            options={{headerShown: false, title: ''}}
+          />
+          <Stack.Screen
+            name="VoteScreen"
+            component={VoteScreen}
             options={{headerShown: false, title: ''}}
           />
         </Stack.Navigator>

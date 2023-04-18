@@ -7,7 +7,7 @@ import {ImageButton} from '../../components/ImageButton';
 import messageStyles from '../MessageScreen/MessageScreen.styles';
 import {ReadyButton} from '../../components/ReadyButton';
 
-const HomeScreen = (props: {navigation: any}) => {
+const MessageScreen = (props: {navigation: any}) => {
   const [usernameText, setUsernameText] = useState('');
 
   return (
@@ -122,4 +122,4 @@ const HomeScreen = (props: {navigation: any}) => {
   buttonText={'Sign Up'}
 />*/
 
-export default HomeScreen;
+export default MessageScreen;
