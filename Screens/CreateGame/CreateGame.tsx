@@ -26,6 +26,10 @@ const CreateGame = (props: {navigation: any}) => {
   const [lobbyID, setLobbyID] = useState('');
   const [userList, setUserList] = useState([]);
 
+  //say f you to the errors and warnings
+  console.warn = function () {};
+  console.error = function () {};
+
   useEffect(() => {
     if (!isNotGameCreator) {
       const makeLobby = async () => {
@@ -148,9 +152,16 @@ const CreateGame = (props: {navigation: any}) => {
                   borderRadius: 10,
                   backgroundColor: 'white',
                   marginBottom: 10,
-                }}>
-                <CircleImage source={avatarImages[avatarID]} size={60} />
-                <TextStroke stroke={3} color={'#000000'}>
+                  marginLeft: 10,
+                  marginRight: 10,
+                }}
+                key={index}>
+                <CircleImage
+                  source={avatarImages[avatarID]}
+                  size={60}
+                  key={index}
+                />
+                <TextStroke stroke={3} color={'#000000'} key={index}>
                   <Text
                     key={index}
                     style={{padding: 10, marginLeft: 10, color: 'white'}}>
@@ -199,9 +210,11 @@ function buttonToRender(props: {navigation: any}) {
     );
   }
   return (
-    <TextStroke stroke={3} color={'#000000'}>
-      <Text style={homeScreenStyles.buttonText}>Waiting For Players...</Text>
-    </TextStroke>
+    <View style={{alignItems: 'center'}}>
+      <TextStroke stroke={3} color={'#000000'}>
+        <Text style={homeScreenStyles.buttonText}>Waiting For Players...</Text>
+      </TextStroke>
+    </View>
   );
 }
 

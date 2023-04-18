@@ -140,7 +140,7 @@ export const isGameStarted = async (lobbyCode: string): Promise<boolean> => {
 
   if (lobbyDoc.exists) {
     const lobbyData = lobbyDoc.data();
-    return !!lobbyData?.isGameStarted;
+    return lobbyData?.isGameStarted;
   } else {
     throw new Error(`Lobby ${lobbyCode} does not exist`);
   }

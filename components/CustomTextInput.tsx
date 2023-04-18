@@ -1,17 +1,15 @@
 import React, {useState} from 'react';
-import {StyleSheet, TextInput, View} from 'react-native';
-/*import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';*/
+import {TextInput, View} from 'react-native';
 
 type Props = {
   placeholderText: string;
-  value: string | undefined;
+  value?: string; // Make value prop optional
   onChangeText: any;
   iconName: string;
   isPassword: boolean;
 };
 
 export function CustomTextInput(props: Props) {
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const [isPasswordSecure, setIsPasswordSecure] = useState(true);
 
   return (
@@ -23,12 +21,6 @@ export function CustomTextInput(props: Props) {
         justifyContent: 'space-between',
         alignItems: 'center',
       }}>
-      {/*<MaterialCommunityIcons
-        name={props.iconName}
-        color="gray"
-        size={25}
-        style={{paddingRight: 5}}
-      />*/}
       <TextInput
         style={{
           flex: 1,
@@ -38,39 +30,13 @@ export function CustomTextInput(props: Props) {
           color: 'black',
         }}
         placeholder={props.placeholderText}
-        defaultValue={props.value}
+        defaultValue={props.value} // Set the default value here
         onChangeText={props.onChangeText}
         placeholderTextColor={'gray'}
         secureTextEntry={isPasswordSecure && props.isPassword}
         keyboardType={props.isPassword ? 'default' : 'email-address'}
         autoCapitalize={'none'}
       />
-      {/*{props.isPassword ? (
-        <MaterialCommunityIcons
-          name={isPasswordSecure ? 'eye-off' : 'eye'}
-          size={28}
-          color="gray"
-          onPress={() => {
-            isPasswordSecure
-              ? setIsPasswordSecure(false)
-              : setIsPasswordSecure(true);
-          }}
-        />
-      ) : null}*/}
     </View>
   );
 }
-
-// <MaterialCommunityIcons style={styles.root} name="email" color="black" size={25} />
-const styles = StyleSheet.create({
-  root: {
-    backgroundColor: '#F7F8F9',
-    borderRadius: 8,
-    boxSizing: 'border-box',
-  },
-  placeholderText: {
-    color: 'rgb(255, 255, 255)',
-    fontSize: 17,
-    fontWeight: '700',
-  },
-});
