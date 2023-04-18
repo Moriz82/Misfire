@@ -88,8 +88,8 @@ const HomeScreen = (props: {navigation: any}) => {
             buttonColor={false}
           />
         </View>
-        <View>
-          <Text style={{color: 'red'}}>{errorMsg}</Text>
+        <View style={{alignItems: 'center'}}>
+          <Text style={{color: 'red', textAlign: 'center'}}>{errorMsg}</Text>
         </View>
       </Box>
     </SafeAreaView>

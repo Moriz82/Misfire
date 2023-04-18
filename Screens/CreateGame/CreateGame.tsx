@@ -149,7 +149,7 @@ const CreateGame = (props: {navigation: any}) => {
                   backgroundColor: 'white',
                   marginBottom: 10,
                 }}>
-                <CircleImage source={avatarImages[avatarID]} size={16} />
+                <CircleImage source={avatarImages[avatarID]} size={60} />
                 <TextStroke stroke={3} color={'#000000'}>
                   <Text
                     key={index}
