@@ -83,91 +83,23 @@ const HomeScreen = (props: {navigation: any}) => {
           width={160}
           isDark={false}
           key={avatarID}
+          isCircle={true}
         />
       </View>
 
       <View style={styles.gridContainer}>
-        <View style={styles.gridCell}>
-          <ImageButton
-            onPress={() => setLAvatarID(0)}
-            image={require('../../assets/images/avatar0.png')}
-            height={50}
-            width={50}
-            isDark={false}
-          />
-        </View>
-        <View style={styles.gridCell}>
-          <ImageButton
-            onPress={() => setLAvatarID(1)}
-            image={require('../../assets/images/avatar1.png')}
-            height={50}
-            width={50}
-            isDark={false}
-          />
-        </View>
-        <View style={styles.gridCell}>
-          <ImageButton
-            onPress={() => setLAvatarID(2)}
-            image={require('../../assets/images/avatar2.png')}
-            height={50}
-            width={50}
-            isDark={false}
-          />
-        </View>
-        <View style={styles.gridCell}>
-          <ImageButton
-            onPress={() => setLAvatarID(3)}
-            image={require('../../assets/images/avatar3.png')}
-            height={50}
-            width={50}
-            isDark={false}
-          />
-        </View>
-        <View style={styles.gridCell}>
-          <ImageButton
-            onPress={() => setLAvatarID(4)}
-            image={require('../../assets/images/avatar4.png')}
-            height={50}
-            width={50}
-            isDark={false}
-          />
-        </View>
-        <View style={styles.gridCell}>
-          <ImageButton
-            onPress={() => setLAvatarID(5)}
-            image={require('../../assets/images/avatar5.png')}
-            height={50}
-            width={50}
-            isDark={false}
-          />
-        </View>
-        <View style={styles.gridCell}>
-          <ImageButton
-            onPress={() => setLAvatarID(6)}
-            image={require('../../assets/images/avatar6.png')}
-            height={50}
-            width={50}
-            isDark={false}
-          />
-        </View>
-        <View style={styles.gridCell}>
-          <ImageButton
-            onPress={() => setLAvatarID(7)}
-            image={require('../../assets/images/avatar7.png')}
-            height={50}
-            width={50}
-            isDark={false}
-          />
-        </View>
-        <View style={styles.gridCell}>
-          <ImageButton
-            onPress={() => setLAvatarID(8)}
-            image={require('../../assets/images/avatar8.png')}
-            height={50}
-            width={50}
-            isDark={false}
-          />
-        </View>
+        {avatarImages.slice(0, -1).map((_, index) => (
+          <View style={styles.gridCell}>
+            <ImageButton
+              onPress={() => setLAvatarID(index)}
+              image={avatarImages[index]}
+              height={70}
+              width={70}
+              isDark={false}
+              isCircle={true}
+            />
+          </View>
+        ))}
       </View>
 
       <View

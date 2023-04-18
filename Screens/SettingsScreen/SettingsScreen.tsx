@@ -1,12 +1,25 @@
 import {View} from 'react-native';
 import {Text, Slider} from 'native-base';
-import React from 'react';
+import React, {useState} from 'react';
 import {ImageButton} from '../../components/ImageButton';
-import {TextStroke, StyledButton} from '../../components/StyledButton';
+import {TextStroke} from '../../components/StyledButton';
 import settingsStyles from './SettingsScreen.styles';
 import {CustomCheckBox} from '../../components/CustomCheckBox';
+import {gameSettings, setGameSettings} from '../../Utils/GameLogic';
+import {createGameLobbyID} from '../CreateGame/CreateGame';
 
 const SettingScreen = (props: {navigation: any}) => {
+  const [allowPictures, setAllowPictures] = useState(
+    gameSettings.allowPictures,
+  );
+  const [allowAudio, setAllowAudio] = useState(gameSettings.allowAudio);
+  const [allowVideo, setAllowVideo] = useState(gameSettings.allowVideo);
+  const [allowProfanity, setAllowProfanity] = useState(
+    gameSettings.allowProfanity,
+  );
+  const [maxCharCount, setMaxCharCount] = useState(gameSettings.maxCharCount);
+  const [roundCount, setRoundCount] = useState(gameSettings.roundCount);
+
   return (
     <>
       <View
@@ -18,7 +31,22 @@ const SettingScreen = (props: {navigation: any}) => {
         }}>
         <ImageButton
           image={require('../../assets/images/backButton.png')}
-          onPress={() => props.navigation.navigate('HomeScreen')}
+          onPress={() => {
+            setGameSettings(
+              createGameLobbyID,
+              allowPictures,
+              allowAudio,
+              allowVideo,
+              allowProfanity,
+              maxCharCount,
+              roundCount,
+            ).then(() =>
+              console.log(
+                `Game Settings set to : ${JSON.stringify(gameSettings)}`,
+              ),
+            );
+            props.navigation.navigate('CreateGame');
+          }}
           height={50}
           width={50}
           isDark={true}
@@ -40,30 +68,55 @@ const SettingScreen = (props: {navigation: any}) => {
       <View style={{backgroundColor: '#605A58', height: '10%', paddingTop: 10}}>
         <View style={{width: '100%'}}>
           <CustomCheckBox
-            displayText='Profanity'
+            displayText="Profanity"
             width={45}
             height={45}
             isDark={false}
             image1={require('../../assets/images/checkImage.png')}
             image2={require('../../assets/images/blankImage.png')}
+            onChange={isChecked => setAllowProfanity(isChecked)}
+            initState={allowProfanity}
           />
         </View>
       </View>
 
-      <View style={{backgroundColor: '#605A58', height: '4%'}}></View>
+      <View style={{backgroundColor: '#605A58', height: '4%'}} />
 
-      <View style={{backgroundColor: '#605A58', height: '5%', alignItems: 'center'}}>
+      <View
+        style={{
+          backgroundColor: '#605A58',
+          height: '5%',
+          alignItems: 'center',
+        }}>
         <TextStroke stroke={3} color={'#000000'}>
           <Text style={settingsStyles.buttonText}>Max Character Count</Text>
         </TextStroke>
       </View>
 
-      <View style={{backgroundColor: '#605A58', height: '5%', alignItems: 'center', flexDirection: 'row', justifyContent: 'space-evenly'}}>
+      <View
+        style={{
+          backgroundColor: '#605A58',
+          height: '5%',
+          alignItems: 'center',
+          flexDirection: 'row',
+          justifyContent: 'space-evenly',
+        }}>
         <TextStroke stroke={3} color={'#000000'}>
           <Text style={settingsStyles.buttonText}>1</Text>
         </TextStroke>
 
-        <Slider w="3/4" colorScheme='orange' maxW="300" defaultValue={70} minValue={0} maxValue={100} accessibilityLabel="hello world" step={10}>
+        <Slider
+          w="3/4"
+          colorScheme="orange"
+          maxW="300"
+          defaultValue={250}
+          minValue={1}
+          maxValue={500}
+          accessibilityLabel="ge1"
+          step={1}
+          onChangeEnd={v => {
+            v && setMaxCharCount(Math.floor(v));
+          }}>
           <Slider.Track>
             <Slider.FilledTrack />
           </Slider.Track>
@@ -75,19 +128,42 @@ const SettingScreen = (props: {navigation: any}) => {
         </TextStroke>
       </View>
 
-
-      <View style={{backgroundColor: '#605A58', height: '10%', alignItems: 'center', paddingTop: 45}}>
+      <View
+        style={{
+          backgroundColor: '#605A58',
+          height: '10%',
+          alignItems: 'center',
+          paddingTop: 45,
+        }}>
         <TextStroke stroke={3} color={'#000000'}>
           <Text style={settingsStyles.buttonText}>Number of Rounds</Text>
         </TextStroke>
       </View>
 
-      <View style={{backgroundColor: '#605A58', height: '5%', alignItems: 'center', flexDirection: 'row', justifyContent: 'space-evenly'}}>
+      <View
+        style={{
+          backgroundColor: '#605A58',
+          height: '5%',
+          alignItems: 'center',
+          flexDirection: 'row',
+          justifyContent: 'space-evenly',
+        }}>
         <TextStroke stroke={3} color={'#000000'}>
           <Text style={settingsStyles.buttonText}>1</Text>
         </TextStroke>
 
-        <Slider w="3/4" colorScheme='orange' maxW="300" defaultValue={70} minValue={0} maxValue={100} accessibilityLabel="hello world" step={10}>
+        <Slider
+          w="3/4"
+          colorScheme="orange"
+          maxW="300"
+          defaultValue={3}
+          minValue={1}
+          maxValue={20}
+          accessibilityLabel="hello world"
+          step={1}
+          onChangeEnd={v => {
+            v && setRoundCount(Math.floor(v));
+          }}>
           <Slider.Track>
             <Slider.FilledTrack />
           </Slider.Track>
@@ -99,46 +175,70 @@ const SettingScreen = (props: {navigation: any}) => {
         </TextStroke>
       </View>
 
-      <View style={{backgroundColor: '#605A58', height: '10%', paddingTop: 10, width: '100%'}}>
-          <CustomCheckBox
-            displayText='Allow Pictures'
-            width={45}
-            height={45}
-            isDark={false}
-            image1={require('../../assets/images/checkImage.png')}
-            image2={require('../../assets/images/blankImage.png')}
-          />
-      </View>
-      <View style={{backgroundColor: '#605A58', height: '10%', paddingTop: 10, width: '100%'}}>
-          <CustomCheckBox
-            displayText='Allow Audio'
-            width={45}
-            height={45}
-            isDark={false}
-            image1={require('../../assets/images/checkImage.png')}
-            image2={require('../../assets/images/blankImage.png')}
-          />
-      </View>
-      <View style={{backgroundColor: '#605A58', height: '10%', paddingTop: 10, width: '100%'}}>
-          <CustomCheckBox
-            displayText='Allow Video'
-            width={45}
-            height={45}
-            isDark={false}
-            image1={require('../../assets/images/checkImage.png')}
-            image2={require('../../assets/images/blankImage.png')}
-          />
-      </View>
-
-      <View style={{backgroundColor: '#605A58', flex:1, paddingTop: 30, width: '100%', padding: 25}}>
-        <StyledButton
-          onPress={() => {
-            props.navigation.navigate('HomeScreen');
-          }}
-          buttonText={'Continue'}
-          buttonColor={false}
+      <View
+        style={{
+          backgroundColor: '#605A58',
+          height: '10%',
+          paddingTop: 10,
+          width: '100%',
+        }}>
+        <CustomCheckBox
+          displayText="Allow Pictures"
+          width={45}
+          height={45}
+          isDark={false}
+          image1={require('../../assets/images/checkImage.png')}
+          image2={require('../../assets/images/blankImage.png')}
+          onChange={isChecked => setAllowPictures(isChecked)}
+          initState={allowPictures}
         />
       </View>
+      <View
+        style={{
+          backgroundColor: '#605A58',
+          height: '10%',
+          paddingTop: 10,
+          width: '100%',
+        }}>
+        <CustomCheckBox
+          displayText="Allow Audio"
+          width={45}
+          height={45}
+          isDark={false}
+          image1={require('../../assets/images/checkImage.png')}
+          image2={require('../../assets/images/blankImage.png')}
+          onChange={isChecked => setAllowAudio(isChecked)}
+          initState={allowAudio}
+        />
+      </View>
+      <View
+        style={{
+          backgroundColor: '#605A58',
+          height: '10%',
+          paddingTop: 10,
+          width: '100%',
+        }}>
+        <CustomCheckBox
+          displayText="Allow Video"
+          width={45}
+          height={45}
+          isDark={false}
+          image1={require('../../assets/images/checkImage.png')}
+          image2={require('../../assets/images/blankImage.png')}
+          onChange={isChecked => setAllowVideo(isChecked)}
+          initState={allowVideo}
+        />
+      </View>
+
+      <View
+        style={{
+          backgroundColor: '#605A58',
+          flex: 1,
+          paddingTop: 30,
+          width: '100%',
+          padding: 25,
+        }}
+      />
     </>
   );
 };

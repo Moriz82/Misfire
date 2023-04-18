@@ -1,6 +1,5 @@
 import firestore from '@react-native-firebase/firestore';
 import 'react-native-get-random-values';
-// @ts-ignore
 import {nanoid} from 'nanoid';
 import {userdata} from './LocalDataManager';
 
@@ -11,7 +10,16 @@ export const createLobby = async () => {
     //await firestore().collection('lobbies').add(lobbyCode);
     await firestore().collection('lobbies').doc(lobbyCode).set({
       isGameStarted: false,
-      members: [], // Add an empty array to store lobby members
+      // Game Settings
+      allowPictures: false,
+      allowAudio: false,
+      allowVideo: false,
+      allowProfanity: false,
+      maxCharCount: 250,
+      roundCount: 3,
+      selectedMessage: '',
+      // Add an empty array to store lobby members
+      members: [],
     });
     console.log(`Lobby Created with code ${lobbyCode}`);
   } catch (error) {
@@ -39,6 +47,7 @@ export const joinLobby = async (lobbyCode: string) => {
           avatarID: userdata.avatarID,
           isReady: false,
           message: '',
+          messageVotes: 0,
         }),
       });
     } else {
@@ -80,6 +89,25 @@ export const deleteLobby = async (lobbyCode: string) => {
 export const getLobbyMembers = async (
   lobbyCode: string,
 ): Promise<{username: string; avatarID: number}[]> => {
+  const lobbyRef = firestore().collection('lobbies').doc(lobbyCode);
+
+  const lobbyDoc = await lobbyRef.get();
+  if (lobbyDoc.exists) {
+    const lobbyData = lobbyDoc.data();
+    return lobbyData?.members as {
+      username: string;
+      avatarID: number;
+      isReady: boolean;
+      message: string;
+    }[];
+  } else {
+    return [];
+  }
+};
+
+export const getLobbyMembersUser = async (
+  lobbyCode: string,
+): Promise<{username: string}[]> => {
   const lobbyRef = firestore().collection('lobbies').doc(lobbyCode);
 
   const lobbyDoc = await lobbyRef.get();

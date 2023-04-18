@@ -1,5 +1,5 @@
 import {SafeAreaView} from 'react-native';
-import {ScrollView, Text, View, Image} from 'native-base';
+import {ScrollView, Text, View} from 'native-base';
 import React, {useEffect, useState} from 'react';
 import homeScreenStyles from '../HomeScreen/HomeScreen.styles';
 import {StyledButton, TextStroke} from '../../components/StyledButton';
@@ -17,6 +17,10 @@ import {joinGameCode} from '../JoinGame/JoinGame';
 import {userdata} from '../../Utils/LocalDataManager';
 import {avatarImages} from '../AvatarScreen/AvatarScreen';
 import {bgColor} from '../../App';
+import {fetchGameSettings} from '../../Utils/GameLogic';
+import CircleImage from '../../components/CircleImage';
+
+export var createGameLobbyID = '';
 
 const CreateGame = (props: {navigation: any}) => {
   const [lobbyID, setLobbyID] = useState('');
@@ -38,6 +42,7 @@ const CreateGame = (props: {navigation: any}) => {
 
   useEffect(() => {
     if (lobbyID) {
+      createGameLobbyID = lobbyID;
       if (!isNotGameCreator) {
         joinLobby(lobbyID);
         console.log(
@@ -53,7 +58,8 @@ const CreateGame = (props: {navigation: any}) => {
       // @ts-ignore
       setUserList(newUserList);
       if (await isGameStarted(lobbyID)) {
-        // navigate to message screen
+        await fetchGameSettings(lobbyID);
+        props.navigation.navigate('MessageScreen');
       }
     };
 
@@ -138,18 +144,16 @@ const CreateGame = (props: {navigation: any}) => {
                 style={{
                   flexDirection: 'row',
                   borderColor: 'black',
-                  borderWidth: 4,
-                  borderRadius: 4,
+                  borderWidth: 3,
+                  borderRadius: 10,
                   backgroundColor: 'white',
+                  marginBottom: 10,
                 }}>
-                <Image
-                  source={avatarImages[avatarID]}
-                  height={16}
-                  width={16}
-                  alt={'err'}
-                />
+                <CircleImage source={avatarImages[avatarID]} size={16} />
                 <TextStroke stroke={3} color={'#000000'}>
-                  <Text key={index} style={{padding: 10, color: 'black'}}>
+                  <Text
+                    key={index}
+                    style={{padding: 10, marginLeft: 10, color: 'white'}}>
                     {username}
                   </Text>
                 </TextStroke>
@@ -174,7 +178,7 @@ function renderSettings(props: {navigation: any}) {
       <ImageButton
         image={require('../../assets/images/settingsImage.png')}
         onPress={() => {
-          props.navigation.navigate('GameSettingsScreen');
+          props.navigation.navigate('SettingsScreen');
         }}
         height={80}
         width={80}

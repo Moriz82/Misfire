@@ -3,12 +3,14 @@ import React, {useState} from 'react';
 import {StyledButton, TextStroke} from '../../components/StyledButton';
 import {ImageButton} from '../../components/ImageButton';
 import {CustomTextInput} from '../../components/CustomTextInput';
-import {joinLobby} from '../../Utils/RemoteDataManager';
+import {getLobbyMembersUser, joinLobby} from '../../Utils/RemoteDataManager';
+import {userdata} from '../../Utils/LocalDataManager';
 
 export var joinGameCode = '';
 
 const JoinGame = (props: {navigation: any}) => {
   const [gameCode, setGameCode] = useState('');
+  const [errorMsg, setErrorMsg] = useState('');
 
   return (
     <>
@@ -66,15 +68,24 @@ const JoinGame = (props: {navigation: any}) => {
         <View style={{width: '85%', paddingTop: 30}}>
           <StyledButton
             onPress={() => {
-              joinLobby(gameCode).then(() =>
-                console.log(`joined game with code: ${gameCode}`),
-              );
-              joinGameCode = gameCode;
-              props.navigation.navigate('CreateGame');
+              getLobbyMembersUser(gameCode).then(value => {
+                if (!value.includes({username: userdata.username})) {
+                  joinLobby(gameCode).then(() =>
+                    console.log(`joined game with code: ${gameCode}`),
+                  );
+                  joinGameCode = gameCode;
+                  props.navigation.navigate('CreateGame');
+                } else {
+                  setErrorMsg('Username already exists in lobby');
+                }
+              });
             }}
             buttonText={'Join'}
             buttonColor={true}
           />
+        </View>
+        <View>
+          <Text style={{color: 'red'}}>{errorMsg}</Text>
         </View>
       </View>
     </>

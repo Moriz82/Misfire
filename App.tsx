@@ -10,7 +10,6 @@ import SettingsScreen from './Screens/SettingsScreen/SettingsScreen';
 import SecretScreen from './Screens/SecretScreen/SecretScreen';
 import YouAreItScreen from './Screens/YouAreItScreen/YouAreItScreen';
 import ChatScreen from './Screens/ChatScreen/ChatScreen';
-import GameSettingScreen from './Screens/GameSettingsScreen/GameSettingsScreen';
 import AvatarScreen from './Screens/AvatarScreen/AvatarScreen';
 import HeIsItScreen from './Screens/HeIsItScreen/HeIsItScreen';
 import MessageScreen from './Screens/MessageScreen/MessageScreen';
@@ -104,11 +103,6 @@ export default function App(): JSX.Element | null {
           <Stack.Screen
             name="SettingsScreen"
             component={SettingsScreen}
-            options={{headerShown: false, title: ''}}
-          />
-          <Stack.Screen
-            name="GameSettingsScreen"
-            component={GameSettingScreen}
             options={{headerShown: false, title: ''}}
           />
           <Stack.Screen
