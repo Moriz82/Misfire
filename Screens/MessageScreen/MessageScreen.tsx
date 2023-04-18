@@ -13,7 +13,7 @@ const HomeScreen = (props: {navigation: any}) => {
   return (
     <>
       <View style={{backgroundColor: '#605A58', height: '15%'}}>
-
+        
       </View>
     </>
   );
