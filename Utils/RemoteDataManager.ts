@@ -146,60 +146,6 @@ export const isGameStarted = async (lobbyCode: string): Promise<boolean> => {
   }
 };
 
-export const setMemberMessage = async (lobbyCode: string, message: string) => {
-  const lobbyRef = firestore().collection('lobbies').doc(lobbyCode);
-
-  try {
-    await lobbyRef.update({
-      members: firestore.FieldValue.arrayRemove({
-        username: userdata.username,
-        avatarID: userdata.avatarID,
-        isReady: false,
-        message: '',
-        messageVotes: 0,
-      }),
-    });
-    await lobbyRef.update({
-      members: firestore.FieldValue.arrayUnion({
-        username: userdata.username,
-        avatarID: userdata.avatarID,
-        isReady: false,
-        message: message,
-        messageVotes: 0,
-      }),
-    });
-  } catch (error) {
-    console.log('Error:', error);
-  }
-};
-
-export const setMemberReady = async (lobbyCode: string, isReady: boolean) => {
-  const lobbyRef = firestore().collection('lobbies').doc(lobbyCode);
-
-  try {
-    await lobbyRef.update({
-      members: firestore.FieldValue.arrayRemove({
-        username: userdata.username,
-        avatarID: userdata.avatarID,
-        isReady: false,
-        message: '',
-        messageVotes: 0,
-      }),
-    });
-    await lobbyRef.update({
-      members: firestore.FieldValue.arrayUnion({
-        username: userdata.username,
-        avatarID: userdata.avatarID,
-        isReady: isReady,
-        message: '',
-        messageVotes: 0,
-      }),
-    });
-  } catch (error) {
-    console.log('Error:', error);
-  }
-};
-
 export const setLobbyTime = async (lobbyCode: string, time: number) => {
   const lobbyRef = firestore().collection('lobbies').doc(lobbyCode);
 
@@ -210,4 +156,21 @@ export const setLobbyTime = async (lobbyCode: string, time: number) => {
   } catch (error) {
     console.log('Error:', error);
   }
+};
+
+export const updateLobbyMember = async (
+  lobbyCode: string,
+  username: string,
+  updates: {
+    isReady?: boolean;
+    message?: string;
+  },
+) => {
+  const lobbyRef = firestore().collection('lobbies').doc(lobbyCode);
+
+  // Update the member object with the specified fields
+  await lobbyRef.update({
+    [`members.${username}.isReady`]: updates.isReady,
+    [`members.${username}.message`]: updates.message,
+  });
 };
