@@ -4,13 +4,14 @@ import {TextStroke} from '../../components/StyledButton';
 import {CustomTextInput} from '../../components/CustomTextInput';
 import messageStyles from '../MessageScreen/MessageScreen.styles';
 import {ReadyButton} from '../../components/ReadyButton';
+import {SafeAreaView} from 'react-native';
 
 const MessageScreen = (props: {navigation: any}) => {
   const [usernameText, setUsernameText] = useState('');
 
   return (
     <>
-      <View style={{backgroundColor: '#605A58', height: '100%'}}>
+      <SafeAreaView style={{backgroundColor: '#605A58', height: '100%'}}>
         <View style={{alignItems: 'center', paddingTop: 10}}>
           <TextStroke stroke={3} color={'#000000'}>
             <Text
@@ -45,7 +46,7 @@ const MessageScreen = (props: {navigation: any}) => {
             height: '17%',
             justifyContent: 'space-around',
           }}>
-          <Avatar style={{width: '20%', height: '65%'}}>
+          <Avatar style={{width: '20%', height: '60%'}}>
             <TextStroke stroke={3} color={'#000000'}>
               <Text
                 style={{
@@ -59,7 +60,7 @@ const MessageScreen = (props: {navigation: any}) => {
             </TextStroke>
           </Avatar>
 
-          <Avatar style={{width: '20%', height: '65%'}}>
+          <Avatar style={{width: '20%', height: '60%'}}>
             <TextStroke stroke={3} color={'#000000'}>
               <Text
                 style={{
@@ -73,7 +74,7 @@ const MessageScreen = (props: {navigation: any}) => {
             </TextStroke>
           </Avatar>
 
-          <Avatar style={{width: '20%', height: '65%'}}>
+          <Avatar style={{width: '20%', height: '60%'}}>
             <TextStroke stroke={3} color={'#000000'}>
               <Text
                 style={{
@@ -87,7 +88,7 @@ const MessageScreen = (props: {navigation: any}) => {
             </TextStroke>
           </Avatar>
 
-          <Avatar style={{width: '20%', height: '65%'}}>
+          <Avatar style={{width: '20%', height: '60%'}}>
             <TextStroke stroke={3} color={'#000000'}>
               <Text
                 style={{
@@ -110,7 +111,7 @@ const MessageScreen = (props: {navigation: any}) => {
             height: '17%',
             justifyContent: 'space-around',
           }}>
-          <Avatar style={{width: '20%', height: '65%'}}>
+          <Avatar style={{width: '20%', height: '60%'}}>
             <TextStroke stroke={3} color={'#000000'}>
               <Text
                 style={{
@@ -124,7 +125,7 @@ const MessageScreen = (props: {navigation: any}) => {
             </TextStroke>
           </Avatar>
 
-          <Avatar style={{width: '20%', height: '65%'}}>
+          <Avatar style={{width: '20%', height: '60%'}}>
             <TextStroke stroke={3} color={'#000000'}>
               <Text
                 style={{
@@ -138,7 +139,7 @@ const MessageScreen = (props: {navigation: any}) => {
             </TextStroke>
           </Avatar>
 
-          <Avatar style={{width: '20%', height: '65%'}}>
+          <Avatar style={{width: '20%', height: '60%'}}>
             <TextStroke stroke={3} color={'#000000'}>
               <Text
                 style={{
@@ -152,7 +153,7 @@ const MessageScreen = (props: {navigation: any}) => {
             </TextStroke>
           </Avatar>
 
-          <Avatar style={{width: '20%', height: '65%'}}>
+          <Avatar style={{width: '20%', height: '60%'}}>
             <TextStroke stroke={3} color={'#000000'}>
               <Text
                 style={{
@@ -189,7 +190,7 @@ const MessageScreen = (props: {navigation: any}) => {
         <View style={{alignItems: 'center', padding: 20}}>
           <ReadyButton />
         </View>
-      </View>
+      </SafeAreaView>
     </>
   );
 };
