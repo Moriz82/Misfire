@@ -2,13 +2,42 @@ import React, {useState} from 'react';
 import {Button, Text} from 'native-base';
 import {StyleSheet} from 'react-native';
 import {TextStroke} from './StyledButton';
+import {createGameLobbyID} from '../Screens/CreateGame/CreateGame';
+import {userdata} from '../Utils/LocalDataManager';
+import { updateLobbyMember } from "../Utils/RemoteDataManager";
 
-export function ReadyButton() {
+type Props = {
+  onChange: (
+    lobbyCode: string,
+    username: string,
+    updates: {
+      isReady?: boolean;
+      message?: string;
+    },
+  ) => void;
+  message: string;
+};
+
+export function ReadyButton(props: Props) {
   const [isReady, setIsReady] = useState(false);
   return (
     <Button
       style={[styles.root, {backgroundColor: isReady ? '#FF0F00' : '#2AC230'}]}
-      onPress={() => setIsReady(!isReady)}>
+      onPress={() => {
+        setIsReady(!isReady);
+        updateLobbyMember(createGameLobbyID, userdata.username, {
+          isReady: !isReady,
+          message: props.message,
+        })
+          .then(() => {
+            console.log('Lobby member updated successfully.');
+          })
+          .catch(error => {
+            console.log('Error updating lobby member:', error);
+          });
+
+        console.log(!isReady);
+      }}>
       <TextStroke stroke={1} color={'#000000'}>
         <Text style={styles.buttonText}>{isReady ? 'UNREADY' : 'READY'}</Text>
       </TextStroke>

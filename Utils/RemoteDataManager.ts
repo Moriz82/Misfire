@@ -17,6 +17,7 @@ export const createLobby = async () => {
       allowProfanity: false,
       maxCharCount: 250,
       roundCount: 3,
+      lobbyTime: 0.0,
       selectedMessage: '',
       // Add an empty array to store lobby members
       members: [],
@@ -168,9 +169,58 @@ export const updateLobbyMember = async (
 ) => {
   const lobbyRef = firestore().collection('lobbies').doc(lobbyCode);
 
+  // Get the current lobby data
+  const lobbyDoc = await lobbyRef.get();
+  const lobbyData = lobbyDoc.data();
+
   // Update the member object with the specified fields
-  await lobbyRef.update({
-    [`members.${username}.isReady`]: updates.isReady,
-    [`members.${username}.message`]: updates.message,
-  });
+  const members = lobbyData!.members;
+  const memberIndex = members.findIndex(
+    (member: {username: string}) => member.username === username,
+  );
+  if (memberIndex !== -1) {
+    members[memberIndex] = {
+      ...members[memberIndex],
+      isReady:
+        updates.isReady !== undefined
+          ? updates.isReady
+          : members[memberIndex].isReady,
+      message:
+        updates.message !== undefined
+          ? updates.message
+          : members[memberIndex].message,
+    };
+    await lobbyRef.update({members});
+  } else {
+    console.error(`Cannot find member ${username} in lobby ${lobbyCode}`);
+  }
+};
+
+export const getReadyList = async (lobbyCode: string) => {
+  const lobbyRef = firestore().collection('lobbies').doc(lobbyCode);
+
+  const lobbyDoc = await lobbyRef.get();
+  if (lobbyDoc.exists) {
+    const lobbyData = lobbyDoc.data();
+    return lobbyData?.members.map(
+      (member: {username: string; isReady: boolean}) => ({
+        username: member.username,
+        isReady: member.isReady,
+      }),
+    ) as {username: string; isReady: boolean}[];
+  } else {
+    return [];
+  }
+};
+
+export const getTime = async (lobbyCode: string) => {
+  const lobbyRef = firestore().collection('lobbies').doc(lobbyCode);
+
+  const lobbyDoc = await lobbyRef.get();
+  if (lobbyDoc.exists) {
+    const lobbyData = lobbyDoc.data();
+    return lobbyData?.lobbyTime as number;
+  } else {
+    throw new Error(`Lobby ${lobbyCode} does not exist`);
+  }
 };

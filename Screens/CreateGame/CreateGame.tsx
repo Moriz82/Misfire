@@ -11,6 +11,7 @@ import {
   isGameStarted,
   joinLobby,
   leaveLobby,
+  remoteStartGame,
 } from '../../Utils/RemoteDataManager';
 import {isNotGameCreator} from '../HomeScreen/HomeScreen';
 import {joinGameCode} from '../JoinGame/JoinGame';
@@ -203,7 +204,11 @@ function buttonToRender(props: {navigation: any}) {
   if (!isNotGameCreator) {
     return (
       <StyledButton
-        onPress={() => props.navigation.navigate('YouAreItScreen')}
+        onPress={() => {
+          remoteStartGame(createGameLobbyID).then(() =>
+            props.navigation.navigate('MessageScreen'),
+          );
+        }}
         buttonText={'Start Game'}
         buttonColor={true}
       />
