@@ -17,7 +17,7 @@ export const createLobby = async () => {
       allowProfanity: false,
       maxCharCount: 250,
       roundCount: 3,
-      lobbyTime: 0.0,
+      lobbyTime: 3.3,
       selectedMessage: '',
       // Add an empty array to store lobby members
       members: [],

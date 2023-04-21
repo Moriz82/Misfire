@@ -4,7 +4,7 @@ import {StyleSheet} from 'react-native';
 import {TextStroke} from './StyledButton';
 import {createGameLobbyID} from '../Screens/CreateGame/CreateGame';
 import {userdata} from '../Utils/LocalDataManager';
-import { updateLobbyMember } from "../Utils/RemoteDataManager";
+import {updateLobbyMember} from '../Utils/RemoteDataManager';
 
 type Props = {
   onChange: (

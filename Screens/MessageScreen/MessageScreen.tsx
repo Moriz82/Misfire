@@ -77,7 +77,7 @@ const MessageScreen = (props: {navigation: any}) => {
             height: '17%',
             justifyContent: 'space-around',
           }}>
-          {userList.map(({username, avatarID, isReady}, index) => (
+          {userList.map(({username, avatarID, isReady}, _) => (
             <View
               style={{
                 alignItems: 'center',
