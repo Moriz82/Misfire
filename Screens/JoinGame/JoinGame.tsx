@@ -5,6 +5,8 @@ import {ImageButton} from '../../components/ImageButton';
 import {CustomTextInput} from '../../components/CustomTextInput';
 import {getLobbyMembersUser, joinLobby} from '../../Utils/RemoteDataManager';
 import {userdata} from '../../Utils/LocalDataManager';
+import { ImageBackground } from 'react-native';
+import homeScreenStyles from './JoinGame.styles';
 
 export var joinGameCode = '';
 
@@ -13,7 +15,11 @@ const JoinGame = (props: {navigation: any}) => {
   const [errorMsg, setErrorMsg] = useState('');
 
   return (
-    <>
+    <View style={{flex: 1}}>
+    <ImageBackground
+      source={require('../../assets/images/MisfireBackground.png')}
+      resizeMode='cover'
+      style={{flex: 1}}>
       <View
         style={{
           width: '100%',
@@ -88,7 +94,9 @@ const JoinGame = (props: {navigation: any}) => {
           <Text style={{color: 'red'}}>{errorMsg}</Text>
         </View>
       </View>
-    </>
+    </ImageBackground>
+    </View>
+
   );
 
   async function searchForUser(): Promise<boolean> {

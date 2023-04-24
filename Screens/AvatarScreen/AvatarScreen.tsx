@@ -1,6 +1,6 @@
 import React, {useState} from 'react';
-import {StyleSheet} from 'react-native';
-import {View, Text} from 'native-base';
+import {ImageBackground, StyleSheet} from 'react-native';
+import {Text, View} from 'native-base';
 import {StyledButton, TextStroke} from '../../components/StyledButton';
 import {ImageButton} from '../../components/ImageButton';
 import homeScreenStyles from '../HomeScreen/HomeScreen.styles';
@@ -29,7 +29,9 @@ const AvatarScreen = (props: {navigation: any}) => {
   console.error = function () {};
 
   return (
-    <>
+    <ImageBackground
+      source={require('../../assets/images/MisfireBackground.png')}
+      style={homeScreenStyles.backgroundImage}>
       <View
         style={{
           width: '100%',
@@ -133,7 +135,7 @@ const AvatarScreen = (props: {navigation: any}) => {
           />
         </View>
       </View>
-    </>
+    </ImageBackground>
   );
 };
 
