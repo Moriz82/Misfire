@@ -1,4 +1,4 @@
-import {View} from 'react-native';
+import {ImageBackground, View} from 'react-native';
 import {Text, Slider} from 'native-base';
 import React, {useState} from 'react';
 import {ImageButton} from '../../components/ImageButton';
@@ -7,6 +7,7 @@ import settingsStyles from './SettingsScreen.styles';
 import {CustomCheckBox} from '../../components/CustomCheckBox';
 import {gameSettings, setGameSettings} from '../../Utils/GameLogic';
 import {createGameLobbyID} from '../CreateGame/CreateGame';
+import homeScreenStyles from '../HomeScreen/HomeScreen.styles';
 
 const SettingScreen = (props: {navigation: any}) => {
   const [allowPictures, setAllowPictures] = useState(
@@ -21,7 +22,9 @@ const SettingScreen = (props: {navigation: any}) => {
   const [roundCount, setRoundCount] = useState(gameSettings.roundCount);
 
   return (
-    <>
+    <ImageBackground
+      source={require('../../assets/images/MisfireBackground.png')}
+      style={homeScreenStyles.backgroundImage}>
       <View
         style={{
           paddingTop: 25,
@@ -239,7 +242,7 @@ const SettingScreen = (props: {navigation: any}) => {
           padding: 25,
         }}
       />
-    </>
+    </ImageBackground>
   );
 };
 

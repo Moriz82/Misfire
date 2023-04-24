@@ -1,4 +1,4 @@
-import {SafeAreaView} from 'react-native';
+import {ImageBackground, SafeAreaView} from 'react-native';
 import {ScrollView, Text, View} from 'native-base';
 import React, {useEffect, useState} from 'react';
 import homeScreenStyles from '../HomeScreen/HomeScreen.styles';
@@ -80,7 +80,9 @@ const CreateGame = (props: {navigation: any}) => {
   });
 
   return (
-    <>
+    <ImageBackground
+      source={require('../../assets/images/MisfireBackground.png')}
+      style={homeScreenStyles.backgroundImage}>
       <View
         style={{
           width: '100%',
@@ -180,7 +182,7 @@ const CreateGame = (props: {navigation: any}) => {
           </View>
         </View>
       </SafeAreaView>
-    </>
+    </ImageBackground>
   );
 };
 

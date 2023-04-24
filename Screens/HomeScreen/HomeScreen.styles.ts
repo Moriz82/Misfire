@@ -3,7 +3,6 @@ import {StyleSheet} from 'react-native';
 const homeScreenStyles = StyleSheet.create({
   safeAreaViewStyle: {
     flex: 1,
-    backgroundColor: '#605A58',
   },
   headerText: {
     fontSize: 30,
@@ -28,6 +27,10 @@ const homeScreenStyles = StyleSheet.create({
     color: 'rgb(255, 255, 255)',
     fontSize: 25,
     fontWeight: '700',
+  },
+  backgroundImage: {
+    flex: 1,
+    resizeMode: 'cover',
   },
 });
 

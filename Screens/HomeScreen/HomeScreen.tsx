@@ -1,6 +1,6 @@
 import {Box, StatusBar, Text, View} from 'native-base';
 import React, {useEffect, useState} from 'react';
-import {SafeAreaView} from 'react-native';
+import {ImageBackground, SafeAreaView} from 'react-native';
 import {StyledButton} from '../../components/StyledButton';
 import {CustomTextInput} from '../../components/CustomTextInput';
 import homeScreenStyles from './HomeScreen.styles';
@@ -23,9 +23,11 @@ const HomeScreen = (props: {navigation: any}) => {
   }, []);
 
   return (
-    <SafeAreaView style={homeScreenStyles.safeAreaViewStyle}>
+    <ImageBackground
+      source={require('../../assets/images/MisfireBackground.png')}
+      style={homeScreenStyles.backgroundImage}>
       <StatusBar barStyle={'light-content'} />
-      <Box style={{padding: 10}}>
+      <Box style={{padding: 70}}>
         <View style={{alignItems: 'center'}}>
           <ImageButton
             onPress={() => {
@@ -99,7 +101,7 @@ const HomeScreen = (props: {navigation: any}) => {
           <Text style={{color: 'red', textAlign: 'center'}}>{errorMsg}</Text>
         </View>
       </Box>
-    </SafeAreaView>
+    </ImageBackground>
   );
 
   function checkUsername(): boolean {

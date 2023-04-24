@@ -4,7 +4,7 @@ import {TextStroke} from '../../components/StyledButton';
 import {CustomTextInput} from '../../components/CustomTextInput';
 import messageStyles from '../MessageScreen/MessageScreen.styles';
 import {ReadyButton} from '../../components/ReadyButton';
-import {SafeAreaView} from 'react-native';
+import {ImageBackground, SafeAreaView} from 'react-native';
 import {
   getLobbyMembers,
   getTime,
@@ -14,6 +14,7 @@ import {createGameLobbyID} from '../CreateGame/CreateGame';
 import {avatarImages} from '../AvatarScreen/AvatarScreen';
 import CircleImage from '../../components/CircleImage';
 import {userdata} from '../../Utils/LocalDataManager';
+import homeScreenStyles from '../HomeScreen/HomeScreen.styles';
 
 const MessageScreen = (props: {navigation: any}) => {
   const [messageText, setMessageText] = useState('');
@@ -41,7 +42,9 @@ const MessageScreen = (props: {navigation: any}) => {
   });
 
   return (
-    <>
+    <ImageBackground
+      source={require('../../assets/images/MisfireBackground.png')}
+      style={homeScreenStyles.backgroundImage}>
       <SafeAreaView style={{backgroundColor: '#605A58', height: '100%'}}>
         <View style={{alignItems: 'center', paddingTop: 10}}>
           <TextStroke stroke={3} color={'#000000'}>
@@ -130,7 +133,7 @@ const MessageScreen = (props: {navigation: any}) => {
           />
         </View>
       </SafeAreaView>
-    </>
+    </ImageBackground>
   );
 };
 

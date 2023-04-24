@@ -4,12 +4,15 @@ import {TextStroke} from '../../components/StyledButton';
 import {CustomTextInput} from '../../components/CustomTextInput';
 import {ImageButton} from '../../components/ImageButton';
 import homeScreenStyles from '../HomeScreen/HomeScreen.styles';
+import { ImageBackground } from 'react-native';
 
 const HomeScreen = (props: {navigation: any}) => {
   const [fieldText, setText] = useState('');
 
   return (
-    <>
+    <ImageBackground
+      source={require('../../assets/images/MisfireBackground.png')}
+      style={homeScreenStyles.backgroundImage}>
       <View
         style={{
           width: '100%',
@@ -61,7 +64,7 @@ const HomeScreen = (props: {navigation: any}) => {
           </View>
         </View>
       </View>
-    </>
+    </ImageBackground>
   );
 };
 
