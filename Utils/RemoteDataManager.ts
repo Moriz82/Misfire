@@ -17,7 +17,7 @@ export const createLobby = async () => {
       allowProfanity: false,
       maxCharCount: 250,
       roundCount: 3,
-      lobbyTime: 3.3,
+      lobbyTime: 0.03,
       selectedMessage: '',
       // Add an empty array to store lobby members
       members: [],
@@ -222,5 +222,57 @@ export const getTime = async (lobbyCode: string) => {
     return lobbyData?.lobbyTime as number;
   } else {
     throw new Error(`Lobby ${lobbyCode} does not exist`);
+  }
+};
+
+export const incrementMessageVotes = async (
+  lobbyCode: string,
+  message: string,
+) => {
+  const lobbyRef = firestore().collection('lobbies').doc(lobbyCode);
+
+  try {
+    // Find the member that posted the message
+    const lobbyDoc = await lobbyRef.get();
+    const lobbyData = lobbyDoc.data();
+    const member = lobbyData?.members.find(
+      (member: {username: string}) => member.username === userdata.username,
+    );
+
+    if (member) {
+      // Find the message and increment its votes
+      const messages = lobbyData?.members.map(
+        (member: {username: string; messageVotes: number; message: string}) => {
+          if (member.message === message) {
+            return {
+              ...member,
+              messageVotes: member.messageVotes + 1,
+            };
+          }
+          return member;
+        },
+      );
+
+      // Update the lobby with the new messages array
+      await lobbyRef.update({members: messages});
+    }
+  } catch (error) {
+    console.log('Error:', error);
+  }
+};
+
+export const getAllMessages = async (lobbyCode: string): Promise<string[]> => {
+  const lobbyRef = firestore().collection('lobbies').doc(lobbyCode);
+
+  const lobbyDoc = await lobbyRef.get();
+  if (lobbyDoc.exists) {
+    const lobbyData = lobbyDoc.data();
+    const members = lobbyData?.members as {
+      username: string;
+      message: string;
+    }[];
+    return members.map(member => member.message);
+  } else {
+    return [];
   }
 };

@@ -1,21 +1,37 @@
-import {View, Text, Avatar, Badge} from 'native-base';
-import React, {useState} from 'react';
+import {View, Text} from 'native-base';
+import React, {useEffect, useState} from 'react';
 import {TextStroke} from '../../components/StyledButton';
-import {CustomTextInput} from '../../components/CustomTextInput';
-import {ReadyButton} from '../../components/ReadyButton';
 import {ImageBackground, SafeAreaView} from 'react-native';
 import voteStyles from './VoteScreen.styles';
 import {StyledButton} from '../../components/StyledButton';
 import homeScreenStyles from '../HomeScreen/HomeScreen.styles';
+import {getAllMessages} from '../../Utils/RemoteDataManager';
+import {createGameLobbyID} from '../CreateGame/CreateGame';
 
 const VoteScreen = (props: {navigation: any}) => {
+  const [selectedMessageIndex, setSelectedMessageIndex] = useState(0);
+  const [messages, setMessages] = useState(['']);
+
+  useEffect(() => {
+    const effect = async () => {
+      const arr = await getAllMessages(createGameLobbyID);
+      setMessages(arr);
+    };
+    effect();
+  });
 
   return (
     <ImageBackground
       source={require('../../assets/images/MisfireBackground.png')}
       style={homeScreenStyles.backgroundImage}>
       <SafeAreaView style={{backgroundColor: '#605A58', height: '100%'}}>
-        <View style={{alignItems: 'center', paddingTop: 12, width: '100%', backgroundColor: '#605A58'}}>
+        <View
+          style={{
+            alignItems: 'center',
+            paddingTop: 12,
+            width: '100%',
+            backgroundColor: '#605A58',
+          }}>
           <TextStroke stroke={3} color={'#000000'}>
             <Text
               style={{
@@ -24,72 +40,26 @@ const VoteScreen = (props: {navigation: any}) => {
                 color: 'white',
                 fontSize: 40,
                 textAlign: 'center',
-                lineHeight: 50
+                lineHeight: 50,
               }}>
               Vote On A Message!{' '}
             </Text>
           </TextStroke>
         </View>
 
-        <View style={{padding: 3}}>
-          <View style={voteStyles.emailTextInput}>
-            <StyledButton
-              onPress={() => {
-                props.navigation.navigate('VoteScreen');
-              }}
-              buttonText={'Example Message'}
-              buttonColor={false}
-            />
+        {messages.map((msg, index) => (
+          <View style={{padding: 3}} key={index}>
+            <View style={voteStyles.emailTextInput}>
+              <StyledButton
+                onPress={() => {
+                  setSelectedMessageIndex(index);
+                }}
+                buttonText={msg}
+                buttonColor={selectedMessageIndex === index}
+              />
+            </View>
           </View>
-        </View>
-
-        <View style={{padding: 3}}>
-          <View style={voteStyles.emailTextInput}>
-            <StyledButton
-              onPress={() => {
-                props.navigation.navigate('VoteScreen');
-              }}
-              buttonText={'Example Message'}
-              buttonColor={false}
-            />
-          </View>
-        </View>
-
-        <View style={{padding: 3}}>
-          <View style={voteStyles.emailTextInput}>
-            <StyledButton
-              onPress={() => {
-                props.navigation.navigate('VoteScreen');
-              }}
-              buttonText={'Example Message'}
-              buttonColor={false}
-            />
-          </View>
-        </View>
-
-        <View style={{padding: 3}}>
-          <View style={voteStyles.emailTextInput}>
-            <StyledButton
-              onPress={() => {
-                props.navigation.navigate('VoteScreen');
-              }}
-              buttonText={'Example Message'}
-              buttonColor={true}
-            />
-          </View>
-        </View>
-
-        <View style={{padding: 3}}>
-          <View style={voteStyles.emailTextInput}>
-            <StyledButton
-              onPress={() => {
-                props.navigation.navigate('VoteScreen');
-              }}
-              buttonText={'Example Message'}
-              buttonColor={false}
-            />
-          </View>
-        </View>
+        ))}
       </SafeAreaView>
     </ImageBackground>
   );

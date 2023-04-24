@@ -40,7 +40,7 @@ const AvatarScreen = (props: {navigation: any}) => {
           justifyContent: 'flex-start',
           alignItems: 'flex-end',
           flexDirection: 'row',
-          alignContent: 'space-between'
+          alignContent: 'space-between',
         }}>
         <ImageButton
           image={require('../../assets/images/backButton.png')}
@@ -57,7 +57,7 @@ const AvatarScreen = (props: {navigation: any}) => {
             paddingRight: 78,
             paddingBottom: 15,
             paddingTop: 52,
-            paddingLeft: 30
+            paddingLeft: 30,
           }}>
           <TextStroke stroke={3} color={'#000000'}>
             <Text style={{padding: 5, width: '100%'}}>Avatar Selection</Text>
@@ -65,33 +65,35 @@ const AvatarScreen = (props: {navigation: any}) => {
         </View>
       </View>
 
-      <ImageBackground
-        source={require('../../assets/images/MisfireBackground.png')}
-        style={homeScreenStyles.backgroundImage}>
+      <View
+        style={{
+          height: '30%',
+          backgroundColor: '#605A58',
+          paddingTop: 0,
+          alignItems: 'center',
+        }}>
         {/*<Image
           key={avatarID}
           style={{height: 160, width: 160}}
           source={avatarImages[avatarID]}
           alt={'err'}
         />*/}
-        <View style={{paddingTop: 20}}>
-          <ImageButton
-            onPress={() => {
-              clickCount++;
-              if (clickCount >= 1) {
-                setLAvatarID(9);
-                clickCount = 0;
-              }
-            }}
-            image={avatarImages[avatarID]}
-            height={160}
-            width={160}
-            isDark={false}
-            key={avatarID}
-            isCircle={true}
-          />
-        </View>
-      </ImageBackground>
+        <ImageButton
+          onPress={() => {
+            clickCount++;
+            if (clickCount >= 1) {
+              setLAvatarID(9);
+              clickCount = 0;
+            }
+          }}
+          image={avatarImages[avatarID]}
+          height={160}
+          width={160}
+          isDark={false}
+          key={avatarID}
+          isCircle={true}
+        />
+      </View>
 
       <View style={styles.gridContainer}>
         {avatarImages.slice(0, -1).map((_, index) => (
@@ -101,7 +103,7 @@ const AvatarScreen = (props: {navigation: any}) => {
               image={avatarImages[index]}
               height={70}
               width={70}
-              isDark={false}
+              isDark={true}
               isCircle={true}
               key={index}
             />
@@ -109,26 +111,30 @@ const AvatarScreen = (props: {navigation: any}) => {
         ))}
       </View>
 
-      <ImageBackground
-      source={require('../../assets/images/MisfireBackground.png')}
-      style={homeScreenStyles.backgroundImage}>
-        <View style={{padding:35}}>
-          <View style={homeScreenStyles.emailTextInput}>
-            <StyledButton
-              onPress={() => {
-                setAvatarID(avatarID).then(() =>
-                  console.log(`avatar id set to: ${avatarID}`),
-                );
-                props.navigation.navigate(
-                  isNotGameCreator ? 'JoinGame' : 'CreateGame',
-                );
-              }}
-              buttonText={'Continue'}
-              buttonColor={true}
-            />
-          </View>
+      <View
+        style={{
+          backgroundColor: '#605A58',
+          flex: 1,
+          alignItems: 'center',
+          justifyContent: 'flex-end',
+          padding: 8,
+          paddingBottom: 60,
+        }}>
+        <View style={homeScreenStyles.emailTextInput}>
+          <StyledButton
+            onPress={() => {
+              setAvatarID(avatarID).then(() =>
+                console.log(`avatar id set to: ${avatarID}`),
+              );
+              props.navigation.navigate(
+                isNotGameCreator ? 'JoinGame' : 'CreateGame',
+              );
+            }}
+            buttonText={'Continue'}
+            buttonColor={true}
+          />
         </View>
-      </ImageBackground>
+      </View>
     </ImageBackground>
   );
 };

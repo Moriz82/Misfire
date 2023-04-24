@@ -1,4 +1,4 @@
-import {View, Text} from 'native-base';
+import {View, Text, Button} from 'native-base';
 import React, {useEffect, useState} from 'react';
 import {TextStroke} from '../../components/StyledButton';
 import {CustomTextInput} from '../../components/CustomTextInput';
@@ -21,7 +21,7 @@ import {isNotGameCreator} from '../HomeScreen/HomeScreen';
 const MessageScreen = (props: {navigation: any}) => {
   const [messageText, setMessageText] = useState('');
   const [userList, setUserList] = useState([]);
-  const [timeText, setTimeText] = useState(3.3);
+  const [timeText, setTimeText] = useState(0.3);
 
   useEffect(() => {
     const intervalQuery = async () => {
@@ -30,7 +30,18 @@ const MessageScreen = (props: {navigation: any}) => {
       parseFloat(newTimeText.toFixed(2));
       // @ts-ignore
       setUserList(newUserList);
-      setTimeText(newTimeText);
+      setTimeText(prevTimeText => {
+        // Update timeText only when it has changed
+        if (newTimeText !== prevTimeText) {
+          // Check if time is up and navigate to VoteScreen
+          if (newTimeText <= 0) {
+            clearInterval(intervalID);
+            props.navigation.navigate('VoteScreen');
+          }
+          return newTimeText;
+        }
+        return prevTimeText;
+      });
 
       if (!isNotGameCreator) {
         await setLobbyTime(
@@ -38,20 +49,16 @@ const MessageScreen = (props: {navigation: any}) => {
           parseFloat((newTimeText - 0.01).toFixed(2)),
         );
       }
-
-      if (timeText - 0.01 <= 0) {
-        props.navigation.navigate('VoteScreen');
-      }
     };
 
     // Call updateUserList every... idek .. it does it alot
-    const intervalId = setInterval(intervalQuery, 900);
+    const intervalID = setInterval(intervalQuery, 900);
 
     // Clear the interval when the component unmounts or when the lobbyID changes
     return () => {
-      clearInterval(intervalId);
+      clearInterval(intervalID);
     };
-  });
+  }, [props.navigation]);
 
   return (
     <ImageBackground
@@ -143,6 +150,12 @@ const MessageScreen = (props: {navigation: any}) => {
             }
             message={messageText}
           />
+          <Button
+            onPress={() => {
+              props.navigation.navigate('VoteScreen');
+            }}>
+            test
+          </Button>
         </View>
       </SafeAreaView>
     </ImageBackground>
