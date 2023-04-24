@@ -65,35 +65,33 @@ const AvatarScreen = (props: {navigation: any}) => {
         </View>
       </View>
 
-      <View
-        style={{
-          height: '30%',
-          backgroundColor: '#605A58',
-          paddingTop: 20,
-          alignItems: 'center',
-        }}>
+      <ImageBackground
+        source={require('../../assets/images/MisfireBackground.png')}
+        style={homeScreenStyles.backgroundImage}>
         {/*<Image
           key={avatarID}
           style={{height: 160, width: 160}}
           source={avatarImages[avatarID]}
           alt={'err'}
         />*/}
-        <ImageButton
-          onPress={() => {
-            clickCount++;
-            if (clickCount >= 1) {
-              setLAvatarID(9);
-              clickCount = 0;
-            }
-          }}
-          image={avatarImages[avatarID]}
-          height={160}
-          width={160}
-          isDark={false}
-          key={avatarID}
-          isCircle={true}
-        />
-      </View>
+        <View style={{paddingTop: 20}}>
+          <ImageButton
+            onPress={() => {
+              clickCount++;
+              if (clickCount >= 1) {
+                setLAvatarID(9);
+                clickCount = 0;
+              }
+            }}
+            image={avatarImages[avatarID]}
+            height={160}
+            width={160}
+            isDark={false}
+            key={avatarID}
+            isCircle={true}
+          />
+        </View>
+      </ImageBackground>
 
       <View style={styles.gridContainer}>
         {avatarImages.slice(0, -1).map((_, index) => (
@@ -111,30 +109,26 @@ const AvatarScreen = (props: {navigation: any}) => {
         ))}
       </View>
 
-      <View
-        style={{
-          backgroundColor: '#605A58',
-          flex: 1,
-          alignItems: 'center',
-          justifyContent: 'flex-end',
-          padding: 8,
-          paddingBottom: 50
-        }}>
-        <View style={homeScreenStyles.emailTextInput}>
-          <StyledButton
-            onPress={() => {
-              setAvatarID(avatarID).then(() =>
-                console.log(`avatar id set to: ${avatarID}`),
-              );
-              props.navigation.navigate(
-                isNotGameCreator ? 'JoinGame' : 'CreateGame',
-              );
-            }}
-            buttonText={'Continue'}
-            buttonColor={true}
-          />
+      <ImageBackground
+      source={require('../../assets/images/MisfireBackground.png')}
+      style={homeScreenStyles.backgroundImage}>
+        <View style={{padding:35}}>
+          <View style={homeScreenStyles.emailTextInput}>
+            <StyledButton
+              onPress={() => {
+                setAvatarID(avatarID).then(() =>
+                  console.log(`avatar id set to: ${avatarID}`),
+                );
+                props.navigation.navigate(
+                  isNotGameCreator ? 'JoinGame' : 'CreateGame',
+                );
+              }}
+              buttonText={'Continue'}
+              buttonColor={true}
+            />
+          </View>
         </View>
-      </View>
+      </ImageBackground>
     </ImageBackground>
   );
 };
