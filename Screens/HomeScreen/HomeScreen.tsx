@@ -93,7 +93,7 @@ const HomeScreen = (props: {navigation: any}) => {
             onPress={() => {
               props.navigation.navigate('YouAreItScreen');
             }}
-            buttonText={'test button delete me'}
+            buttonText={'test button'}
             buttonColor={false}
           />
         </View>
