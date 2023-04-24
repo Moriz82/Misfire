@@ -51,7 +51,7 @@ const HomeScreen = (props: {navigation: any}) => {
       </View>
 
       <View style={{alignItems: 'center', padding: 15}}>
-        <ReadyButton />
+        <ReadyButton/>
       </View>
     </SafeAreaView>
   );

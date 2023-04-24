@@ -32,13 +32,13 @@ const HomeScreen = (props: {navigation: any}) => {
 
       <View style={{padding: 30, paddingTop: 0, alignItems: 'center'}}>
        <TextStroke stroke={3} color={'#000000'}>
-         <Text style={heIsItStyles.buttonText}>User 1</Text>
+         <Text style={{padding: 8}}>User 1</Text>
        </TextStroke>
       </View>
 
       <View style={{padding: 50, paddingTop: 30, alignItems: 'center'}}>
        <TextStroke stroke={3} color={'#000000'}>
-         <Text style={heIsItStyles.buttonText}>The game will begin shortly... think of a funny text message!</Text>
+         <Text style={{padding: 10, textAlign: 'center'}}>The game will begin shortly... think of a funny text message!</Text>
        </TextStroke>
       </View>
 

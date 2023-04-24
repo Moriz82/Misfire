@@ -46,7 +46,7 @@ export function CustomCheckBox(props: Props) {
         />
         <View style={{paddingLeft: 10}}>
           <TextStroke stroke={3} color={'#000000'}>
-            <Text>{props.displayText}</Text>
+            <Text style={{padding: 3}}>{props.displayText}</Text>
           </TextStroke>
         </View>
       </View>
