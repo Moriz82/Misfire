@@ -118,7 +118,7 @@ const CreateGame = (props: {navigation: any}) => {
             paddingBottom: 15,
           }}>
           <TextStroke stroke={3} color={'#000000'}>
-            <Text style={homeScreenStyles.buttonText}>Lobby </Text>
+            <Text style={{padding: 3, paddingLeft: 14}}>Lobby </Text>
           </TextStroke>
         </View>
       </View>
@@ -133,10 +133,10 @@ const CreateGame = (props: {navigation: any}) => {
           }}>
           <View style={{paddingTop: 25, paddingBottom: 10}}>
             <TextStroke stroke={3} color={'#000000'}>
-              <Text style={homeScreenStyles.buttonText}>Game ID: </Text>
+              <Text style={{padding: 5, paddingLeft: 5}}>Game ID: </Text>
             </TextStroke>
             <TextStroke stroke={3} color={'#000000'}>
-              <Text style={homeScreenStyles.buttonText}>{lobbyID}</Text>
+              <Text style={{padding: 5}}>{lobbyID}</Text>
             </TextStroke>
           </View>
           <View style={[homeScreenStyles.emailTextInput, {paddingLeft: 30}]}>

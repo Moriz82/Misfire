@@ -17,7 +17,7 @@ export function StyledButton(props: Props) {
       ]}
       onPress={props.onPress}>
       <TextStroke stroke={3} color={'#000000'}>
-        <Text style={styles.buttonText}>{props.buttonText}</Text>
+        <Text style={{padding: 2}}>{props.buttonText}</Text>
       </TextStroke>
     </Button>
   );

@@ -63,12 +63,12 @@ const SettingScreen = (props: {navigation: any}) => {
             paddingTop: 20,
           }}>
           <TextStroke stroke={3} color={'#000000'}>
-            <Text style={settingsStyles.buttonText}>Settings</Text>
+            <Text style={{padding: 8}}>Settings</Text>
           </TextStroke>
         </View>
       </View>
 
-      <View style={{backgroundColor: '#605A58', height: '10%', paddingTop: 10}}>
+      <View style={{backgroundColor: '#605A58', height: '10%', paddingTop: 30}}>
         <View style={{width: '100%'}}>
           <CustomCheckBox
             displayText="Profanity"
@@ -92,7 +92,7 @@ const SettingScreen = (props: {navigation: any}) => {
           alignItems: 'center',
         }}>
         <TextStroke stroke={3} color={'#000000'}>
-          <Text style={settingsStyles.buttonText}>Max Character Count</Text>
+          <Text style={{padding: 8}}>Max Character Count</Text>
         </TextStroke>
       </View>
 
@@ -105,7 +105,7 @@ const SettingScreen = (props: {navigation: any}) => {
           justifyContent: 'space-evenly',
         }}>
         <TextStroke stroke={3} color={'#000000'}>
-          <Text style={settingsStyles.buttonText}>1</Text>
+          <Text style={{padding: 8}}>1</Text>
         </TextStroke>
 
         <Slider
@@ -127,7 +127,7 @@ const SettingScreen = (props: {navigation: any}) => {
         </Slider>
 
         <TextStroke stroke={3} color={'#000000'}>
-          <Text style={settingsStyles.buttonText}>500</Text>
+          <Text style={{padding: 8}}>500</Text>
         </TextStroke>
       </View>
 
@@ -139,7 +139,7 @@ const SettingScreen = (props: {navigation: any}) => {
           paddingTop: 45,
         }}>
         <TextStroke stroke={3} color={'#000000'}>
-          <Text style={settingsStyles.buttonText}>Number of Rounds</Text>
+          <Text style={{padding: 8}}>Number of Rounds</Text>
         </TextStroke>
       </View>
 
@@ -152,7 +152,7 @@ const SettingScreen = (props: {navigation: any}) => {
           justifyContent: 'space-evenly',
         }}>
         <TextStroke stroke={3} color={'#000000'}>
-          <Text style={settingsStyles.buttonText}>1</Text>
+          <Text style={{padding: 8}}>1</Text>
         </TextStroke>
 
         <Slider
@@ -174,7 +174,7 @@ const SettingScreen = (props: {navigation: any}) => {
         </Slider>
 
         <TextStroke stroke={3} color={'#000000'}>
-          <Text style={settingsStyles.buttonText}>20</Text>
+          <Text style={{padding: 8}}>20</Text>
         </TextStroke>
       </View>
 

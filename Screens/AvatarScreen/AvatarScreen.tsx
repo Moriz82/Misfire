@@ -40,7 +40,7 @@ const AvatarScreen = (props: {navigation: any}) => {
           justifyContent: 'flex-start',
           alignItems: 'flex-end',
           flexDirection: 'row',
-          alignContent: 'space-between',
+          alignContent: 'space-between'
         }}>
         <ImageButton
           image={require('../../assets/images/backButton.png')}
@@ -56,9 +56,11 @@ const AvatarScreen = (props: {navigation: any}) => {
             flex: 1,
             paddingRight: 78,
             paddingBottom: 15,
+            paddingTop: 52,
+            paddingLeft: 30
           }}>
           <TextStroke stroke={3} color={'#000000'}>
-            <Text style={homeScreenStyles.buttonText}>Avatar Selection</Text>
+            <Text style={{padding: 5, width: '100%'}}>Avatar Selection</Text>
           </TextStroke>
         </View>
       </View>
@@ -67,7 +69,7 @@ const AvatarScreen = (props: {navigation: any}) => {
         style={{
           height: '30%',
           backgroundColor: '#605A58',
-          paddingTop: 0,
+          paddingTop: 20,
           alignItems: 'center',
         }}>
         {/*<Image
@@ -116,6 +118,7 @@ const AvatarScreen = (props: {navigation: any}) => {
           alignItems: 'center',
           justifyContent: 'flex-end',
           padding: 8,
+          paddingBottom: 50
         }}>
         <View style={homeScreenStyles.emailTextInput}>
           <StyledButton

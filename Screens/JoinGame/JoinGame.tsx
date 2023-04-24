@@ -37,9 +37,9 @@ const JoinGame = (props: {navigation: any}) => {
           isDark={true}
         />
 
-        <View style={{paddingLeft: 50, paddingBottom: 15}}>
+        <View style={{paddingLeft: 35, paddingBottom: 15}}>
           <TextStroke stroke={3} color={'#000000'}>
-            <Text style={{}}>Join Game </Text>
+            <Text style={{padding: 10}}>Join Game </Text>
           </TextStroke>
         </View>
       </View>

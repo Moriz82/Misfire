@@ -1,4 +1,4 @@
-import {View, Text, Avatar} from 'native-base';
+import {View, Text, Avatar, Badge} from 'native-base';
 import React, {useState} from 'react';
 import {TextStroke} from '../../components/StyledButton';
 import {CustomTextInput} from '../../components/CustomTextInput';
