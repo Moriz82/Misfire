@@ -8,6 +8,7 @@ import {ImageBackground, SafeAreaView} from 'react-native';
 import {
   getLobbyMembers,
   getTime,
+  setLobbyTime,
   updateLobbyMember,
 } from '../../Utils/RemoteDataManager';
 import {createGameLobbyID} from '../CreateGame/CreateGame';
@@ -15,25 +16,36 @@ import {avatarImages} from '../AvatarScreen/AvatarScreen';
 import CircleImage from '../../components/CircleImage';
 import {userdata} from '../../Utils/LocalDataManager';
 import homeScreenStyles from '../HomeScreen/HomeScreen.styles';
+import {isNotGameCreator} from '../HomeScreen/HomeScreen';
 
 const MessageScreen = (props: {navigation: any}) => {
   const [messageText, setMessageText] = useState('');
   const [userList, setUserList] = useState([]);
-  const [timeText, setTimeText] = useState(0);
+  const [timeText, setTimeText] = useState(3.3);
 
   useEffect(() => {
     const intervalQuery = async () => {
       const newUserList = await getLobbyMembers(createGameLobbyID);
       const newTimeText = await getTime(createGameLobbyID);
+      parseFloat(newTimeText.toFixed(2));
       // @ts-ignore
       setUserList(newUserList);
       setTimeText(newTimeText);
+
+      if (!isNotGameCreator) {
+        await setLobbyTime(
+          createGameLobbyID,
+          parseFloat((newTimeText - 0.01).toFixed(2)),
+        );
+      }
+
+      if (timeText - 0.01 <= 0) {
+        props.navigation.navigate('VoteScreen');
+      }
     };
 
-    intervalQuery();
-
     // Call updateUserList every... idek .. it does it alot
-    const intervalId = setInterval(intervalQuery, 1000);
+    const intervalId = setInterval(intervalQuery, 900);
 
     // Clear the interval when the component unmounts or when the lobbyID changes
     return () => {
