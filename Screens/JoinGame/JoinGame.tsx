@@ -24,7 +24,6 @@ const JoinGame = (props: {navigation: any}) => {
         style={{
           width: '100%',
           height: '13%',
-          backgroundColor: '#434343',
           justifyContent: 'flex-start',
           alignItems: 'flex-end',
           flexDirection: 'row',

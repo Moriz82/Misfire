@@ -1,6 +1,9 @@
 import {StyleSheet} from 'react-native';
 
 const homeScreenStyles = StyleSheet.create({
+  safeAreaViewStyle: {
+    flex: 1,
+  },
   headerText: {
     fontSize: 30,
     paddingTop: 50,
