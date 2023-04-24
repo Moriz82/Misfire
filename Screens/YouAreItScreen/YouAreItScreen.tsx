@@ -1,6 +1,6 @@
 import {View, Text} from 'native-base';
 import React, {useState} from 'react';
-import {SafeAreaView} from 'react-native';
+import {ImageBackground, SafeAreaView} from 'react-native';
 import {TextStroke} from '../../components/StyledButton';
 import {CustomTextInput} from '../../components/CustomTextInput';
 import {ImageButton} from '../../components/ImageButton';
@@ -11,10 +11,13 @@ const HomeScreen = (props: {navigation: any}) => {
   const [usernameText, setUsernameText] = useState('');
 
   return (
-    <SafeAreaView style={homeScreenStyles.safeAreaViewStyle}>
+    <ImageBackground
+      source={require('../../assets/images/MisfireBackground.png')}
+      style={homeScreenStyles.backgroundImage}>
+
       <View style={{alignItems: 'center'}}>
         <TextStroke stroke={3} color={'#000000'}>
-          <Text style={{padding: 10, paddingTop: 30, color: '#FF6C1A'}}>
+          <Text style={{padding: 10, paddingTop: 90, color: '#FF6C1A'}}>
             You are the target!{' '}
           </Text>
         </TextStroke>
@@ -53,7 +56,7 @@ const HomeScreen = (props: {navigation: any}) => {
       <View style={{alignItems: 'center', padding: 15}}>
         <ReadyButton/>
       </View>
-    </SafeAreaView>
+    </ImageBackground>
   );
 };
 
