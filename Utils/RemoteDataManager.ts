@@ -17,7 +17,7 @@ export const createLobby = async () => {
       allowProfanity: false,
       maxCharCount: 250,
       roundCount: 3,
-      lobbyTime: 0.03,
+      lobbyTime: 3.3,
       selectedMessage: '',
       // Add an empty array to store lobby members
       members: [],
@@ -47,6 +47,7 @@ export const joinLobby = async (lobbyCode: string) => {
           username: userdata.username,
           avatarID: userdata.avatarID,
           isReady: false,
+          hasNav: false,
           message: '',
           messageVotes: 0,
         }),
@@ -89,7 +90,15 @@ export const deleteLobby = async (lobbyCode: string) => {
 
 export const getLobbyMembers = async (
   lobbyCode: string,
-): Promise<{username: string; avatarID: number}[]> => {
+): Promise<
+  {
+    username: string;
+    avatarID: number;
+    isReady: boolean;
+    message: string;
+    hasNav: boolean;
+  }[]
+> => {
   const lobbyRef = firestore().collection('lobbies').doc(lobbyCode);
 
   const lobbyDoc = await lobbyRef.get();
@@ -100,6 +109,7 @@ export const getLobbyMembers = async (
       avatarID: number;
       isReady: boolean;
       message: string;
+      hasNav: boolean; // add new property
     }[];
   } else {
     return [];
@@ -274,5 +284,36 @@ export const getAllMessages = async (lobbyCode: string): Promise<string[]> => {
     return members.map(member => member.message);
   } else {
     return [];
+  }
+};
+
+export const setMemberNav = async (
+  lobbyCode: string,
+  username: string,
+  isNav: boolean,
+) => {
+  const lobbyRef = firestore().collection('lobbies').doc(lobbyCode);
+
+  try {
+    const lobbyDoc = await lobbyRef.get();
+    if (lobbyDoc.exists) {
+      const lobbyData = lobbyDoc.data();
+      const updatedMembers = lobbyData?.members.map((member: any) => {
+        if (member.username === username) {
+          return {
+            ...member,
+            hasNav: isNav,
+          };
+        }
+        return member;
+      });
+      await lobbyRef.update({
+        members: updatedMembers,
+      });
+    } else {
+      throw new Error(`Lobby ${lobbyCode} does not exist`);
+    }
+  } catch (error) {
+    console.log('Error:', error);
   }
 };

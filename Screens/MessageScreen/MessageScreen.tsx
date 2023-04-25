@@ -21,7 +21,7 @@ import {isNotGameCreator} from '../HomeScreen/HomeScreen';
 const MessageScreen = (props: {navigation: any}) => {
   const [messageText, setMessageText] = useState('');
   const [userList, setUserList] = useState([]);
-  const [timeText, setTimeText] = useState(0.3);
+  const [timeText, setTimeText] = useState(3.3);
 
   useEffect(() => {
     const intervalQuery = async () => {

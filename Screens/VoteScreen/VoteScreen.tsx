@@ -9,7 +9,7 @@ import {getAllMessages} from '../../Utils/RemoteDataManager';
 import {createGameLobbyID} from '../CreateGame/CreateGame';
 
 const VoteScreen = (props: {navigation: any}) => {
-  const [selectedMessageIndex, setSelectedMessageIndex] = useState(0);
+  const [selectedMessageIndex, setSelectedMessageIndex] = useState(-1);
   const [messages, setMessages] = useState(['']);
 
   useEffect(() => {

@@ -12,6 +12,7 @@ import {
   joinLobby,
   leaveLobby,
   remoteStartGame,
+  setMemberNav,
 } from '../../Utils/RemoteDataManager';
 import {isNotGameCreator} from '../HomeScreen/HomeScreen';
 import {joinGameCode} from '../JoinGame/JoinGame';
@@ -62,8 +63,15 @@ const CreateGame = (props: {navigation: any}) => {
       const newUserList = await getLobbyMembers(lobbyID);
       // @ts-ignore
       setUserList(newUserList);
-      if (await isGameStarted(lobbyID)) {
+      if (
+        (await isGameStarted(lobbyID)) &&
+        !(await getLobbyMembers(lobbyID)).find(
+          user => user.username === userdata.username,
+        )?.hasNav
+      ) {
         await fetchGameSettings(lobbyID);
+        await setMemberNav(lobbyID, userdata.username, true);
+        clearInterval(intervalId);
         props.navigation.navigate('MessageScreen');
       }
     };
@@ -207,9 +215,7 @@ function buttonToRender(props: {navigation: any}) {
     return (
       <StyledButton
         onPress={() => {
-          remoteStartGame(createGameLobbyID).then(() =>
-            props.navigation.navigate('MessageScreen'),
-          );
+          remoteStartGame(createGameLobbyID);
         }}
         buttonText={'Start Game'}
         buttonColor={true}
