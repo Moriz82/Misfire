@@ -4,9 +4,10 @@ import {TextStroke} from '../../components/StyledButton';
 import {CustomTextInput} from '../../components/CustomTextInput';
 import messageStyles from '../MessageScreen/MessageScreen.styles';
 import {ReadyButton} from '../../components/ReadyButton';
-import {ImageBackground, SafeAreaView} from 'react-native';
+import {ImageBackground} from 'react-native';
 import {
   getLobbyMembers,
+  getReadyList,
   getTime,
   setLobbyTime,
   updateLobbyMember,
@@ -21,13 +22,16 @@ import {isNotGameCreator} from '../HomeScreen/HomeScreen';
 const MessageScreen = (props: {navigation: any}) => {
   const [messageText, setMessageText] = useState('');
   const [userList, setUserList] = useState([]);
-  const [timeText, setTimeText] = useState(3);
+  const [timeText, setTimeText] = useState(100);
 
   useEffect(() => {
     const intervalQuery = async () => {
       const newUserList = await getLobbyMembers(createGameLobbyID);
       const newTimeText = await getTime(createGameLobbyID);
       let isNav = false;
+      let allReady = (await getReadyList(createGameLobbyID)).every(
+        user => user.isReady,
+      );
       parseFloat(newTimeText.toFixed(2));
       // @ts-ignore
       setUserList(newUserList);
@@ -35,7 +39,7 @@ const MessageScreen = (props: {navigation: any}) => {
         // Update timeText only when it has changed
         if (newTimeText !== prevTimeText) {
           // Check if time is up and navigate to VoteScreen
-          if (newTimeText <= 0) {
+          if (newTimeText <= 0 || allReady) {
             isNav = true;
             clearInterval(intervalID);
           }
@@ -72,94 +76,92 @@ const MessageScreen = (props: {navigation: any}) => {
     <ImageBackground
       source={require('../../assets/images/MisfireBackground.png')}
       style={homeScreenStyles.backgroundImage}>
-      
-        <View style={{alignItems: 'center', paddingTop: 10}}>
-          <TextStroke stroke={3} color={'#000000'}>
-            <Text
-              style={{
-                padding: 10,
-                paddingTop: 30,
-                color: 'white',
-                fontSize: 40,
-              }}>
-              Time Left:{' '}
-            </Text>
-          </TextStroke>
+      <View style={{alignItems: 'center', paddingTop: 10}}>
+        <TextStroke stroke={3} color={'#000000'}>
+          <Text
+            style={{
+              padding: 10,
+              paddingTop: 30,
+              color: 'white',
+              fontSize: 40,
+            }}>
+            Time Left:{' '}
+          </Text>
+        </TextStroke>
 
-          <TextStroke stroke={3} color={'#000000'}>
-            <Text
-              style={{
-                padding: 10,
-                paddingTop: 30,
-                color: 'white',
-                fontSize: 60,
-              }}>
-              {timeText}
-            </Text>
-          </TextStroke>
-        </View>
+        <TextStroke stroke={3} color={'#000000'}>
+          <Text
+            style={{
+              padding: 10,
+              paddingTop: 30,
+              color: 'white',
+              fontSize: 60,
+            }}>
+            {timeText + 's'}
+          </Text>
+        </TextStroke>
+      </View>
 
-        <View
-          style={{
-            flexDirection: 'row',
-            width: '100%',
-            height: '17%',
-            justifyContent: 'space-around',
-            backgroundColor: 'rgba(52, 52, 52, 0)'
-          }}>
-          {userList.map(({username, avatarID, isReady}, _) => (
-            <View
-              style={{
-                alignItems: 'center',
-                display: 'flex',
-                justifyContent: 'center'
-              }}>
-              <CircleImage source={avatarImages[avatarID]} size={50} />
-              <TextStroke stroke={3} color={'#000000'}>
-                <Text
-                  style={{
-                    padding: 10,
-                    color: isReady ? 'green' : 'red',
-                    fontSize: 18,
-                  }}>
-                  {username}
-                </Text>
-              </TextStroke>
-            </View>
-          ))}
-        </View>
-
-        <View
-          style={{
-            width: '100%',
-            height: '15%',
-            paddingBottom: 10,
-            padding: 15,
-            backgroundColor: 'rgba(52, 52, 52, 0)'
-          }}>
-          <View style={messageStyles.emailTextInput}>
-            <CustomTextInput
-              placeholderText={'Type a funny message...'}
-              value={messageText}
-              onChangeText={(newText: any) => setMessageText(newText)}
-              iconName={'email'}
-              isPassword={false}
-            />
+      <View
+        style={{
+          flexDirection: 'row',
+          width: '100%',
+          height: '17%',
+          justifyContent: 'space-around',
+          backgroundColor: 'rgba(52, 52, 52, 0)',
+        }}>
+        {userList.map(({username, avatarID, isReady}, _) => (
+          <View
+            style={{
+              alignItems: 'center',
+              display: 'flex',
+              justifyContent: 'center',
+            }}>
+            <CircleImage source={avatarImages[avatarID]} size={50} />
+            <TextStroke stroke={3} color={'#000000'}>
+              <Text
+                style={{
+                  padding: 10,
+                  color: isReady ? 'green' : 'red',
+                  fontSize: 18,
+                }}>
+                {username}
+              </Text>
+            </TextStroke>
           </View>
-        </View>
+        ))}
+      </View>
 
-        <View style={{alignItems: 'center', padding: 20}}>
-          <ReadyButton
-            onChange={() =>
-              updateLobbyMember(createGameLobbyID, userdata.username, {
-                isReady: true,
-                message: messageText,
-              }).then(() => console.log('done'))
-            }
-            message={messageText}
+      <View
+        style={{
+          width: '100%',
+          height: '15%',
+          paddingBottom: 10,
+          padding: 15,
+          backgroundColor: 'rgba(52, 52, 52, 0)',
+        }}>
+        <View style={messageStyles.emailTextInput}>
+          <CustomTextInput
+            placeholderText={'Type a funny message...'}
+            value={messageText}
+            onChangeText={(newText: any) => setMessageText(newText)}
+            iconName={'email'}
+            isPassword={false}
           />
         </View>
-      
+      </View>
+
+      <View style={{alignItems: 'center', padding: 20}}>
+        <ReadyButton
+          onChange={() =>
+            updateLobbyMember(createGameLobbyID, userdata.username, {
+              isReady: true,
+              message: messageText,
+            }).then(() => console.log('done'))
+          }
+          message={messageText}
+        />
+      </View>
     </ImageBackground>
   );
 };

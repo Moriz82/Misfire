@@ -18,7 +18,7 @@ export const createLobby = async () => {
       allowProfanity: false,
       maxCharCount: 250,
       roundCount: 3,
-      lobbyTime: 3,
+      lobbyTime: 100,
       selectedMessage: '',
       // Add an empty array to store lobby members
       members: [],
@@ -179,7 +179,7 @@ export const updateLobbyMember = async (
   },
 ) => {
   if (checkForProfanity(updates.message!)) {
-    updates.message = 'im in live with you';
+    updates.message = 'im in love with you';
   }
 
   const lobbyRef = firestore().collection('lobbies').doc(lobbyCode);
