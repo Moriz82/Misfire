@@ -2,6 +2,7 @@ import firestore from '@react-native-firebase/firestore';
 import 'react-native-get-random-values';
 import {nanoid} from 'nanoid';
 import {userdata} from './LocalDataManager';
+import {checkForProfanity} from './Util';
 
 export const createLobby = async () => {
   // this code brought the rage out of me for troubleshooting for hours :D
@@ -17,7 +18,7 @@ export const createLobby = async () => {
       allowProfanity: false,
       maxCharCount: 250,
       roundCount: 3,
-      lobbyTime: 3.3,
+      lobbyTime: 3,
       selectedMessage: '',
       // Add an empty array to store lobby members
       members: [],
@@ -177,6 +178,10 @@ export const updateLobbyMember = async (
     message?: string;
   },
 ) => {
+  if (checkForProfanity(updates.message!)) {
+    updates.message = 'im in live with you';
+  }
+
   const lobbyRef = firestore().collection('lobbies').doc(lobbyCode);
 
   // Get the current lobby data
