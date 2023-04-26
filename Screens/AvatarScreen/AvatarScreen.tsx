@@ -65,13 +65,9 @@ const AvatarScreen = (props: {navigation: any}) => {
         </View>
       </View>
 
-      <View
-        style={{
-          height: '30%',
-          backgroundColor: '#605A58',
-          paddingTop: 0,
-          alignItems: 'center',
-        }}>
+      <ImageBackground
+        source={require('../../assets/images/MisfireBackground.png')}
+        style={homeScreenStyles.backgroundImage}>
         {/*<Image
           key={avatarID}
           style={{height: 160, width: 160}}
@@ -93,7 +89,7 @@ const AvatarScreen = (props: {navigation: any}) => {
           key={avatarID}
           isCircle={true}
         />
-      </View>
+      </ImageBackground>
 
       <View style={styles.gridContainer}>
         {avatarImages.slice(0, -1).map((_, index) => (
@@ -111,30 +107,26 @@ const AvatarScreen = (props: {navigation: any}) => {
         ))}
       </View>
 
-      <View
-        style={{
-          backgroundColor: '#605A58',
-          flex: 1,
-          alignItems: 'center',
-          justifyContent: 'flex-end',
-          padding: 8,
-          paddingBottom: 60,
-        }}>
-        <View style={homeScreenStyles.emailTextInput}>
-          <StyledButton
-            onPress={() => {
-              setAvatarID(avatarID).then(() =>
-                console.log(`avatar id set to: ${avatarID}`),
-              );
-              props.navigation.navigate(
-                isNotGameCreator ? 'JoinGame' : 'CreateGame',
-              );
-            }}
-            buttonText={'Continue'}
-            buttonColor={true}
-          />
+      <ImageBackground
+        source={require('../../assets/images/MisfireBackground.png')}
+        style={homeScreenStyles.backgroundImage}>
+        <View style={{padding: 40}}>
+          <View style={homeScreenStyles.emailTextInput}>
+            <StyledButton
+              onPress={() => {
+                setAvatarID(avatarID).then(() =>
+                  console.log(`avatar id set to: ${avatarID}`),
+                );
+                props.navigation.navigate(
+                  isNotGameCreator ? 'JoinGame' : 'CreateGame',
+                );
+              }}
+              buttonText={'Continue'}
+              buttonColor={true}
+            />
+          </View>
         </View>
-      </View>
+      </ImageBackground>
     </ImageBackground>
   );
 };

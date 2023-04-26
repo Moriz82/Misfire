@@ -64,7 +64,7 @@ const MessageScreen = (props: {navigation: any}) => {
     <ImageBackground
       source={require('../../assets/images/MisfireBackground.png')}
       style={homeScreenStyles.backgroundImage}>
-      <SafeAreaView style={{backgroundColor: '#605A58', height: '100%'}}>
+      
         <View style={{alignItems: 'center', paddingTop: 10}}>
           <TextStroke stroke={3} color={'#000000'}>
             <Text
@@ -94,17 +94,17 @@ const MessageScreen = (props: {navigation: any}) => {
         <View
           style={{
             flexDirection: 'row',
-            backgroundColor: '#605A58',
             width: '100%',
             height: '17%',
             justifyContent: 'space-around',
+            backgroundColor: 'rgba(52, 52, 52, 0)'
           }}>
           {userList.map(({username, avatarID, isReady}, _) => (
             <View
               style={{
                 alignItems: 'center',
                 display: 'flex',
-                justifyContent: 'center',
+                justifyContent: 'center'
               }}>
               <CircleImage source={avatarImages[avatarID]} size={50} />
               <TextStroke stroke={3} color={'#000000'}>
@@ -125,9 +125,9 @@ const MessageScreen = (props: {navigation: any}) => {
           style={{
             width: '100%',
             height: '15%',
-            backgroundColor: '#605A58',
             paddingBottom: 10,
             padding: 15,
+            backgroundColor: 'rgba(52, 52, 52, 0)'
           }}>
           <View style={messageStyles.emailTextInput}>
             <CustomTextInput
@@ -157,7 +157,7 @@ const MessageScreen = (props: {navigation: any}) => {
             test
           </Button>
         </View>
-      </SafeAreaView>
+      
     </ImageBackground>
   );
 };

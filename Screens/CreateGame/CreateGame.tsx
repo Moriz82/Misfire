@@ -86,11 +86,9 @@ const CreateGame = (props: {navigation: any}) => {
       clearInterval(intervalId);
     };
   });
-
+  
   return (
-    <ImageBackground
-      source={require('../../assets/images/MisfireBackground.png')}
-      style={homeScreenStyles.backgroundImage}>
+    <View style={{backgroundColor: '#605A58', flex:1}}>
       <View
         style={{
           width: '100%',
@@ -190,7 +188,7 @@ const CreateGame = (props: {navigation: any}) => {
           </View>
         </View>
       </SafeAreaView>
-    </ImageBackground>
+    </View>
   );
 };
 
