@@ -45,6 +45,19 @@ const VoteScreen = (props: {navigation: any}) => {
               Vote On A Message!{' '}
             </Text>
           </TextStroke>
+
+          <TextStroke stroke={3} color={'#000000'}>
+            <Text
+              style={{
+                padding: 10,
+                color: 'white',
+                fontSize: 25,
+                textAlign: 'center',
+                lineHeight: 20,
+              }}>
+              Time: 100s{' '}
+            </Text>
+          </TextStroke>
         </View>
 
         {messages.map((msg, index) => (
