@@ -16,10 +16,6 @@ const JoinGame = (props: {navigation: any}) => {
 
   return (
     <View style={{flex: 1}}>
-    <ImageBackground
-      source={require('../../assets/images/MisfireBackground.png')}
-      resizeMode='cover'
-      style={{flex: 1}}>
       <View
         style={{
           width: '100%',
@@ -28,6 +24,7 @@ const JoinGame = (props: {navigation: any}) => {
           alignItems: 'flex-end',
           flexDirection: 'row',
           alignContent: 'space-between',
+          backgroundColor: '#434343'
         }}>
         <ImageButton
           image={require('../../assets/images/backButton.png')}
@@ -89,11 +86,11 @@ const JoinGame = (props: {navigation: any}) => {
             buttonColor={true}
           />
         </View>
+
         <View>
           <Text style={{color: 'red'}}>{errorMsg}</Text>
         </View>
       </View>
-    </ImageBackground>
     </View>
 
   );
