@@ -48,6 +48,7 @@ export const joinLobby = async (lobbyCode: string) => {
           username: userdata.username,
           avatarID: userdata.avatarID,
           isReady: false,
+          hasVoted: false,
           hasNav: false,
           message: '',
           messageVotes: 0,
@@ -96,6 +97,7 @@ export const getLobbyMembers = async (
     username: string;
     avatarID: number;
     isReady: boolean;
+    hasVoted: boolean;
     message: string;
     hasNav: boolean;
   }[]
@@ -109,6 +111,7 @@ export const getLobbyMembers = async (
       username: string;
       avatarID: number;
       isReady: boolean;
+      hasVoted: boolean;
       message: string;
       hasNav: boolean; // add new property
     }[];
@@ -129,6 +132,7 @@ export const getLobbyMembersUser = async (
       username: string;
       avatarID: number;
       isReady: boolean;
+      hasVoted: boolean;
       message: string;
     }[];
   } else {
@@ -175,6 +179,7 @@ export const updateLobbyMember = async (
   username: string,
   updates: {
     isReady?: boolean;
+    hasVoted?: boolean;
     message?: string;
   },
 ) => {
@@ -200,6 +205,10 @@ export const updateLobbyMember = async (
         updates.isReady !== undefined
           ? updates.isReady
           : members[memberIndex].isReady,
+      hasVoted:
+        updates.hasVoted !== undefined
+          ? updates.hasVoted
+          : members[memberIndex].hasVoted,
       message:
         updates.message !== undefined
           ? updates.message
@@ -218,11 +227,12 @@ export const getReadyList = async (lobbyCode: string) => {
   if (lobbyDoc.exists) {
     const lobbyData = lobbyDoc.data();
     return lobbyData?.members.map(
-      (member: {username: string; isReady: boolean}) => ({
+      (member: {username: string; isReady: boolean; hasVoted: boolean}) => ({
         username: member.username,
         isReady: member.isReady,
+        hasVoted: member.hasVoted,
       }),
-    ) as {username: string; isReady: boolean}[];
+    ) as {username: string; isReady: boolean; hasVoted: boolean}[];
   } else {
     return [];
   }

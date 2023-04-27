@@ -15,7 +15,7 @@ type Props = {
       message?: string;
     },
   ) => void;
-  message: string;
+  message?: string;
 };
 
 export function ReadyButton(props: Props) {
@@ -25,16 +25,29 @@ export function ReadyButton(props: Props) {
       style={[styles.root, {backgroundColor: isReady ? '#FF0F00' : '#2AC230'}]}
       onPress={() => {
         setIsReady(!isReady);
-        updateLobbyMember(createGameLobbyID, userdata.username, {
-          isReady: !isReady,
-          message: props.message,
-        })
-          .then(() => {
-            console.log('Lobby member updated successfully.');
+
+        if (props.message) {
+          updateLobbyMember(createGameLobbyID, userdata.username, {
+            isReady: !isReady,
+            message: props.message,
           })
-          .catch(error => {
-            console.log('Error updating lobby member:', error);
-          });
+            .then(() => {
+              console.log('Lobby member updated successfully.');
+            })
+            .catch(error => {
+              console.log('Error updating lobby member:', error);
+            });
+        } else {
+          updateLobbyMember(createGameLobbyID, userdata.username, {
+            hasVoted: !isReady,
+          })
+            .then(() => {
+              console.log('Lobby member updated successfully.');
+            })
+            .catch(error => {
+              console.log('Error updating lobby member:', error);
+            });
+        }
 
         console.log(!isReady);
       }}>

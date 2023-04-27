@@ -34,21 +34,33 @@ const HomeScreen = (props: {navigation: any}) => {
       </View>
 
       <View style={{padding: 30, paddingTop: 0, alignItems: 'center'}}>
-       <TextStroke stroke={3} color={'#000000'}>
-         <Text style={{padding: 8}}>User 1</Text>
-       </TextStroke>
+        <TextStroke stroke={3} color={'#000000'}>
+          <Text style={{padding: 8}}>User 1</Text>
+        </TextStroke>
       </View>
 
       <View style={{padding: 50, paddingTop: 30, alignItems: 'center'}}>
-       <TextStroke stroke={3} color={'#000000'}>
-         <Text style={{padding: 10, textAlign: 'center'}}>The game will begin shortly... think of a funny text message!</Text>
-       </TextStroke>
+        <TextStroke stroke={3} color={'#000000'}>
+          <Text style={{padding: 10, textAlign: 'center'}}>
+            The game will begin shortly... think of a funny text message!
+          </Text>
+        </TextStroke>
       </View>
 
       <View style={{padding: 60}}>
-        <ReadyButton onChange={function (lobbyCode: string, username: string, updates: { isReady?: boolean | undefined; message?: string | undefined; }): void {
-          throw new Error('Function not implemented.');
-        } } message={''}></ReadyButton>
+        <ReadyButton
+          onChange={function (
+            lobbyCode: string,
+            username: string,
+            updates: {
+              isReady?: boolean | undefined;
+              message?: string | undefined;
+            },
+          ): void {
+            throw new Error('Function not implemented.');
+          }}
+          message={''}
+        />
       </View>
     </ImageBackground>
   );

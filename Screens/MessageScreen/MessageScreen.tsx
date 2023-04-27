@@ -32,7 +32,6 @@ const MessageScreen = (props: {navigation: any}) => {
       let allReady = (await getReadyList(createGameLobbyID)).every(
         user => user.isReady,
       );
-      parseFloat(newTimeText.toFixed(2));
       // @ts-ignore
       setUserList(newUserList);
       setTimeText(prevTimeText => {
@@ -49,6 +48,9 @@ const MessageScreen = (props: {navigation: any}) => {
       });
 
       if (isNav) {
+        if (!isNotGameCreator) {
+          await setLobbyTime(createGameLobbyID, 100);
+        }
         await updateLobbyMember(createGameLobbyID, userdata.username, {
           isReady: true,
           message: messageText,

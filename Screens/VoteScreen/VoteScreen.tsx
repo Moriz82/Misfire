@@ -5,12 +5,23 @@ import {ImageBackground, SafeAreaView} from 'react-native';
 import voteStyles from './VoteScreen.styles';
 import {StyledButton} from '../../components/StyledButton';
 import homeScreenStyles from '../HomeScreen/HomeScreen.styles';
-import {getAllMessages} from '../../Utils/RemoteDataManager';
+import {
+  getAllMessages,
+  getLobbyMembers,
+  getReadyList,
+  getTime,
+  setLobbyTime,
+  updateLobbyMember,
+} from '../../Utils/RemoteDataManager';
 import {createGameLobbyID} from '../CreateGame/CreateGame';
+import {isNotGameCreator} from '../HomeScreen/HomeScreen';
+import {userdata} from '../../Utils/LocalDataManager';
+import {ReadyButton} from '../../components/ReadyButton';
 
 const VoteScreen = (props: {navigation: any}) => {
   const [selectedMessageIndex, setSelectedMessageIndex] = useState(-1);
   const [messages, setMessages] = useState(['']);
+  const [timeText, setTimeText] = useState(100);
 
   useEffect(() => {
     const effect = async () => {
@@ -19,6 +30,57 @@ const VoteScreen = (props: {navigation: any}) => {
     };
     effect();
   });
+
+  useEffect(() => {
+    const intervalQuery = async () => {
+      const newTimeText = await getTime(createGameLobbyID);
+      let isNav = false;
+      let allReady = (await getReadyList(createGameLobbyID)).every(
+        user => user.hasVoted,
+      );
+      // @ts-ignore
+      setTimeText(prevTimeText => {
+        // Update timeText only when it has changed
+        if (newTimeText !== prevTimeText) {
+          // Check if time is up and navigate to VoteScreen
+          if (newTimeText <= 0 || allReady) {
+            isNav = true;
+            clearInterval(intervalID);
+          }
+          return newTimeText;
+        }
+        return prevTimeText;
+      });
+
+      if (isNav) {
+        if (!isNotGameCreator) {
+          await setLobbyTime(createGameLobbyID, 100);
+        }
+        await updateLobbyMember(createGameLobbyID, userdata.username, {
+          isReady: true,
+          hasVoted: true,
+          message: (
+            await getLobbyMembers(createGameLobbyID)
+          ).find(user => user.username === userdata.username)!.message,
+        }).then(props.navigation.navigate('HeIsItScreen'));
+      }
+
+      if (!isNotGameCreator) {
+        await setLobbyTime(
+          createGameLobbyID,
+          parseFloat((newTimeText - 1).toFixed(2)),
+        );
+      }
+    };
+
+    // Call updateUserList every... idek .. it does it alot
+    const intervalID = setInterval(intervalQuery, 900);
+
+    // Clear the interval when the component unmounts or when the lobbyID changes
+    return () => {
+      clearInterval(intervalID);
+    };
+  }, [props.navigation]);
 
   return (
     <ImageBackground
@@ -55,7 +117,7 @@ const VoteScreen = (props: {navigation: any}) => {
                 textAlign: 'center',
                 lineHeight: 20,
               }}>
-              Time: 100s{' '}
+              {`Time: ${timeText}`}
             </Text>
           </TextStroke>
         </View>
@@ -73,6 +135,13 @@ const VoteScreen = (props: {navigation: any}) => {
             </View>
           </View>
         ))}
+        <ReadyButton
+          onChange={() =>
+            updateLobbyMember(createGameLobbyID, userdata.username, {
+              hasVoted: true,
+            }).then(() => console.log('done'))
+          }
+        />
       </SafeAreaView>
     </ImageBackground>
   );
