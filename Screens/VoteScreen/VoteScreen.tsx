@@ -10,7 +10,9 @@ import {
   getLobbyMembers,
   getReadyList,
   getTime,
+  incrementMessageVotes,
   setLobbyTime,
+  setSelectedMessage,
   updateLobbyMember,
 } from '../../Utils/RemoteDataManager';
 import {createGameLobbyID} from '../CreateGame/CreateGame';
@@ -20,6 +22,7 @@ import {ReadyButton} from '../../components/ReadyButton';
 
 const VoteScreen = (props: {navigation: any}) => {
   const [selectedMessageIndex, setSelectedMessageIndex] = useState(-1);
+  const [lastSelectedMessageIndex, setLastSelectedMessageIndex] = useState(-1);
   const [messages, setMessages] = useState(['']);
   const [timeText, setTimeText] = useState(100);
 
@@ -29,7 +32,26 @@ const VoteScreen = (props: {navigation: any}) => {
       setMessages(arr);
     };
     effect();
-  });
+  }, []);
+
+  useEffect(() => {
+    const effect = async () => {
+      if (selectedMessageIndex !== -1) {
+        await incrementMessageVotes(
+          createGameLobbyID,
+          messages[lastSelectedMessageIndex],
+          true,
+        );
+      }
+
+      await incrementMessageVotes(
+        createGameLobbyID,
+        messages[selectedMessageIndex],
+        false,
+      );
+    };
+    effect();
+  }, [messages, selectedMessageIndex]);
 
   useEffect(() => {
     const intervalQuery = async () => {
@@ -54,6 +76,7 @@ const VoteScreen = (props: {navigation: any}) => {
 
       if (isNav) {
         if (!isNotGameCreator) {
+          await setSelectedMessage(createGameLobbyID);
           await setLobbyTime(createGameLobbyID, 100);
         }
         await updateLobbyMember(createGameLobbyID, userdata.username, {
@@ -70,9 +93,7 @@ const VoteScreen = (props: {navigation: any}) => {
           createGameLobbyID,
           parseFloat((newTimeText - 1).toFixed(2)),
         );
-        console.log("time updated");
       }
-      console.log("ran intercal");
     };
 
     // Call updateUserList every... idek .. it does it alot
@@ -82,7 +103,7 @@ const VoteScreen = (props: {navigation: any}) => {
     return () => {
       clearInterval(intervalID);
     };
-  }, [props.navigation]);
+  }, [selectedMessageIndex, props.navigation]);
 
   return (
     <ImageBackground
@@ -129,6 +150,9 @@ const VoteScreen = (props: {navigation: any}) => {
             <View style={voteStyles.emailTextInput}>
               <StyledButton
                 onPress={() => {
+                  if (selectedMessageIndex !== -1) {
+                    setLastSelectedMessageIndex(selectedMessageIndex);
+                  }
                   setSelectedMessageIndex(index);
                 }}
                 buttonText={msg}

@@ -20,6 +20,7 @@ export const createLobby = async () => {
       roundCount: 3,
       lobbyTime: 100,
       selectedMessage: '',
+      selectedUser: '',
       // Add an empty array to store lobby members
       members: [],
     });
@@ -118,6 +119,39 @@ export const getLobbyMembers = async (
   } else {
     return [];
   }
+};
+
+export const getSelectedUser = async (
+  lobbyCode: string,
+): Promise<{avatarID: any; username: any; msg: any}> => {
+  const lobbyRef = firestore().collection('lobbies').doc(lobbyCode);
+  const lobbyDoc = await lobbyRef.get();
+
+  if (lobbyDoc.exists) {
+    const lobbyData = lobbyDoc.data();
+    const selectedUsername = lobbyData?.selectedUser;
+    const selectedMessage = lobbyData?.selectedMessage;
+
+    if (selectedUsername) {
+      const selectedUser = lobbyData?.members.find(
+        (member: {username: any}) => member.username === selectedUsername,
+      );
+
+      if (selectedUser) {
+        return {
+          username: selectedUser.username,
+          avatarID: selectedUser.avatarID,
+          msg: selectedMessage,
+        };
+      }
+    }
+  }
+
+  return {
+    username: 'selectedUser.username',
+    avatarID: 'selectedUser.avatarID',
+    msg: '',
+  };
 };
 
 export const getLobbyMembersUser = async (
@@ -253,6 +287,7 @@ export const getTime = async (lobbyCode: string) => {
 export const incrementMessageVotes = async (
   lobbyCode: string,
   message: string,
+  decrement: boolean,
 ) => {
   const lobbyRef = firestore().collection('lobbies').doc(lobbyCode);
 
@@ -261,17 +296,21 @@ export const incrementMessageVotes = async (
     const lobbyDoc = await lobbyRef.get();
     const lobbyData = lobbyDoc.data();
     const member = lobbyData?.members.find(
+      // eslint-disable-next-line @typescript-eslint/no-shadow
       (member: {username: string}) => member.username === userdata.username,
     );
 
     if (member) {
       // Find the message and increment its votes
       const messages = lobbyData?.members.map(
+        // eslint-disable-next-line @typescript-eslint/no-shadow
         (member: {username: string; messageVotes: number; message: string}) => {
           if (member.message === message) {
             return {
               ...member,
-              messageVotes: member.messageVotes + 1,
+              messageVotes: decrement
+                ? member.messageVotes - 1
+                : member.messageVotes + 1,
             };
           }
           return member;
@@ -330,5 +369,67 @@ export const setMemberNav = async (
     }
   } catch (error) {
     console.log('Error:', error);
+  }
+};
+
+export const setSelectedUser = async (lobbyCode: string, username: string) => {
+  const lobbyRef = firestore().collection('lobbies').doc(lobbyCode);
+
+  try {
+    await lobbyRef.update({
+      selectedUser: username,
+    });
+  } catch (error) {
+    console.log('Error:', error);
+  }
+};
+
+export const setSelectedMessage = async (lobbyCode: string) => {
+  const lobbyRef = firestore().collection('lobbies').doc(lobbyCode);
+
+  // Get the lobby document to access the member messages and votes
+  const lobbyDoc = await lobbyRef.get();
+
+  if (lobbyDoc.exists) {
+    const lobbyData = lobbyDoc.data();
+    const rIndex = Math.floor(Math.random() * lobbyData?.members.length);
+    const selUser = lobbyData?.members[rIndex].username;
+
+    // Create an array with the messages and their votes
+    // @ts-ignore
+    const messagesWithVotes = lobbyData.members.map(
+      (member: {username: any; message: string; messageVotes: number}) => ({
+        message: member.message,
+        votes: member.messageVotes,
+      }),
+    );
+
+    // Sort the array by the number of votes
+    messagesWithVotes.sort(
+      (a: {votes: number}, b: {votes: number}) => b.votes - a.votes,
+    );
+
+    // Check if there is a tie for the most voted message
+    const maxVotes = messagesWithVotes[0].votes;
+    const mostVotedMessages = messagesWithVotes.filter(
+      (message: {votes: any}) => message.votes === maxVotes,
+    );
+
+    // If there is no tie, select the most voted message
+    if (mostVotedMessages.length === 1) {
+      await lobbyRef.update({
+        selectedMessage: mostVotedMessages[0].message,
+        selectedUser: selUser,
+      });
+    } else {
+      // If there is a tie, select one at random
+      const randomIndex = Math.floor(Math.random() * mostVotedMessages.length);
+      await lobbyRef.update({
+        selectedMessage: mostVotedMessages[randomIndex].message,
+        selectedUser: selUser,
+      });
+    }
+  } else {
+    throw new Error(`Lobby ${lobbyCode} does not exist`);
   }
 };
