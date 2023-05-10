@@ -3,6 +3,7 @@ import 'react-native-get-random-values';
 import {nanoid} from 'nanoid';
 import {userdata} from './LocalDataManager';
 import {checkForProfanity} from './Util';
+import {gameSettings} from './GameLogic';
 
 export const createLobby = async () => {
   // this code brought the rage out of me for troubleshooting for hours :D
@@ -144,7 +145,14 @@ export const getSelectedUser = async (
           msg: selectedMessage,
         };
       }
+      else {
+        console.log('no sleected user');
+      }
+    } else {
+      console.log('no username var');
     }
+  }else {
+    console.log('no lobby?');
   }
 
   return {
@@ -217,7 +225,7 @@ export const updateLobbyMember = async (
     message?: string;
   },
 ) => {
-  if (checkForProfanity(updates.message!)) {
+  if (checkForProfanity(updates.message!) && !gameSettings.allowProfanity) {
     updates.message = 'im in love with you';
   }
 
