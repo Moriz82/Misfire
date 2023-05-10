@@ -158,7 +158,7 @@ export const getSelectedUser = async (
   return {
     username: 'selectedUser.username',
     avatarID: 'selectedUser.avatarID',
-    msg: '',
+    msg: 'test',
   };
 };
 

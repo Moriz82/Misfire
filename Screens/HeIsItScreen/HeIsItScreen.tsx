@@ -10,15 +10,17 @@ import {createGameLobbyID} from '../CreateGame/CreateGame';
 import {avatarImages} from '../AvatarScreen/AvatarScreen';
 
 const HomeScreen = (props: {navigation: any}) => {
-  const [user, setUser] = useState({username: 'test', avatarID: 0, msg: ''});
+  const [user, setUser] = useState({username: 'test', avatarID: 0, msg: 'test'});
 
   useEffect(() => {
     const effect = async () => {
       const user = await getSelectedUser(createGameLobbyID);
       setUser(user);
     };
-    effect();
-  }, []);
+    if (user.msg === 'test') {
+      effect();
+    }
+  });
 
   return (
     <ImageBackground
