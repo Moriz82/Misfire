@@ -70,7 +70,9 @@ const VoteScreen = (props: {navigation: any}) => {
           createGameLobbyID,
           parseFloat((newTimeText - 1).toFixed(2)),
         );
+        console.log("time updated");
       }
+      console.log("ran intercal");
     };
 
     // Call updateUserList every... idek .. it does it alot
