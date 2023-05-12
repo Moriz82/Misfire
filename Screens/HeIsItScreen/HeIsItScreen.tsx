@@ -7,6 +7,7 @@ import homeScreenStyles from '../HomeScreen/HomeScreen.styles';
 import {getSelectedUser} from '../../Utils/RemoteDataManager';
 import {createGameLobbyID} from '../CreateGame/CreateGame';
 import {avatarImages} from '../AvatarScreen/AvatarScreen';
+import Contacts from 'react-native-contacts';
 
 const HomeScreen = (props: {navigation: any}) => {
   const [user, setUser] = useState({

@@ -1,12 +1,27 @@
-import {View, Text} from 'native-base';
-import React, {useState} from 'react';
-import {ImageBackground} from 'react-native';
-import {StyledButton, TextStroke} from '../../components/StyledButton';
+import {View, Text, Button} from 'native-base';
+import React, {useEffect, useState} from 'react';
+import {ImageBackground, FlatList, TouchableOpacity} from 'react-native';
+import {TextStroke} from '../../components/StyledButton';
 import {ImageButton} from '../../components/ImageButton';
 import homeScreenStyles from '../HomeScreen/HomeScreen.styles';
-import { selectContact } from "../../Utils/GameLogic";
+import Contacts from 'react-native-contacts';
+import Popover from 'react-native-popover-view';
 
 const HomeScreen = (props: {navigation: any}) => {
+  const [contacts, setContacts] = useState([]);
+  const [isVisible, setIsVisible] = useState(false);
+  const [selectedContact, setSelectedContact] = useState(null);
+
+  useEffect(() => {
+    getContacts();
+  }, []);
+
+  const getContacts = () => {
+    Contacts.getAll().then(c => {
+      console.log(c);
+      setContacts(c);
+    });
+  };
 
   return (
     <ImageBackground
@@ -32,11 +47,8 @@ const HomeScreen = (props: {navigation: any}) => {
 
       <View style={{padding: 30, paddingTop: 0}}>
         <View style={homeScreenStyles.emailTextInput}>
-          <StyledButton
-            buttonColor={true}
-            buttonText={'Contacts'}
-            onPress={selectContact}
-          />
+          <Button title="Pick a contact" onPress={() => setIsVisible(true)} />
+          <Text>{selectedContact}</Text>
         </View>
       </View>
 

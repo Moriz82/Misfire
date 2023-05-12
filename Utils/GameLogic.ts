@@ -1,5 +1,4 @@
 import firestore from '@react-native-firebase/firestore';
-import {selectContactPhone} from 'react-native-select-contact';
 
 export var gameSettings = {
   allowPictures: false,
@@ -63,11 +62,11 @@ export const fetchGameSettings = async (lobbyCode: string) => {
   }
 };
 
-export const selectContact = async () => {
-  try {
-    const res = selectContactPhone();
-    console.log(res);
-  } catch (error) {
-    console.error(error);
-  }
-};
+// create a contact picker for react-native
+//
+// Path: Utils/ContactPicker.tsx
+import React, {useState} from 'react';
+import {View, Text, Button, StyleSheet} from 'react-native';
+
+
+
