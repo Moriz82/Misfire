@@ -14,6 +14,7 @@ import AvatarScreen from './Screens/AvatarScreen/AvatarScreen';
 import HeIsItScreen from './Screens/HeIsItScreen/HeIsItScreen';
 import MessageScreen from './Screens/MessageScreen/MessageScreen';
 import VoteScreen from './Screens/VoteScreen/VoteScreen';
+import EndScreen from './Screens/EndScreen/EndScreen';
 import Contacts, {Contact} from 'react-native-contacts';
 
 export const bgColor = '#605A58';
@@ -157,6 +158,12 @@ export default function App(): JSX.Element | null {
             component={VoteScreen}
             options={{headerShown: false, title: ''}}
           />
+          <Stack.Screen
+            name="EndScreen"
+            component={EndScreen}
+            options={{headerShown: false, title: ''}}
+          />
+
         </Stack.Navigator>
       </NavigationContainer>
     </NativeBaseProvider>
