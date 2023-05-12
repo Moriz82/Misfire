@@ -1,5 +1,7 @@
 package com.misfire;
 
+import android.content.Intent;
+import com.tkporter.sendsms.SendSMSPackage;
 import com.facebook.react.ReactActivity;
 import com.facebook.react.ReactActivityDelegate;
 import com.facebook.react.defaults.DefaultNewArchitectureEntryPoint;
@@ -14,6 +16,13 @@ public class MainActivity extends ReactActivity {
   @Override
   protected String getMainComponentName() {
     return "Misfire";
+  }
+
+  @Override
+  public void onActivityResult(int requestCode, int resultCode, Intent data) {
+  	super.onActivityResult(requestCode, resultCode, data);
+  	//probably some other stuff here
+  	SendSMSPackage.getInstance().onActivityResult(requestCode, resultCode, data);
   }
 
   /**

@@ -62,11 +62,25 @@ export const fetchGameSettings = async (lobbyCode: string) => {
   }
 };
 
-// create a contact picker for react-native
-//
-// Path: Utils/ContactPicker.tsx
-import React, {useState} from 'react';
-import {View, Text, Button, StyleSheet} from 'react-native';
+// a function that sends a text message through react-native and requests permision beforehand
+//import the SendSMS class from the module
+import {Linking} from 'react-native';
 
+export const sendText = (phoneNumber, message) => {
+  const url = `sms:${phoneNumber}&body=${message}`;
 
-
+  Linking.canOpenURL(url)
+    .then(supported => {
+      if (!supported) {
+        console.log('SMS is not available');
+      } else {
+        return Linking.openURL(url);
+      }
+    })
+    .then(result => {
+      console.log('Message sent:', result);
+    })
+    .catch(error => {
+      console.log('An error occurred:', error);
+    });
+};
