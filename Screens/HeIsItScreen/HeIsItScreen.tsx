@@ -1,15 +1,29 @@
 import {View, Text} from 'native-base';
-import React, {useState} from 'react';
-import {ImageBackground, SafeAreaView} from 'react-native';
+import React, {useEffect, useState} from 'react';
+import {ImageBackground} from 'react-native';
 import {TextStroke} from '../../components/StyledButton';
-import {CustomTextInput} from '../../components/CustomTextInput';
 import {ImageButton} from '../../components/ImageButton';
-import heIsItStyles from '../HeIsItScreen/HeIsItScreen.styles';
-import {ReadyButton} from '../../components/ReadyButton';
 import homeScreenStyles from '../HomeScreen/HomeScreen.styles';
+import {getSelectedUser} from '../../Utils/RemoteDataManager';
+import {createGameLobbyID} from '../CreateGame/CreateGame';
+import {avatarImages} from '../AvatarScreen/AvatarScreen';
 
 const HomeScreen = (props: {navigation: any}) => {
-  const [usernameText, setUsernameText] = useState('');
+  const [user, setUser] = useState({
+    username: 'test',
+    avatarID: 0,
+    msg: 'test',
+  });
+
+  useEffect(() => {
+    const effect = async () => {
+      const user = await getSelectedUser(createGameLobbyID);
+      setUser(user);
+    };
+    if (user.msg === 'test') {
+      effect();
+    }
+  });
 
   return (
     <ImageBackground
@@ -25,30 +39,27 @@ const HomeScreen = (props: {navigation: any}) => {
 
       <View style={{alignItems: 'center'}}>
         <ImageButton
-          image={require('../../assets/images/avatar0.png')}
+          image={avatarImages[user.avatarID]}
           onPress={() => props.navigation.navigate('HomeScreen')}
           height={170}
           width={170}
           isDark={false}
+          isCircle={true}
         />
       </View>
 
       <View style={{padding: 30, paddingTop: 0, alignItems: 'center'}}>
-       <TextStroke stroke={3} color={'#000000'}>
-         <Text style={{padding: 8}}>User 1</Text>
-       </TextStroke>
+        <TextStroke stroke={3} color={'#000000'}>
+          <Text style={{padding: 8}}>{user.username}</Text>
+        </TextStroke>
       </View>
 
       <View style={{padding: 50, paddingTop: 30, alignItems: 'center'}}>
-       <TextStroke stroke={3} color={'#000000'}>
-         <Text style={{padding: 10, textAlign: 'center'}}>The game will begin shortly... think of a funny text message!</Text>
-       </TextStroke>
-      </View>
-
-      <View style={{padding: 60}}>
-        <ReadyButton onChange={function (lobbyCode: string, username: string, updates: { isReady?: boolean | undefined; message?: string | undefined; }): void {
-          throw new Error('Function not implemented.');
-        } } message={''}></ReadyButton>
+        <TextStroke stroke={3} color={'#000000'}>
+          <Text style={{padding: 10, textAlign: 'center'}}>
+            The selected message is:{'\n'} '{user.msg}'
+          </Text>
+        </TextStroke>
       </View>
     </ImageBackground>
   );
