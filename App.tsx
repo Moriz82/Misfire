@@ -1,5 +1,5 @@
 import React, {useEffect, useRef, useState} from 'react';
-import {AppState} from 'react-native';
+import {AppState, PermissionsAndroid, Platform} from 'react-native';
 import {extendTheme, NativeBaseProvider} from 'native-base';
 import {NavigationContainer} from '@react-navigation/native';
 import {createNativeStackNavigator} from '@react-navigation/native-stack';
@@ -14,8 +14,10 @@ import AvatarScreen from './Screens/AvatarScreen/AvatarScreen';
 import HeIsItScreen from './Screens/HeIsItScreen/HeIsItScreen';
 import MessageScreen from './Screens/MessageScreen/MessageScreen';
 import VoteScreen from './Screens/VoteScreen/VoteScreen';
+import Contacts, {Contact} from 'react-native-contacts';
 
 export const bgColor = '#605A58';
+export var contactList: Contact[] = [];
 
 export default function App(): JSX.Element | null {
   let dataFetched = false;
@@ -24,6 +26,23 @@ export default function App(): JSX.Element | null {
   const [appStateVisible, setAppStateVisible] = useState(appState.current);
 
   useEffect(() => {
+    const effect = async () => {
+      if (Platform.OS === 'android') {
+        const request = await PermissionsAndroid.request(
+          PermissionsAndroid.PERMISSIONS.READ_CONTACTS,
+        );
+
+        // denied permission
+        if (request === PermissionsAndroid.RESULTS.DENIED) {
+          throw Error('Permission Denied');
+        }
+        // user chose 'deny, don't ask again'
+        else if (request === PermissionsAndroid.RESULTS.NEVER_ASK_AGAIN) {
+          throw Error('Permission Denied');
+        }
+      }
+    };
+    effect();
     const subscription = AppState.addEventListener(
       'change',
       async nextAppState => {

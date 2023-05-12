@@ -1,4 +1,5 @@
 import firestore from '@react-native-firebase/firestore';
+import {selectContactPhone} from 'react-native-select-contact';
 
 export var gameSettings = {
   allowPictures: false,
@@ -59,5 +60,14 @@ export const fetchGameSettings = async (lobbyCode: string) => {
     };
   } else {
     throw new Error(`Lobby ${lobbyCode} does not exist`);
+  }
+};
+
+export const selectContact = async () => {
+  try {
+    const res = selectContactPhone();
+    console.log(res);
+  } catch (error) {
+    console.error(error);
   }
 };

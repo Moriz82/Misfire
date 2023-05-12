@@ -9,6 +9,7 @@ import {
   getAllMessages,
   getLobbyMembers,
   getReadyList,
+  getSelectedUser,
   getTime,
   incrementMessageVotes,
   setLobbyTime,
@@ -60,6 +61,14 @@ const VoteScreen = (props: {navigation: any}) => {
       let allReady = (await getReadyList(createGameLobbyID)).every(
         user => user.hasVoted,
       );
+
+      if (!isNotGameCreator) {
+        await setLobbyTime(
+          createGameLobbyID,
+          parseFloat((newTimeText - 1).toFixed(2)),
+        );
+      }
+
       // @ts-ignore
       setTimeText(prevTimeText => {
         // Update timeText only when it has changed
@@ -85,14 +94,16 @@ const VoteScreen = (props: {navigation: any}) => {
           message: (
             await getLobbyMembers(createGameLobbyID)
           ).find(user => user.username === userdata.username)!.message,
-        }).then(props.navigation.navigate('HeIsItScreen'));
-      }
-
-      if (!isNotGameCreator) {
-        await setLobbyTime(
-          createGameLobbyID,
-          parseFloat((newTimeText - 1).toFixed(2)),
-        );
+        }).then(async () => {
+          if (
+            (await getSelectedUser(createGameLobbyID)).username ===
+            userdata.username
+          ) {
+            props.navigation.navigate('YouAreItScreen');
+          } else {
+            props.navigation.navigate('HeIsItScreen');
+          }
+        });
       }
     };
 

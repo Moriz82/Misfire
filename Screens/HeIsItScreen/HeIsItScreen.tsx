@@ -3,14 +3,17 @@ import React, {useEffect, useState} from 'react';
 import {ImageBackground} from 'react-native';
 import {TextStroke} from '../../components/StyledButton';
 import {ImageButton} from '../../components/ImageButton';
-import {ReadyButton} from '../../components/ReadyButton';
 import homeScreenStyles from '../HomeScreen/HomeScreen.styles';
 import {getSelectedUser} from '../../Utils/RemoteDataManager';
 import {createGameLobbyID} from '../CreateGame/CreateGame';
 import {avatarImages} from '../AvatarScreen/AvatarScreen';
 
 const HomeScreen = (props: {navigation: any}) => {
-  const [user, setUser] = useState({username: 'test', avatarID: 0, msg: 'test'});
+  const [user, setUser] = useState({
+    username: 'test',
+    avatarID: 0,
+    msg: 'test',
+  });
 
   useEffect(() => {
     const effect = async () => {
