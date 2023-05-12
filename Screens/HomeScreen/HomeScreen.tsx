@@ -91,7 +91,7 @@ const HomeScreen = (props: {navigation: any}) => {
         <View style={homeScreenStyles.emailTextInput}>
           <StyledButton
             onPress={() => {
-              props.navigation.navigate('VoteScreen');
+              props.navigation.navigate('EndScreen');
             }}
             buttonText={'test button'}
             buttonColor={false}
