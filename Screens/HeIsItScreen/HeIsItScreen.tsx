@@ -4,10 +4,9 @@ import {ImageBackground} from 'react-native';
 import {TextStroke} from '../../components/StyledButton';
 import {ImageButton} from '../../components/ImageButton';
 import homeScreenStyles from '../HomeScreen/HomeScreen.styles';
-import {getSelectedUser} from '../../Utils/RemoteDataManager';
+import {getMessageSent, getSelectedUser} from '../../Utils/RemoteDataManager';
 import {createGameLobbyID} from '../CreateGame/CreateGame';
 import {avatarImages} from '../AvatarScreen/AvatarScreen';
-import Contacts from 'react-native-contacts';
 
 const HomeScreen = (props: {navigation: any}) => {
   const [user, setUser] = useState({
@@ -21,9 +20,15 @@ const HomeScreen = (props: {navigation: any}) => {
       const user = await getSelectedUser(createGameLobbyID);
       setUser(user);
     };
+    const effect2 = async () => {
+      if (await getMessageSent(createGameLobbyID)) {
+        props.navigation.navigate('EndScreen');
+      }
+    };
     if (user.msg === 'test') {
       effect();
     }
+    effect2();
   });
 
   return (

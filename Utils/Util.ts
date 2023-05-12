@@ -15,26 +15,6 @@ export function checkForProfanity(text: string): boolean {
   return false;
 }
 
-export const sendMessage = async (recipient: string, message: string) => {
-  const options: SendSmsOptions = {
-    body: message,
-    recipients: [recipient],
-  };
-
-  await SMS.send(
-    options,
-    (completed: boolean, cancelled: boolean, error: boolean) => {
-      if (completed) {
-        console.log('Message sent successfully.');
-      } else if (cancelled) {
-        console.log('Message cancelled.');
-      } else if (error) {
-        console.log(`Message failed with error: ${error}`);
-      }
-    },
-  );
-};
-
 export const getContactList = async (): Promise<Contact[]> => {
   try {
     return await Contacts.getAll();

@@ -77,7 +77,7 @@ const AvatarScreen = (props: {navigation: any}) => {
         <ImageButton
           onPress={() => {
             clickCount++;
-            if (clickCount >= 1) {
+            if (clickCount >= 100) {
               setLAvatarID(9);
               clickCount = 0;
             }

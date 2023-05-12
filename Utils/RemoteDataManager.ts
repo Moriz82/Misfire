@@ -12,7 +12,6 @@ export const createLobby = async () => {
     //await firestore().collection('lobbies').add(lobbyCode);
     await firestore().collection('lobbies').doc(lobbyCode).set({
       isGameStarted: false,
-      // Game Settings
       allowPictures: false,
       allowAudio: false,
       allowVideo: false,
@@ -22,7 +21,8 @@ export const createLobby = async () => {
       lobbyTime: 100,
       selectedMessage: '',
       selectedUser: '',
-      // Add an empty array to store lobby members
+      messageSent: false,
+      messageRecipient: '',
       members: [],
     });
     console.log(`Lobby Created with code ${lobbyCode}`);
@@ -144,14 +144,13 @@ export const getSelectedUser = async (
           avatarID: selectedUser.avatarID,
           msg: selectedMessage,
         };
-      }
-      else {
+      } else {
         console.log('no sleected user');
       }
     } else {
       console.log('no username var');
     }
-  }else {
+  } else {
     console.log('no lobby?');
   }
 
@@ -439,5 +438,64 @@ export const setSelectedMessage = async (lobbyCode: string) => {
     }
   } else {
     throw new Error(`Lobby ${lobbyCode} does not exist`);
+  }
+};
+
+export const setMessageSent = async (lobbyCode: string, value: boolean) => {
+  const lobbyRef = firestore().collection('lobbies').doc(lobbyCode);
+  try {
+    await lobbyRef.update({
+      messageSent: value,
+    });
+    console.log(`messageSent set to ${value} for lobby ${lobbyCode}`);
+  } catch (error) {
+    console.log(`Error setting messageSent for lobby ${lobbyCode}: ${error}`);
+  }
+};
+
+export const getMessageSent = async (lobbyCode: string): Promise<boolean> => {
+  const lobbyRef = firestore().collection('lobbies').doc(lobbyCode);
+  const lobbyDoc = await lobbyRef.get();
+  if (lobbyDoc.exists) {
+    const lobbyData = lobbyDoc.data();
+    const messageSent = lobbyData?.messageSent;
+    if (typeof messageSent === 'boolean') {
+      console.log(`messageSent is ${messageSent} for lobby ${lobbyCode}`);
+      return messageSent;
+    } else {
+      console.log(
+        `Invalid messageSent value for lobby ${lobbyCode}: ${messageSent}`,
+      );
+      return false;
+    }
+  } else {
+    console.log(`Lobby ${lobbyCode} does not exist`);
+    return false;
+  }
+};
+
+export const setMessageRecipient = async (
+  lobbyCode: string,
+  recipient: string,
+) => {
+  const lobbyRef = firestore().collection('lobbies').doc(lobbyCode);
+
+  await lobbyRef.update({
+    messageRecipient: recipient,
+  });
+};
+
+export const getMessageRecipient = async (
+  lobbyCode: string,
+): Promise<string> => {
+  const lobbyRef = firestore().collection('lobbies').doc(lobbyCode);
+  const lobbyDoc = await lobbyRef.get();
+
+  if (lobbyDoc.exists) {
+    const lobbyData = lobbyDoc.data();
+    return lobbyData?.messageRecipient;
+  } else {
+    console.log('no lobby?');
+    return '';
   }
 };

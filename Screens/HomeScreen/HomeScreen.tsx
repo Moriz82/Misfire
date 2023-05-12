@@ -87,16 +87,6 @@ const HomeScreen = (props: {navigation: any}) => {
             buttonColor={false}
           />
         </View>
-
-        <View style={homeScreenStyles.emailTextInput}>
-          <StyledButton
-            onPress={() => {
-              props.navigation.navigate('YouAreItScreen');
-            }}
-            buttonText={'test button'}
-            buttonColor={false}
-          />
-        </View>
         <View style={{alignItems: 'center'}}>
           <Text style={{color: 'red', textAlign: 'center'}}>{errorMsg}</Text>
         </View>

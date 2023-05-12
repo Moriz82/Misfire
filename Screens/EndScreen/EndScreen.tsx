@@ -1,14 +1,26 @@
 import {View, Text} from 'native-base';
-import React, {useState} from 'react';
-import {StyledButton, TextStroke} from '../../components/StyledButton';
+import React, {useEffect, useState} from 'react';
+import {TextStroke} from '../../components/StyledButton';
 import {ImageButton} from '../../components/ImageButton';
-import {CustomTextInput} from '../../components/CustomTextInput';
-import {getLobbyMembersUser, joinLobby} from '../../Utils/RemoteDataManager';
-import {userdata} from '../../Utils/LocalDataManager';
-import { ImageBackground } from 'react-native';
-import endScreenStyles from './EndScreen.styles';
+import {
+  getMessageRecipient,
+  getSelectedUser,
+} from '../../Utils/RemoteDataManager';
+import {createGameLobbyID} from '../CreateGame/CreateGame';
 
 const EndScreen = (props: {navigation: any}) => {
+  const [message, setMessage] = useState('msg');
+  const [person, setPerson] = useState('person');
+
+  useEffect(() => {
+    async function effect() {
+      const msg = (await getSelectedUser(createGameLobbyID)).msg;
+      const per = await getMessageRecipient(createGameLobbyID);
+      setMessage(msg);
+      setPerson(per);
+    }
+    effect();
+  }, []);
 
   return (
     <View style={{flex: 1}}>
@@ -20,7 +32,7 @@ const EndScreen = (props: {navigation: any}) => {
           alignItems: 'flex-end',
           flexDirection: 'row',
           alignContent: 'space-between',
-          backgroundColor: '#434343'
+          backgroundColor: '#434343',
         }}>
         <ImageButton
           image={require('../../assets/images/backButton.png')}
@@ -45,7 +57,6 @@ const EndScreen = (props: {navigation: any}) => {
           flexDirection: 'column',
           padding: 13,
         }}>
-        
         <View style={{paddingLeft: 0, paddingBottom: 15, paddingTop: 60}}>
           <TextStroke stroke={3} color={'#000000'}>
             <Text style={{padding: 3}}>The message...</Text>
@@ -53,7 +64,7 @@ const EndScreen = (props: {navigation: any}) => {
         </View>
         <View style={{paddingLeft: 0, paddingBottom: 15}}>
           <TextStroke stroke={3} color={'#000000'}>
-            <Text style={{padding: 3, textAlign: 'center'}}>EXAMPLE MESSAGE</Text>
+            <Text style={{padding: 3, textAlign: 'center'}}>{message}</Text>
           </TextStroke>
         </View>
         <View style={{paddingLeft: 0, paddingBottom: 15}}>
@@ -63,12 +74,13 @@ const EndScreen = (props: {navigation: any}) => {
         </View>
         <View style={{paddingLeft: 0, paddingBottom: 15}}>
           <TextStroke stroke={3} color={'#000000'}>
-            <Text style={{padding: 3, textAlign: 'center', color: 'red'}}>EXAMPLE PERSON</Text>
+            <Text style={{padding: 3, textAlign: 'center', color: 'red'}}>
+              {person}
+            </Text>
           </TextStroke>
         </View>
       </View>
     </View>
-
   );
 };
 

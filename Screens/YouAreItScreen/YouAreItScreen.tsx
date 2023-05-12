@@ -1,33 +1,37 @@
-import {View, Text, Button, ScrollView} from 'native-base';
+import {View, Text, ScrollView} from 'native-base';
 import React, {useEffect, useState} from 'react';
-import {ImageBackground, FlatList, TouchableOpacity} from 'react-native';
+import {ImageBackground} from 'react-native';
 import {TextStroke, StyledButton} from '../../components/StyledButton';
 import {ImageButton} from '../../components/ImageButton';
 import homeScreenStyles from '../HomeScreen/HomeScreen.styles';
-import Contacts from 'react-native-contacts';
+import {
+  getAllContactNames,
+  getRandomContact,
+  sendText,
+} from '../../Utils/GameLogic';
+import {
+  getSelectedUser,
+  setMessageRecipient,
+  setMessageSent,
+} from '../../Utils/RemoteDataManager';
+import {createGameLobbyID} from '../CreateGame/CreateGame';
 
 const HomeScreen = (props: {navigation: any}) => {
   const [contacts, setContacts] = useState([]);
-  const [isVisible, setIsVisible] = useState(false);
-  const [selectedContact, setSelectedContact] = useState(null);
-  const [lobbyID, setLobbyID] = useState('');
   const [contactIndex, setContactIndex] = useState(-1);
-  const cs = [{contactName:'sadfds'},{contactName:'sadfds'},{contactName:'sadfds'}];
 
   //say f you to the errors and warnings
   console.warn = function () {};
   console.error = function () {};
 
   useEffect(() => {
-    //getContacts();
-  }, []);
-
-  const getContacts = () => {
-    Contacts.getAll().then(c => {
-      console.log(c);
+    const effect = async () => {
+      const c = await getAllContactNames();
+      // @ts-ignore
       setContacts(c);
-    });
-  };
+    };
+    effect();
+  }, []);
 
   return (
     <ImageBackground
@@ -36,7 +40,7 @@ const HomeScreen = (props: {navigation: any}) => {
       <View style={{alignItems: 'center'}}>
         <TextStroke stroke={3} color={'#000000'}>
           <Text style={{padding: 10, paddingTop: 60, color: '#FF6C1A'}}>
-            You are the target!{' '}
+            You are the target!{'\n'}Choose the contact you would like to omit{' '}
           </Text>
         </TextStroke>
       </View>
@@ -51,34 +55,59 @@ const HomeScreen = (props: {navigation: any}) => {
         />
       </View>
 
-
       <ScrollView style={{}}>
-        {cs.map(({contactName}, index) => (
-            <View
-              style={{
-                flexDirection: 'row',
-                borderColor: 'black',
-                marginBottom: 10,
-                marginLeft: 10,
-                marginRight: 10,
-              }}
-              key={index}>
-              <View style={{flex:1}}>
-                <StyledButton
-                  onPress={() => {setContactIndex(index)}}
-                  buttonText={contactName}
-                  buttonColor={index === contactIndex}
-                />
-              </View>
+        {contacts.map(({givenName}, index) => (
+          <View
+            style={{
+              flexDirection: 'row',
+              borderColor: 'black',
+              marginBottom: 10,
+              marginLeft: 10,
+              marginRight: 10,
+            }}
+            key={index}>
+            <View style={{flex: 1}}>
+              <StyledButton
+                onPress={() => {
+                  setContactIndex(index);
+                }}
+                buttonText={givenName}
+                buttonColor={index === contactIndex}
+              />
             </View>
-          ))}
+          </View>
+        ))}
       </ScrollView>
 
       <View style={{alignItems: 'center'}}>
         <TextStroke stroke={3} color={'ß#000000'}>
-          <Text style={{padding: 40, paddingTop: 45, color: 'white', textAlign: 'center'}}>
-            Choose the name of ONE contact you would like to omit.{' '}
-          </Text>
+          <StyledButton
+            onPress={() => {
+              async function sm() {
+                const contact = await getRandomContact(
+                  // @ts-ignore
+                  contacts[contactIndex].givenName,
+                );
+
+                await setMessageRecipient(createGameLobbyID, contact!.name);
+
+                await sendText(
+                  // @ts-ignore
+                  contact.phoneNumber!,
+                  (
+                    await getSelectedUser(createGameLobbyID)
+                  ).msg,
+                );
+              }
+              sm().then(() => {
+                setMessageSent(createGameLobbyID, true).then(() => {
+                  props.navigation.navigate('EndScreen');
+                });
+              });
+            }}
+            buttonText={'Im Ready'}
+            buttonColor={true}
+          />
         </TextStroke>
       </View>
     </ImageBackground>
