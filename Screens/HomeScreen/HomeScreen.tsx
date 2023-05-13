@@ -1,12 +1,13 @@
 import {Box, StatusBar, Text, View} from 'native-base';
 import React, {useEffect, useState} from 'react';
-import {ImageBackground, SafeAreaView} from 'react-native';
+import {ImageBackground} from 'react-native';
 import {StyledButton} from '../../components/StyledButton';
 import {CustomTextInput} from '../../components/CustomTextInput';
 import homeScreenStyles from './HomeScreen.styles';
 import {ImageButton} from '../../components/ImageButton';
 import {fetchData, setUsername, userdata} from '../../Utils/LocalDataManager';
 import {checkForProfanity} from '../../Utils/Util';
+import {sendText} from '../../Utils/GameLogic';
 
 export var isNotGameCreator = false;
 

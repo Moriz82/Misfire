@@ -64,25 +64,64 @@ export const fetchGameSettings = async (lobbyCode: string) => {
 
 // a function that sends a text message through react-native and requests permision beforehand
 //import the SendSMS class from the module
-import {Linking} from 'react-native';
+import {Linking, Platform} from 'react-native';
+import {PermissionsAndroid, ToastAndroid} from 'react-native';
+import SmsAndroid from 'react-native-sms';
 
-export const sendText = (phoneNumber: any, message: any) => {
-  const url = `sms:${phoneNumber}&body=${message}`;
+export const sendText = async (phoneNumber: string, message: string) => {
+  if (Platform.OS === 'ios') {
+    const url = `sms:${phoneNumber}&body=${message}`;
 
-  Linking.canOpenURL(url)
-    .then(supported => {
-      if (!supported) {
-        console.log('SMS is not available');
+    Linking.canOpenURL(url)
+      .then(supported => {
+        if (!supported) {
+          console.log('SMS is not available');
+        } else {
+          return Linking.openURL(url);
+        }
+      })
+      .then(result => {
+        console.log('Message sent:', result);
+      })
+      .catch(error => {
+        console.log('An error occurred:', error);
+      });
+  } else {
+    try {
+      const granted = await PermissionsAndroid.request(
+        PermissionsAndroid.PERMISSIONS.SEND_SMS,
+        {
+          title: 'SMS Permission',
+          message: 'App needs SMS permission to send messages',
+          buttonPositive: 'OK',
+        },
+      );
+      console.log(granted);
+      if (granted === PermissionsAndroid.RESULTS.GRANTED) {
+        console.log('1');
+        const options = {
+          body: message,
+          recipients: [phoneNumber],
+          successTypes: ['sent', 'queued'],
+        };
+        // @ts-ignore
+        await SmsAndroid.send(options, (completed, cancelled, error) => {
+          if (completed) {
+            console.log('SMS sent successfully');
+          } else if (cancelled) {
+            console.log('SMS sending cancelled');
+          } else if (error) {
+            console.log('Error sending SMS');
+          }
+          console.log('2');
+        });
       } else {
-        return Linking.openURL(url);
+        ToastAndroid.show('SMS permission denied', ToastAndroid.SHORT);
       }
-    })
-    .then(result => {
-      console.log('Message sent:', result);
-    })
-    .catch(error => {
-      console.log('An error occurred:', error);
-    });
+    } catch (err) {
+      console.warn(err);
+    }
+  }
 };
 
 import Contacts from 'react-native-contacts';
