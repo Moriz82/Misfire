@@ -22,6 +22,7 @@ const HomeScreen = (props: {navigation: any}) => {
     };
     const effect2 = async () => {
       if (await getMessageSent(createGameLobbyID)) {
+        clearInterval(intervalId);
         props.navigation.navigate('EndScreen');
       }
     };
@@ -29,6 +30,10 @@ const HomeScreen = (props: {navigation: any}) => {
       effect();
     }
     effect2();
+    const intervalId = setInterval(effect2, 1000);
+    return () => {
+      clearInterval(intervalId);
+    };
   });
 
   return (

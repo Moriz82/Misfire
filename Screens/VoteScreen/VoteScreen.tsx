@@ -76,7 +76,6 @@ const VoteScreen = (props: {navigation: any}) => {
           // Check if time is up and navigate to VoteScreen
           if (newTimeText <= 0 || allReady) {
             isNav = true;
-            clearInterval(intervalID);
           }
           return newTimeText;
         }
@@ -84,26 +83,38 @@ const VoteScreen = (props: {navigation: any}) => {
       });
 
       if (isNav) {
-        if (!isNotGameCreator) {
+        // @ts-ignore
+        if (
+          !isNotGameCreator &&
+          (await getSelectedUser(createGameLobbyID)).username ==
+            'selectedUser.username'
+        ) {
           await setSelectedMessage(createGameLobbyID);
           await setLobbyTime(createGameLobbyID, 100);
         }
-        await updateLobbyMember(createGameLobbyID, userdata.username, {
-          isReady: true,
-          hasVoted: true,
-          message: (
-            await getLobbyMembers(createGameLobbyID)
-          ).find(user => user.username === userdata.username)!.message,
-        }).then(async () => {
-          if (
-            (await getSelectedUser(createGameLobbyID)).username ===
-            userdata.username
-          ) {
-            props.navigation.navigate('YouAreItScreen');
-          } else {
-            props.navigation.navigate('HeIsItScreen');
-          }
-        });
+        // @ts-ignore
+        if (
+          (await getSelectedUser(createGameLobbyID)).username !==
+          'selectedUser.username'
+        ) {
+          clearInterval(intervalID);
+          await updateLobbyMember(createGameLobbyID, userdata.username, {
+            isReady: true,
+            hasVoted: true,
+            message: (
+              await getLobbyMembers(createGameLobbyID)
+            ).find(user => user.username === userdata.username)!.message,
+          }).then(async () => {
+            if (
+              (await getSelectedUser(createGameLobbyID)).username ===
+              userdata.username
+            ) {
+              props.navigation.navigate('YouAreItScreen');
+            } else {
+              props.navigation.navigate('HeIsItScreen');
+            }
+          });
+        }
       }
     };
 
