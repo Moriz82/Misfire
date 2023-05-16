@@ -3,6 +3,7 @@ import React, {useEffect, useState} from 'react';
 import {TextStroke} from '../../components/StyledButton';
 import {ImageButton} from '../../components/ImageButton';
 import {
+  deleteLobby,
   getMessageRecipient,
   getSelectedUser,
 } from '../../Utils/RemoteDataManager';
@@ -11,6 +12,7 @@ import {createGameLobbyID} from '../CreateGame/CreateGame';
 const EndScreen = (props: {navigation: any}) => {
   const [message, setMessage] = useState('msg');
   const [person, setPerson] = useState('person');
+  const [didRemoveLobby, setDidRemoveLobby] = useState(false);
 
   useEffect(() => {
     async function effect() {
@@ -18,6 +20,11 @@ const EndScreen = (props: {navigation: any}) => {
       const per = await getMessageRecipient(createGameLobbyID);
       setMessage(msg);
       setPerson(per);
+
+      if (!didRemoveLobby) {
+        setDidRemoveLobby(true);
+        await deleteLobby(createGameLobbyID);
+      }
     }
     effect();
   }, []);
