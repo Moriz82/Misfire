@@ -86,9 +86,9 @@ const CreateGame = (props: {navigation: any}) => {
       clearInterval(intervalId);
     };
   });
-  
+
   return (
-    <View style={{backgroundColor: '#605A58', flex:1}}>
+    <View style={{backgroundColor: '#605A58', flex: 1}}>
       <View
         style={{
           width: '100%',

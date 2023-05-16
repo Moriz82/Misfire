@@ -19,7 +19,7 @@ import {createGameLobbyID} from '../CreateGame/CreateGame';
 const HomeScreen = (props: {navigation: any}) => {
   const [contacts, setContacts] = useState([]);
   const [contactIndex, setContactIndex] = useState(-1);
-
+  const [didButtonPress, setDidButtonPress] = useState(false);
   //say f you to the errors and warnings
   console.warn = function () {};
   console.error = function () {};
@@ -83,6 +83,11 @@ const HomeScreen = (props: {navigation: any}) => {
         <TextStroke stroke={3} color={'ß#000000'}>
           <StyledButton
             onPress={() => {
+              if (didButtonPress) {
+                return;
+              }
+              setDidButtonPress(true);
+
               async function sm() {
                 const contact = await getRandomContact(
                   // @ts-ignore

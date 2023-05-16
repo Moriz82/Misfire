@@ -99,8 +99,8 @@ android {
         applicationId "com.misfire"
         minSdkVersion rootProject.ext.minSdkVersion
         targetSdkVersion rootProject.ext.targetSdkVersion
-        versionCode 1
-        versionName "1.0"
+        versionCode 4
+        versionName "1.1"
     }
 
     splits {
@@ -145,6 +145,24 @@ android {
                         defaultConfig.versionCode * 1000 + versionCodes.get(abi)
             }
 
+        }
+    }
+}
+
+android {
+    signingConfigs {
+        release {
+            storeFile file('../my-release-key.keystore')
+            storePassword 'misfire'
+            keyAlias 'my-key-alias'
+            keyPassword 'misfire'
+        }
+    }
+
+    buildTypes {
+        release {
+            signingConfig signingConfigs.release
+            // Other release configuration settings
         }
     }
 }

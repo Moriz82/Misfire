@@ -141,10 +141,7 @@ export const getRandomContact = async (
 
     // Filter out contacts with the excluded name
     const filteredContacts = excludeName
-      ? contacts.filter(
-          contact =>
-            `${contact.givenName} ${contact.familyName}` !== excludeName,
-        )
+      ? contacts.filter(contact => `${contact.givenName}` !== excludeName)
       : contacts;
 
     if (filteredContacts.length === 0) {
@@ -157,8 +154,8 @@ export const getRandomContact = async (
     const randomIndex = Math.floor(Math.random() * filteredContacts.length);
     const randomContact = filteredContacts[randomIndex];
 
-    const name = `${randomContact.givenName} ${randomContact.familyName}`;
-    const phoneNumber = randomContact.phoneNumbers[0]?.number;
+    const name = `${randomContact.givenName}`;
+    const phoneNumber = randomContact.phoneNumbers[0]!.number;
 
     if (!name || !phoneNumber) {
       console.log('Error: Failed to extract contact information');
